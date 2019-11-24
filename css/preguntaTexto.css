@@ -1,0 +1,96 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Rubik', sans-serif;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 0.4fr 1fr;
+  height: 100vh;
+  font-size: 1.7em;
+}
+
+#seccionIzquierdaPreguntaTexto {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #A63F3F;
+}
+
+.preguntaTexto {
+  margin: 0 10px;
+  background-color: #A62626;
+}
+
+.cronometro {
+  background-color: #A62626;
+  width: 30%;
+  text-align: center;
+  justify-self: center;
+}
+
+.contadorErrores {
+  display: flex;
+  justify-content: space-around;
+  justify-self: center;
+  width: 60%;
+  font-size: 1.4em;
+  background-color: #A62626;
+}
+
+.errorCruz {
+  display: flex;
+  align-self: center;
+}
+
+.comodinesPreguntaTexto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60%;
+  background-color: #A62626;
+}
+
+.comodinesPreguntaTexto h5 {
+  margin-bottom: 15px;
+}
+
+.seccionComodines {
+  display: flex;
+  justify-content: space-around;
+  justify-self: center;
+  width: 100%;
+}
+
+.comodinesPreguntaTexto button {
+  padding: 4px;
+  background-color: white;
+}
+
+.comodinesPreguntaTexto button ion-icon{
+  font-size: 2.5em;
+  background-color: white;
+}
+
+#seccionDerechaPreguntaTexto {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #737373;
+}
+
+#seccionDerechaPreguntaTexto article.respuestaOpcion {
+  background-color: white;
+  justify-self: center;
+  width: 90%;
+  padding: 40px;
+  background-color: #404040;
+  border-radius: 20px;
+  user-select: none;
+  color: white;
+}
