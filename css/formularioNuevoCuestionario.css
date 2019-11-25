@@ -1,0 +1,145 @@
+#headerNuevoCuestionarioFormulario {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#botonesMenu {
+  display: flex;
+  justify-content: space-around;
+  width: 10%;
+}
+
+#nombreNuevoCuestionario {
+  background-color: green;
+  width: 40%;
+}
+
+#mainNuevoFormulario {
+  width: 95%;
+  margin: 32px auto;
+  font-size: 1.7em;
+  font-family: 'Nunito', sans-serif;
+}
+
+#botonUsuario ion-icon, #botonVolver ion-icon{
+  font-size: 3em;
+  background-color: none;
+}
+
+#botonUsuario, #botonVolver {
+  border-radius: 5px;
+  background-color: white;
+  border-top: none;
+  border-left: none;
+}
+
+#formularioNuevoCuestionario {
+  width: 100%;
+  padding-top: 23px;
+}
+
+#formularioNC {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+#formularioNC #botonEnviarFormulario {
+  width: 100%;
+  border: 1px solid lightgrey;
+  font-size: 1.2em;
+  color: grey;
+  padding: 10px 0;
+}
+
+#nombreNuevoCuestionario input {
+  font-size: 2em;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  width: 100%;
+}
+
+.preguntasYRespuestas {
+  margin-bottom: 20px;
+}
+
+.preguntasYRespuestas hr {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-style: ridge;
+  -webkit-box-shadow: 0px 10px 5px -5px rgba(0,0,0,0.44);
+  -moz-box-shadow: 0px 10px 5px -5px rgba(0,0,0,0.44);
+  box-shadow: 0px 10px 5px -5px rgba(0,0,0,0.44)
+}
+
+.pregunta {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.consignaPregunta {
+  display: flex;
+  flex-direction: column;
+}
+
+.funcionesPregunta button {
+  background-color: white;
+  border-top: none;
+  border-left: none;
+  border-radius: 3px;
+}
+
+.funcionesPregunta ion-icon {
+  font-size: 1.4em;
+  background-color: none;
+}
+
+.pregunta input {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  height: 40px;
+  font-size: 1.1em;
+  padding-left: 5px;
+  margin-bottom: 10px;
+}
+
+.unasRespuestas {
+  margin-left: 2%;
+}
+
+.unasRespuestas input {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  height: 40px;
+  font-size: 1.1em;
+  padding-left: 5px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.unasRespuestas input[type="radio"] {
+  width: auto;
+  margin-right: 10px;
+}
+
+.formularioInput {
+  display: flex;
+  flex-direction: row;
+}
+
+.unasRespuestas .formularioInput:first-of-type input {
+  border-bottom-color: #5AB131;
+}
+
+.unasRespuestas .formularioInput input {
+  border-bottom-color: #BF4133;
+}
+
+.textoChiquito {
+  font-size: 0.4em;
+}

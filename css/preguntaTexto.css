@@ -1,11 +1,4 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Rubik', sans-serif;
-}
-
-main {
+main#mainPreguntaTexto {
   display: grid;
   grid-template-columns: 0.4fr 1fr;
   height: 100vh;
