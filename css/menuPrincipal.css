@@ -1,0 +1,57 @@
+*{
+    padding: 0%;
+    margin: 0%;
+}
+body{
+    background-color:orange;
+}
+#usuario{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 10%;
+    margin-top: 2%;
+
+}
+#usuario button{
+    padding:1%;
+    margin-left: 1em;
+}
+#usuario p{
+    font-size: 2em;
+}
+#cajaprincipal{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top:4%;
+    
+}
+#botones{
+  
+    width:14em ;
+    padding:6%;
+    display: flex;
+    flex-flow: row;
+    margin-bottom: 5%;
+    margin-top: 5%;
+    margin-left: 3em;
+}
+#botones p{
+    font-size: 2em;
+    margin-left: 0.4em;
+}
+#botoncitos{
+    margin-left: 9.1em;
+}
+#botoneschicos{
+    padding:3%;
+
+}
+ion-icon{
+    width: 2em;
+}
+img{
+    margin-right: 2em;
+}
+
