@@ -10,16 +10,16 @@ main#mainPreguntaTexto {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  background-color: #A63F3F;
+  border-right: 1px solid grey;
 }
 
 .preguntaTexto {
   margin: 0 10px;
-  background-color: #A62626;
+  /* background-color: #A62626; */
 }
 
 .cronometro {
-  background-color: #A62626;
+  /* background-color: #A62626; */
   width: 30%;
   text-align: center;
   justify-self: center;
@@ -31,7 +31,7 @@ main#mainPreguntaTexto {
   justify-self: center;
   width: 60%;
   font-size: 1.4em;
-  background-color: #A62626;
+  /* background-color: #A62626; */
 }
 
 .errorCruz {
@@ -44,7 +44,7 @@ main#mainPreguntaTexto {
   flex-direction: column;
   align-items: center;
   width: 60%;
-  background-color: #A62626;
+  /* background-color: #A62626; */
 }
 
 .comodinesPreguntaTexto h5 {
@@ -61,6 +61,14 @@ main#mainPreguntaTexto {
 .comodinesPreguntaTexto button {
   padding: 4px;
   background-color: white;
+  border: 1px dashed grey;
+  transition: 0.2s;
+}
+
+.comodinesPreguntaTexto button:hover {
+  -webkit-box-shadow: 0 7px 4px #777;
+	-moz-box-shadow: 0 7px 4px #777;
+	box-shadow: 0 7px 4px #777;
 }
 
 .comodinesPreguntaTexto button ion-icon{
@@ -74,16 +82,25 @@ main#mainPreguntaTexto {
   justify-content: space-around;
   justify-content: space-around;
   align-items: center;
-  background-color: #737373;
+  /* background-color: #737373; */
 }
 
 #seccionDerechaPreguntaTexto article.respuestaOpcion {
-  background-color: white;
+  /* background-color: white; */
   justify-self: center;
   width: 90%;
   padding: 40px;
-  background-color: #404040;
+  /* background-color: #404040; */
   border-radius: 20px;
   user-select: none;
-  color: white;
+  /* color: white; */
+  border: 1px solid grey;
+  font-size: 0.8em;
+  transition: 0.2s;
+}
+
+#seccionDerechaPreguntaTexto article.respuestaOpcion:hover {
+  -webkit-box-shadow: 0 7px 4px #777;
+	-moz-box-shadow: 0 7px 4px #777;
+	box-shadow: 0 7px 4px #777;
 }
