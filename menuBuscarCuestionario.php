@@ -15,16 +15,16 @@
     <section id="menuBuscarCuestionario">
       <div>
 
-        <button id="botonUsuario">
+        <a href="#" class="botonMenu">
           <ion-icon name="contact"></ion-icon>
-        </button>
+          <p>Usuario</p>
+        </a>
 
         <!-- nombre de usuario -->
-        <p>Usuario</p>
 
-        <button id="botonHome">
-          Inicio <ion-icon name="home"></ion-icon>
-        </button>
+        <a href="#" class="botonMenu">
+          <ion-icon name="home"></ion-icon> Inicio
+        </a>
 
       </div>
     </section>

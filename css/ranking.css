@@ -1,0 +1,33 @@
+.tituloRanking {
+  font-size: 0.8em;
+  margin-left: 2%;
+  margin-bottom: 2%;
+}
+
+table {
+  margin-left: 2%;
+  text-align: center;
+  font-size: 0.6em;
+  border: 1px solid rgba(216, 221, 215, 0.73);
+  border-collapse: collapse;
+}
+
+table th, td {
+  border: 1px solid rgba(216, 221, 215, 0.73);
+}
+
+.lineaPar {
+  background-color: #d6dfd2;
+}
+
+#botonRegresar {
+  margin-top: 20px;
+  border: 1px solid lightgrey;
+  font-size: 1.2em;
+  color: grey;
+  padding: 10px 10px;
+  margin-left: 2%;
+  text-align: center;
+  background-color: rgba(216, 221, 215, 0.33);
+  text-decoration: none;
+}

@@ -10,7 +10,7 @@
   </div>
   <div class="creadorCuestionario">
     <p class="creador">Autor: Usuario</p>
-    <a href="#" class="ranking">Ranking<ion-icon name="list"></ion-icon></a>
+    <a href="ranking.php" class="ranking">Ranking<ion-icon name="list"></ion-icon></a>
     <p> Generos: genero1, genero2, genero3...</p>
   </div>
   <div class="jugarCuestionario">

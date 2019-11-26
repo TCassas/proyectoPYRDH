@@ -12,24 +12,39 @@
   width: 100%;
   align-items: center;
   text-align: center;
-
 }
 
-#botonHome {
+#inputBuscarCuestionario input {
+  transition: 0.1s;
+  outline: none;
+}
+
+#inputBuscarCuestionario input:focus {
+  border-bottom-color: #5AB131 !important;
+}
+
+.botonMenu {
   display: flex;
   align-items: center;
   justify-self: center;
   font-size: 1.2em;
   background-color: none;
   padding: 4px 10px;
-}
-
-#botonHome {
+  text-decoration: none;
+  color: black;
+  border: 2px solid rgba(216, 221, 215, 0.83);
   margin-top: 20px;
   border-radius: 5px;
   background-color: white;
   border-top: none;
   border-left: none;
+  transition: 0.2s;
+}
+
+.botonMenu:hover {
+  -webkit-box-shadow: 0 7px 4px #777;
+	-moz-box-shadow: 0 7px 4px #777;
+	box-shadow: 0 7px 4px #777;
 }
 
 #cuestionariosLista {
@@ -46,6 +61,12 @@
   padding: 10px 20px;
   margin-bottom: 20px;
   font-size: 0.8em;
+  border: 2px solid white;
+  transition: 0.2s;
+}
+
+.articuloCuestionario:hover {
+  border: 2px solid #5AB131;
 }
 
 .fotoCuestionario {
