@@ -6,8 +6,10 @@
 
 #botonesMenu {
   display: flex;
-  justify-content: space-around;
-  width: 10%;
+}
+
+#botonesMenu > a {
+  margin-right: 10px;
 }
 
 #nombreNuevoCuestionario {

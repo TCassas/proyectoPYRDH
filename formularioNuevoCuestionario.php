@@ -20,12 +20,13 @@
       </div>
 
       <div id="botonesMenu">
-        <button id="botonVolver">
-          <ion-icon name="arrow-round-back"></ion-icon>
-        </button>
-        <button id="botonUsuario">
+        <!-- <a href="formularioPlay.php" class="botonMenu">
           <ion-icon name="contact"></ion-icon>
-        </button>
+          <p>Usuario</p>
+        </a> -->
+        <a href="formularioPlay.php" class="botonMenu">
+          <ion-icon name="home"></ion-icon> Inicio
+        </a>
       </div>
 
     </header>

@@ -7,33 +7,33 @@
 
     <title>Document</title>
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/estilo1.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
-<body>
-    
+<body id="menuPrincipal">
+
         <header>
             <div id="usuario">
             <p>usuario</p>
             <button name="" id=""><ion-icon name="person"></ion-icon></button>
             </div>
-           
+
         </header>
     </div>
     <div id="cajaprincipal">
-        
+
 
         <div for="" id="">
 
-                <img src="imagenes/images.jpg" alt=""><br>
+            <img src="img/images.jpg" alt=""><br>
 
-            <button name="" id="botones"><p id="play">PLAY</p></button>
-            <button name="" id="botones"><p>CREATE</p></button>
-        
+            <a href="menuBuscarCuestionario.php"><button name="" id="botones"><p id="play">PLAY</p></button></a>
+            <a href="formularioNuevoCuestionario.php"><button name="" id="botones"><p>CREATE</p></button></a>
+
             <div id="botoncitos">
-                      <button name="" id="botoneschicos"><ion-icon name="help"></ion-icon></button>
+                    <button name="" id="botoneschicos"><ion-icon name="help"></ion-icon></button>
                     <button name="" id="botoneschicos"><ion-icon name="settings"></ion-icon></button>
             </div>
-      
+
         </div>
     </div>
 </body>

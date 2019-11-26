@@ -2,7 +2,7 @@
     padding: 0%;
     margin: 0%;
 }
-body{
+body#menuPrincipal{
     background-color:orange;
 }
 #usuario{
@@ -25,10 +25,10 @@ body{
     justify-content: center;
     align-items: center;
     margin-top:4%;
-    
+
 }
 #botones{
-  
+
     width:14em ;
     padding:6%;
     display: flex;
@@ -54,4 +54,3 @@ ion-icon{
 img{
     margin-right: 2em;
 }
-
