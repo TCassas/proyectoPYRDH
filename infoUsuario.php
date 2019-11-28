@@ -28,7 +28,7 @@
       <section id="configuracionUsuario">
         <a href="formularioPlay.php" class="botonMenu">Regresar</a>
         <a href="#" class="botonMenu">Cambiar contraseña</a>
-        <a href="#" class="botonMenu">Cerrar sesión</a>
+        <a href="index.html" class="botonMenu">Cerrar sesión</a>
       </section>
     </section>
   </main>

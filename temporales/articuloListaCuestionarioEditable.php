@@ -17,5 +17,8 @@
     <a href="editarCuestionario.php">
       <ion-icon name="create"></ion-icon>
     </a>
+    <a href="borrarCuestionario.php">
+      <ion-icon name="trash"></ion-icon>
+    </a>
   </div>
 </article>
