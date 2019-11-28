@@ -35,3 +35,59 @@ justify-content: flex-end;
 flex-direction: column;
 align-items: center;
 }
+
+/* modificacion css santi */
+
+nav {
+
+background: black;
+width: 100%;
+height: 15%;
+opacity: 0.8;
+}
+
+
+
+section {
+
+/* background: grey; */
+width: 100%;
+height: 100%;
+}
+
+footer {
+
+	background: black;
+	width: 100%;
+	height: 15%;
+  line-height: 0;
+	opacity: 0.8;
+}
+
+.redes {
+
+float: right;
+width: 15%;
+height: 40%;
+
+}
+
+
+form {
+
+	position: absolute;
+    top: 15%;
+    left: 43%;
+
+
+}
+
+img {
+
+width: 20%;
+height: 100%;
+
+}
+
+/* modificacion css santi */
+
