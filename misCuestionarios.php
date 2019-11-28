@@ -37,7 +37,7 @@
       <div id="inputBuscarCuestionario" class="unasRespuestas">
         <input type="text" name="cuestionarioBusqueda" value="" placeholder="Buscar">
       </div>
-
+      <h1>Mis cuestionarios (10) </h1>
       <!-- Lista de cuestionarios -->
       <div class="cuestionarios">
         <?php for ($i = 0; $i < 10; $i++) {
