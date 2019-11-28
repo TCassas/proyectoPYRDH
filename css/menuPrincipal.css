@@ -1,56 +1,51 @@
-*{
-    padding: 0%;
-    margin: 0%;
+#mainMenuPrincipal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
 }
-body#menuPrincipal{
-    background-color:orange;
-}
-#usuario{
-    display: flex;
-    justify-content: flex-end;
-    margin-right: 10%;
-    margin-top: 2%;
 
+#usuarioMenuPrincipal {
+  height: 10%;
+  align-self: flex-end;
 }
-#usuario button{
-    padding:1%;
-    margin-left: 1em;
-}
-#usuario p{
-    font-size: 2em;
-}
-#cajaprincipal{
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top:4%;
+#opcionesMenuPrincipal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 90%;
+  width: 80%;
+  padding: 0 20%;
+}
 
+#opcionesMenuPrincipal a {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+  width: 100%;
+  margin-bottom: 5px;
+  text-align: center;
+  font-size: 2em;
 }
-#botones{
 
-    width:14em ;
-    padding:6%;
-    display: flex;
-    flex-flow: row;
-    margin-bottom: 5%;
-    margin-top: 5%;
-    margin-left: 3em;
+#opcionesMenuPrincipal a:hover {
+  -webkit-box-shadow: 0 7px 4px #777;
+	-moz-box-shadow: 0 7px 4px #777;
+	box-shadow: 0 7px 4px #777;
+  border-color: #5AB131;
 }
-#botones p{
-    font-size: 2em;
-    margin-left: 0.4em;
-}
-#botoncitos{
-    margin-left: 9.1em;
-}
-#botoneschicos{
-    padding:3%;
 
+#botonesConfigYAyuda {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
 }
-ion-icon{
-    width: 2em;
-}
-img{
-    margin-right: 2em;
+
+#botonesConfigYAyuda a {
+  display: flex;
+  justify-content: center;
+  margin-left: 10px;
+  width: 20%;
 }

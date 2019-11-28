@@ -31,3 +31,27 @@ table th, td {
   background-color: rgba(216, 221, 215, 0.33);
   text-decoration: none;
 }
+
+@media (max-width: 636px) {
+  div.cuestionarioRanking {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .cuestionarioRanking .articuloCuestionario .jugarCuestionario {
+    justify-content: center;
+  }
+
+  .cuestionarioRanking .articuloCuestionario .creadorCuestionario {
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  div.cuestionarioRanking .articuloCuestionario {
+    width: 100% !important;
+  }
+}

@@ -8,9 +8,12 @@
   <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
-  <title>Crea tu cuestionario</title>
+  <title>Modifica tu cuestionario</title>
 </head>
 <body>
+
+  <!-- La unica diferencia entre esto, y crear un nuevo formulario, es que en este los inputs vendrían cargados con información -->
+
   <main id="mainNuevoFormulario">
     <header id="headerNuevoCuestionarioFormulario">
 
@@ -49,7 +52,7 @@
           ?>
 
         </div>
-        <button type="submit" name="button" id="botonEnviarFormulario">¡Crear formulario!</button>
+        <button type="submit" name="button" id="botonEnviarFormulario">Guardar cambios en el cuestionario</button>
       </form>
     </section>
   </main>

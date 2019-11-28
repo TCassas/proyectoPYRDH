@@ -2,14 +2,13 @@
   width: 95%;
   margin: 32px auto;
   font-size: 1.7em;
-  display: grid;
-  grid-template-columns: 0.3fr 1fr;
+  display: flex;
 }
 
 #menuBuscarCuestionario {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 20%;
   align-items: center;
   text-align: center;
 }
@@ -50,6 +49,7 @@
 #cuestionariosLista {
   display: flex;
   flex-direction: column;
+  width: 80%;
 }
 
 .articuloCuestionario {
@@ -115,4 +115,47 @@
 .jugarCuestionario ion-icon:hover {
   transform: rotate(360deg);
   color: #5AB131;
+}
+
+@media (max-width: 830px) {
+  #mainBuscarCuestionario {
+    flex-direction: column;
+  }
+
+  #menuBuscarCuestionario {
+    width: 100%;
+  }
+
+  #menuBuscarCuestionario div {
+    width: 40%;
+    margin-bottom: 20px;
+  }
+
+  #menuBuscarCuestionario div a {
+    justify-content: center;
+  }
+
+  #cuestionariosLista {
+    width: 100%;
+  }
+}
+
+@media (max-width: 636px) {
+  #cuestionarios {
+    flex-direction: row;
+  }
+
+  #cuestionariosLista .articuloCuestionario {
+    flex-direction: column;
+    width: 45%;
+    display: inline-block;
+  }
+
+  .cuestionarios .articuloCuestionario .jugarCuestionario {
+    justify-content: center;
+  }
+
+  .infoCuestionario {
+    flex-direction: column;
+  }
 }

@@ -15,16 +15,20 @@
     <section id="menuBuscarCuestionario">
       <div>
 
-        <button id="botonUsuario">
+        <a href="infoUsuario.php" class="botonMenu">
           <ion-icon name="contact"></ion-icon>
-        </button>
+          <p>Usuario</p>
+        </a>
 
         <!-- nombre de usuario -->
-        <p>Usuario</p>
 
-        <button class="botonMenu">
-          Inicio <ion-icon name="home"></ion-icon>
-        </button>
+        <a href="formularioPlay.php" class="botonMenu">
+          <ion-icon name="home"></ion-icon> Inicio
+        </a>
+
+        <a href="formularioNuevoCuestionario.php" class="botonMenu">
+          <ion-icon name="add"></ion-icon> Crear
+        </a>
 
       </div>
     </section>

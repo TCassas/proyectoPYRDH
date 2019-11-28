@@ -8,15 +8,15 @@
   <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
-  <title>¡Elegí que cuestionario jugar!</title>
+  <title>Mis cuestionarios</title>
 </head>
 <body>
   <main id="mainBuscarCuestionario">
     <section id="menuBuscarCuestionario">
       <div>
-
         <a href="infoUsuario.php" class="botonMenu">
-          <ion-icon name="contact"></ion-icon> Usuario
+          <ion-icon name="contact"></ion-icon>
+          <p>Usuario</p>
         </a>
 
         <!-- nombre de usuario -->
@@ -41,7 +41,7 @@
       <!-- Lista de cuestionarios -->
       <div class="cuestionarios">
         <?php for ($i = 0; $i < 10; $i++) {
-          include("temporales/articuloListaCuestionario.php");
+          include("temporales/articuloListaCuestionarioEditable.php");
         }?>
       </div>
 
