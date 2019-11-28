@@ -26,8 +26,8 @@
           <ion-icon name="home"></ion-icon> Inicio
         </a>
 
-        <a href="formularioNuevoCuestionario.php" class="botonMenu">
-          <ion-icon name="add"></ion-icon> Crear
+        <a href="menuBuscarCuestionario.php" class="botonMenu">
+          <ion-icon name="arrow-round-back"></ion-icon> Regresar
         </a>
 
       </div>

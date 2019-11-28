@@ -1,20 +1,58 @@
 main#mainPreguntaTexto {
-  display: grid;
-  grid-template-columns: 0.4fr 1fr;
+  display: flex;
   height: 100vh;
   font-size: 1.7em;
 }
 
 #seccionIzquierdaPreguntaTexto {
   display: flex;
+  width: 35%;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
   border-right: 1px solid grey;
 }
 
+#irAPregunta {
+  display: none;
+}
+
+#cantidadPreguntas {
+  display: flex;
+  position: relative;
+}
+
+.puntitoPregunta {
+  z-index: 1;
+  height: 10px;
+  width: 10px;
+  background-color: black;
+  margin: 0 2px;
+  border-radius: 10px;
+  transition: 0.1s;
+}
+
+.puntitoPregunta:hover {
+  width: 15px;
+  background-color: #5AB131;
+}
+
+.puntitoPregunta:nth-of-type(1) {
+  background-color: #5AB131;
+}
+
+.puntitoPregunta:nth-of-type(2) {
+  background-color: red;
+}
+
+#irARespuestas {
+  display: none;
+}
+
 .preguntaTexto {
   margin: 0 10px;
+  font-size: 0.8em;
+  text-align: center;
   /* background-color: #A62626; */
 }
 
@@ -63,6 +101,7 @@ main#mainPreguntaTexto {
   background-color: white;
   border: 1px dashed grey;
   transition: 0.2s;
+  width: 30%;
 }
 
 .comodinesPreguntaTexto button:hover {
@@ -78,7 +117,10 @@ main#mainPreguntaTexto {
 
 #seccionDerechaPreguntaTexto {
   display: flex;
+  position: relative;
+  width: 75%;
   flex-direction: column;
+  margin-bottom: 20px;
   justify-content: space-around;
   justify-content: space-around;
   align-items: center;
@@ -103,4 +145,54 @@ main#mainPreguntaTexto {
   -webkit-box-shadow: 0 7px 4px #777;
 	-moz-box-shadow: 0 7px 4px #777;
 	box-shadow: 0 7px 4px #777;
+}
+
+@media (max-width: 865px) {
+  main#mainPreguntaTexto {
+    flex-direction: column;
+  }
+
+  #irAPregunta {
+    display: block;
+    margin: 0 auto;
+  }
+
+  #irARespuestas {
+    display: block;
+    width: 0px;
+    margin: 0 auto;
+  }
+
+  .cronometro {
+    margin-bottom: 40px;
+  }
+
+  .preguntaTexto {
+    margin-bottom: 40px;
+  }
+
+  .contadorErrores {
+    margin-bottom: 40px;
+  }
+
+  #seccionIzquierdaPreguntaTexto {
+    width: 100%;
+    border-right: none;
+    margin-bottom: 40px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid grey;
+  }
+
+  #seccionDerechaPreguntaTexto {
+    width: 100%;
+  }
+
+  #seccionDerechaPreguntaTexto article.respuestaOpcion {
+    margin-bottom: 40px;
+  }
+
+  #cantidadPreguntas {
+    margin-bottom: 20px;
+  }
 }

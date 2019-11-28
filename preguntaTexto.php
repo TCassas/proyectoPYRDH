@@ -11,6 +11,7 @@
 </head>
 <body>
   <main id="mainPreguntaTexto">
+    <a href="#seccionDerechaPreguntaTexto" id="irARespuestas"><ion-icon name="arrow-round-down"></ion-icon></a>
     <section id="seccionIzquierdaPreguntaTexto">
       <div class="cronometro">
         <p>60 seg</p>
@@ -20,7 +21,7 @@
       </div>
       <div class="contadorErrores">
         <div class="errorCruz">
-          <ion-icon name="close-circle"></ion-icon>
+          <ion-icon name="checkmark-circle"></ion-icon>
         </div>
         <div class="errorCruz">
           <ion-icon name="close-circle"></ion-icon>
@@ -59,6 +60,18 @@
       <article class="respuestaOpcion">
         <p>Respuesta 4</p>
       </article>
+      <a href="#seccionIzquierdaPreguntaTexto" id="irAPregunta"><ion-icon name="arrow-round-up"></ion-icon></a>
+      <section id="cantidadPreguntas">
+        <?php
+          for ($i = 0; $i < 10; $i++) {
+            ?>
+              <div class="puntitoPregunta">
+
+              </div>
+            <?php
+          }
+        ?>
+      </section>
     </section>
   </main>
 </body>

@@ -22,7 +22,7 @@
       <a href="menuBuscarCuestionario.php" class="botonMenu">Jugar</a>
       <a href="misCuestionarios.php" class="botonMenu">Mis cuestionarios</a>
       <div id="botonesConfigYAyuda">
-        <a href="#" class="botonMenu"><ion-icon name="help"></ion-icon></a>
+        <a href="ayuda.php" class="botonMenu"><ion-icon name="help"></ion-icon></a>
         <a href="#" class="botonMenu"><ion-icon name="settings"></ion-icon></a>
       </div>
     </section>

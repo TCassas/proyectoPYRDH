@@ -25,10 +25,6 @@
           <ion-icon name="home"></ion-icon> Inicio
         </a>
 
-        <a href="formularioNuevoCuestionario.php" class="botonMenu">
-          <ion-icon name="add"></ion-icon> Crear
-        </a>
-
       </div>
     </section>
     <section id="cuestionariosLista">

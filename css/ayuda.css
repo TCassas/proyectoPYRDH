@@ -1,0 +1,153 @@
+#mainPaginaAyuda {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  margin: 40px auto;
+
+}
+
+#mainPaginaAyuda hr {
+  opacity: 0.2;
+}
+
+#cartaPaginaAyuda {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  background-color: white;
+  border-top: none;
+  border-left: none;
+  padding: 5%;
+  -webkit-box-shadow: 0 7px 4px #777;
+	-moz-box-shadow: 0 7px 4px #777;
+	box-shadow: 0 7px 4px #777;
+  border-radius: 40px;
+}
+
+#cartaPaginaAyuda a {
+  width: 20% !important;
+  margin-bottom: 20px;
+}
+
+.titulo {
+  font-size: 1.4em;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+#nosotros p.titulo {
+  margin-right: 24px;
+}
+
+#nosotros {
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px;
+}
+
+#nosotros p:nth-of-type(2) {
+  padding-left: 10px;
+  border-left: 2px solid #5AB131;
+}
+
+#preguntasFrecuentes {
+  display: flex;
+  align-items: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+#preguntasPaginaAyuda {
+  padding-left: 10px;
+  border-left: 2px solid #5AB131;
+}
+
+.preguntaYRespuestaPaginaAyuda {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.preguntaPaginaAyuda {
+  font-weight: bold;
+}
+
+.respuestaPaginaAyuda {
+  font-style: italic;
+}
+
+#contacto {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+#contacto .grupoLIY {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+#contacto form {
+  padding: 0 10%;
+}
+
+#contacto .grupoLIY label {
+  width: 30%;
+  text-align: right;
+}
+
+#contacto .grupoLIY input {
+  width: 90%;
+  margin-left: 5px;
+  font-size: 1.2em;
+  border-left: 2px solid #5AB131;
+  border-top: none;
+  border-bottom: none;
+  border-right: none;
+  background-color: rgba(216, 221, 215, 0.33);
+}
+
+#contacto .grupoLIY textarea {
+  width: 90%;
+  font-size: 1.2em;
+  margin-left: 5px;
+  border-left: 2px solid #5AB131;
+  border-top: none;
+  border-bottom: none;
+  border-right: none;
+  background-color: rgba(216, 221, 215, 0.33);
+}
+
+#botonEnviarFormularioContacto {
+  width: 40%;
+  border: 1px solid lightgrey;
+  font-size: 1.2em;
+  color: grey;
+  padding: 10px 0;
+}
+
+@media (max-width: 700px) {
+  #nosotros {
+    flex-direction: column;
+  }
+
+  #preguntasFrecuentes {
+    flex-direction: column;
+  }
+
+  #contacto .grupoLIY {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  #contacto .grupoLIY label {
+    text-align: left;
+    width: 100%;
+  }
+}
