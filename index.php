@@ -1,43 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="css/styles.css">
-  <title>Document</title>
-</head>
-<body>
-  <main id="mainLogin">
-    <section id="loginSeccionIzquierda">
+<html>
 
-    </section>
-    <section id="loginSeccionDerecha">
-      <h1>Registrate!</h1>
-      <form class="" action="index.html" method="post">
-        <div class="grupoLYILogin">
-          <label for="">Usuario</label>
-          <input type="text" name="" value="">
-        </div>
-        <div class="grupoLYILogin">
-          <label for="">Contraseña</label>
-          <input type="text" name="" value="">
-        </div>
-        <div class="grupoLYILogin">
-          <label for="">Verificar contraseña</label>
-          <input type="text" name="" value="">
-        </div>
-        <div class="grupoLYILogin">
-          <label for="">Correo</label>
-          <input type="text" name="" value="">
-        </div>
-        <div class="grupoLYILogin">
-          <label for="">Fecha de nacimiento</label>
-          <input type="text" name="" value="">
-        </div>
-        <button type="submit" name="button">Enviar</button>
-      </form>
-    </section>
-  </main>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Preguntados</title>
+	<link rel="stylesheet" href="css/estilo.css">
+</head>
+<body background="imgs/bg-body.png">
+
+	<nav>
+<img src="imgs/descarga.png" alt="">
+	</nav>
+
+
+	<section>
+		<form action="formularioDeIngreso.php" method="POST">
+
+	</br> </br> <div class="contenedor">
+			<label for="nombre">Usuario</label> <br>
+			<input type="text" name="name" id="nombre">
+		</div>
+
+	</br> <div class="contenedor">
+			<label for="password">Contraseña</label> <br>
+		 <input type="password" name="password" id="password">
+		</div>
+
+		</br> <div class="contenedor">
+			<label for="pass2">Verificar Contraseña</label> <br>
+		 <input type="password" name="" id="pass2">
+	</div>
+
+	</br> <div class="contenedor">
+			<label for="email">Correo</label> <br>
+			<input type="email" name="email" id="email">
+		</div> </br>
+
+	</br> <div class="contenedor">
+			<label for="dias">Fecha de Nacimiento</label> <br>
+		<input type="date">
+	</div>
+
+	</br> <div id="enviarle" class="contenedor">
+		<input type="submit" value="Enviar" id="botonEnviarRegistro" >
+	</div> </br>
+	<p id="i">¿Ya tienes una cuenta?  <a href="formularioDeIngreso.php">Ingresa </a></p>
+	</form>
+	</section>
+
+
+
+	<footer>
+  <div class="final">
+
+		<div class="redes">
+		<img src="imgs/fb-logo.png" alt="">
+		<img src="imgs/instagram.png" alt="">
+		<img src="imgs/twitter.png" alt="">
+		</div>
+	</div>
+	</footer>
+
 </body>
 </html>

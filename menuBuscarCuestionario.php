@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="css/styles.css">
   <title>¡Elegí que cuestionario jugar!</title>
 </head>
-<body>
+<body background="imgs/bg-body.png">
   <main id="mainBuscarCuestionario">
     <section id="menuBuscarCuestionario">
       <div>

@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="css/styles.css">
   <title>Modifica tu cuestionario</title>
 </head>
-<body>
+<body background="imgs/bg-body.png">
   <main id="mainPaginaAyuda">
     <section id="cartaPaginaAyuda">
       <a href="formularioPlay.php" class="botonMenu">

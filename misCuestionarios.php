@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="css/styles.css">
   <title>Mis cuestionarios</title>
 </head>
-<body>
+<body background="imgs/bg-body.png">
   <main id="mainBuscarCuestionario">
     <section id="menuBuscarCuestionario">
       <div>
