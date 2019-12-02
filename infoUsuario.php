@@ -15,13 +15,12 @@
   <main id="mainInfoUsuario">
     <section id="cartaUsuario">
       <section id="info">
-        <article id="fotoUsuarioPerfil">
-          <ion-icon name="person"></ion-icon>
-        </article>
+        <figure id="fotoUsuarioPerfil">
+          <img src="<?= $_SESSION["fotoPerfil"] ?>" alt="">
+        </figure>
         <article class="infoUsuarioPerfil">
           <p>Nombre de usuario: <?= $_SESSION["usuario"] ?></p>
           <p>Correo electronico: <?= $_SESSION["email"] ?></p>
-          <p>Fecha de nacimiento: xx / xx / xxxx</p>
           <p>Cantidad de cuestionarios creados: x</p>
           <p>Play count: x</p>
         </article>

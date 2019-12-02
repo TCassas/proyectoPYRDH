@@ -1,3 +1,26 @@
+<?php
+  $errorCargaImagen = false;
+  session_start();
+
+  if(!empty($_FILES)) {
+    var_dump($_FILES);
+    if($_FILES["fotoPerfil"]["error"] != 0) {
+
+    } else {
+      $extension = pathinfo($_FILES["fotoPerfil"]["name"], PATHINFO_EXTENSION);
+
+      if($extension == "jpg" || $extension == "png" || $extension == "jpeg") {
+        echo $extension;
+        move_uploaded_file($_FILES["fotoPerfil"]["tmp_name"], "imgs/" . $_SESSION["usuario"] . "." . $extension);
+        $_SESSION["fotoPerfil"] = "imgs/" . $_SESSION["usuario"] . "." . $extension;
+        header("Location: infoUsuario.php");
+      } else {
+        $errorCargaImagen = true;
+      }
+    }
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -14,12 +37,12 @@
   <main id="mainInfoUsuario">
     <section id="cartaUsuarioEditar">
       <section id="infoUsuarioEditar">
-        <article id="fotoUsuarioPerfil">
-          <ion-icon name="person"></ion-icon>
-        </article>
+        <figure id="fotoUsuarioPerfil">
+          <img src="<?= $_SESSION["fotoPerfil"] ?>" alt="">
+        </figure>
         <article class="infoUsuarioPerfil">
-          <?php session_start(); ?>
-          <form class="" action="index.html" method="post">
+
+          <form class="" action="editarUsuario.php" method="post" enctype="multipart/form-data">
             <div class="grupoLIYEditar">
               <label for="">Nombre de usuario:</label>
               <input type="text" name="nombre" value="<?= $_SESSION["usuario"]?>">
@@ -32,8 +55,13 @@
               <label for="">Fecha de nacimiento</label>
               <input type="date" name="fecha" value="<?= $_SESSION["fecha"]?>">
             </div>
+            <div class="grupoLIYEditar">
+              <label for="">Subir una foto de perfil</label>
+              <input type="file" name="fotoPerfil" value="">
+            </div>
             <button type="submit" name="button" class="enviarFormulario">Enviar</button>
           </form>
+
         </article>
       </section>
     </section>

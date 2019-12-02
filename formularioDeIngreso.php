@@ -5,6 +5,7 @@ session_start();
 require_once 'controladores/funciones.php';
 
 $arrayDeErrores = "";
+$errorInicioSesion = false;
 
 if($_POST) {
     $arrayDeErrores = validarRegistracion($_POST);
@@ -14,16 +15,19 @@ if($_POST) {
             'username' =>$_POST['username'],
             'password' => password_hash($_POST['password'], PASSWORD_DEFAULT)
         ];
-      }
 
-      $archivo = file_get_contents("usuariosPYRDH.json");
-      $archivoDeco = json_decode($archivo, true);
+        $archivo = file_get_contents("usuariosPYRDH.json");
+        $archivoDeco = json_decode($archivo, true);
 
-      foreach($archivoDeco["usuarios"] as $usuario) {
-        if($_POST["username"] == $usuario["username"] && password_verify($_POST["password"], $usuario["password"])) {
-          session_start();
-          header("Location: formularioPlay.php");
+        foreach($archivoDeco["usuarios"] as $usuario) {
+          if($_POST["username"] == $usuario["username"] && password_verify($_POST["password"], $usuario["password"])) {
+            session_start();
+            header("Location: formularioPlay.php");
+            exit;
+          }
         }
+
+        $errorInicioSesion = true;
       }
 }
 ?>
@@ -41,7 +45,7 @@ if($_POST) {
 
 
     <div id="seccionizquierda">
-        <img src="imgs/images.jpg" alt="">
+        <img src="imgs/images.jpg" alt="" class="imagenLogin">
     </div>
 
     <div id="seccionderecha">
@@ -59,6 +63,7 @@ if($_POST) {
               <input type="password" id="password" name="password" class="inputFormularioIngreso">
 <small class="text-danger"><?= isset($arrayDeErrores['password']) ? $arrayDeErrores['password'] : "" ?></small>
               <button type="submit" name="button" id="it">ENVIAR</button>
+              <small class="text-danger"><?= ($errorInicioSesion) ? "Los datos ingresados no corresponden a una cuenta registrada" : "" ?></small>
           </form>
         </div>
 
