@@ -18,14 +18,15 @@
           <ion-icon name="person"></ion-icon>
         </article>
         <article class="infoUsuarioPerfil">
+          <?php session_start(); ?>
           <form class="" action="index.html" method="post">
             <div class="grupoLIYEditar">
               <label for="">Nombre de usuario:</label>
-              <input type="text" name="nombre" value="<?= $_SESSION["nombre"]?>">
+              <input type="text" name="nombre" value="<?= $_SESSION["usuario"]?>">
             </div>
             <div class="grupoLIYEditar">
               <label for="">Correo Electronico:</label>
-              <input type="mail" name="correo" value="<?= $_SESSION["correo"]?>">
+              <input type="mail" name="correo" value="<?= $_SESSION["email"]?>">
             </div>
             <div class="grupoLIYEditar">
               <label for="">Fecha de nacimiento</label>

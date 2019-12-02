@@ -8,6 +8,11 @@ $arrayDeErrores = "";
 if($_POST) {
     $arrayDeErrores = validarRegistracion($_POST);
     if(count($arrayDeErrores) === 0) {
+      session_start();
+
+      $_SESSION["usuario"] = $_POST["username"];
+      $_SESSION["email"] = $_POST["email"];
+
         // REGISTRO AL USUARIO
         $usuarioFinal = [
             'username' => trim($_POST['username']),

@@ -11,6 +11,7 @@
   <title>Modifica tu cuestionario</title>
 </head>
 <body background="imgs/bg-body.png">
+  <?php session_start(); ?>
   <main id="mainInfoUsuario">
     <section id="cartaUsuario">
       <section id="info">
@@ -18,8 +19,8 @@
           <ion-icon name="person"></ion-icon>
         </article>
         <article class="infoUsuarioPerfil">
-          <p>Nombre de usuario: User</p>
-          <p>Correo electronico: user@hotmail.com</p>
+          <p>Nombre de usuario: <?= $_SESSION["usuario"] ?></p>
+          <p>Correo electronico: <?= $_SESSION["email"] ?></p>
           <p>Fecha de nacimiento: xx / xx / xxxx</p>
           <p>Cantidad de cuestionarios creados: x</p>
           <p>Play count: x</p>

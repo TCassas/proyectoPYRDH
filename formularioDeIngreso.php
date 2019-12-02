@@ -3,10 +3,9 @@
     $archivo = file_get_contents("usuariosPYRDH.json");
     $archivoDeco = json_decode($archivo, true);
 
-    var_dump($_POST);
-
     foreach($archivoDeco["usuarios"] as $usuario) {
       if($_POST["username"] == $usuario["username"] && password_verify($_POST["password"], $usuario["password"])) {
+        session_start();
         header("Location: formularioPlay.php");
       }
     }
