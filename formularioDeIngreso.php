@@ -1,6 +1,15 @@
 <?php
-  if(isset($_POST["username"]) && isset($_POST["password"])) {
-    header('Location: formularioPlay.php');
+  if(!empty($_POST)) {
+    $archivo = file_get_contents("usuariosPYRDH.json");
+    $archivoDeco = json_decode($archivo, true);
+
+    var_dump($_POST);
+
+    foreach($archivoDeco["usuarios"] as $usuario) {
+      if($_POST["username"] == $usuario["username"] && password_verify($_POST["password"], $usuario["password"])) {
+        header("Location: formularioPlay.php");
+      }
+    }
   }
 ?>
 
@@ -26,10 +35,10 @@
         <p id="titulo"> Iniciar sesion</p>
         <div id="seccionderechaformu">
           <form action="formularioDeIngreso.php" method="POST" id="formulario">
-              <label for="" id="it"> Usuario</label>
-                  <input type="text" id="" name="username" class="inputFormularioIngreso">
-              <label for="" id="it"> Contraseña</label>
-                  <input type="password" id="" name="password" class="inputFormularioIngreso">
+              <label for="username" id="it"> Usuario</label>
+                  <input type="text" id="username" name="username" class="inputFormularioIngreso">
+              <label for="password" id="it"> Contraseña</label>
+                  <input type="password" id="password" name="password" class="inputFormularioIngreso">
               <button type="submit" name="button" id="it">ENVIAR</button>
           </form>
         </div>

@@ -10,13 +10,21 @@ if($_POST) {
     if(count($arrayDeErrores) === 0) {
         // REGISTRO AL USUARIO
         $usuarioFinal = [
-            'nombre' => trim($_POST['nombre']),
+            'username' => trim($_POST['username']),
             'email' => $_POST['email'],
             'password' => password_hash($_POST['password'], PASSWORD_DEFAULT)
         ];
         // ENVIAR A LA BASE DE DATOS $usuarioFinal
-        $jsonDeUsuario = json_encode($usuarioFinal);
-        file_put_contents('usuariosPYRDH.json', $jsonDeUsuario . PHP_EOL, FILE_APPEND);
+
+        //Guardo en $archivo el contenido del JSon
+        $archivo = json_decode(file_get_contents("usuariosPYRDH.json"), true);
+
+        //Trato el contenido del archivo como un array, es decir, un array donde cada elemento del mismo es un usuario
+        $archivo['usuarios'][] = $usuarioFinal;
+
+        //Subir lo anteriormente mencionado al archivo nuevamente -- Esto reescribe el contenido, habría que ver como se podría usar lo de FILE_APPEND
+        $jsonDeUsuario = json_encode($archivo);
+        file_put_contents('usuariosPYRDH.json', $jsonDeUsuario);
         header("Location: formularioDeIngreso.php");
         exit;
     }
@@ -26,7 +34,7 @@ if($_POST) {
 ?>
 
 
-!<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -48,8 +56,8 @@ if($_POST) {
 		<form method="POST" action=>
 
 	</br> </br> <div class="contenedor">
-			<label for="nombre">Usuario</label> <br>
-			<input type="text" name="nombre" id="nombre" value="<?= persistirDato($arrayDeErrores, 'nombre'); ?>">
+			<label for="username">Usuario</label> <br>
+			<input type="text" name="username" id="nombre" value="<?= persistirDato($arrayDeErrores, 'nombre'); ?>">
 			<small class="text-danger"><?= isset($arrayDeErrores['nombre']) ? $arrayDeErrores['nombre'] : "" ?></small>
 		</div>
 

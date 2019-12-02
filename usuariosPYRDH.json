@@ -1,2 +1,1 @@
-{"nombre":"santi","email":"sromeron42@gmail.com","password":"$2y$10$ztOrerrfjOBKssyda35XF.XZIHISlNGXvZ.gX2heqkcMM3ubWWMQu"}
-{"nombre":"raul","email":"raulricardoromero1@hotmail.com","password":"$2y$10$HSIrBL7UJWzVPF2ZngC81uGxsBivYxfx\/T.0JSKQeKOn9uTvisUqy"}
+{"usuarios":[{"username":"usuario","email":"usuario@hotmail.com","password":"$2y$10$BF5D6LshO8KhaJtwlDfdYesQA4OKsPkbukVFPWY8ov0CkUHH7hvYO"},{"username":"usuario2","email":"usuario2@hotmail.com","password":"$2y$10$6airZDNsDd8mqQNLgzmLteNu.I5OVZZWJMgNxQ\/hJ8EqqzIApzJHG"}]}
