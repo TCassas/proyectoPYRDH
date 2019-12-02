@@ -16,7 +16,7 @@
     <section id="cartaUsuario">
       <section id="info">
         <figure id="fotoUsuarioPerfil">
-          <img src="<?= $_SESSION["fotoPerfil"] ?>" alt="">
+          <img src="<?= isset($_SESSION["fotoPerfil"]) ? $_SESSION["fotoPerfil"] : "imgs/fondoPunteado.jpg"?>" alt="">
         </figure>
         <article class="infoUsuarioPerfil">
           <p>Nombre de usuario: <?= $_SESSION["usuario"] ?></p>
