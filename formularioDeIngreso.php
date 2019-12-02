@@ -1,15 +1,31 @@
-<?php
-  if(!empty($_POST)) {
-    $archivo = file_get_contents("usuariosPYRDH.json");
-    $archivoDeco = json_decode($archivo, true);
 
-    foreach($archivoDeco["usuarios"] as $usuario) {
-      if($_POST["username"] == $usuario["username"] && password_verify($_POST["password"], $usuario["password"])) {
-        session_start();
-        header("Location: formularioPlay.php");
+<?php
+
+session_start();
+require_once 'controladores/funciones.php';
+
+$arrayDeErrores = "";
+
+if($_POST) {
+    $arrayDeErrores = validarRegistracion($_POST);
+    if(count($arrayDeErrores) === 0) {
+        // REGISTRO AL USUARIO
+        $usuarioFinal = [
+            'username' =>$_POST['username'],
+            'password' => password_hash($_POST['password'], PASSWORD_DEFAULT)
+        ];
       }
-    }
-  }
+
+      $archivo = file_get_contents("usuariosPYRDH.json");
+      $archivoDeco = json_decode($archivo, true);
+
+      foreach($archivoDeco["usuarios"] as $usuario) {
+        if($_POST["username"] == $usuario["username"] && password_verify($_POST["password"], $usuario["password"])) {
+          session_start();
+          header("Location: formularioPlay.php");
+        }
+      }
+}
 ?>
 
 <!DOCTYPE html>
@@ -34,10 +50,14 @@
         <p id="titulo"> Iniciar sesion</p>
         <div id="seccionderechaformu">
           <form action="formularioDeIngreso.php" method="POST" id="formulario">
+
               <label for="username" id="it"> Usuario</label>
-                  <input type="text" id="username" name="username" class="inputFormularioIngreso">
+              <input type="text" id="username" name="username" class="inputFormularioIngreso" value="<?= persistirDato($arrayDeErrores, 'username'); ?>">
+              <small class="text-danger"><?= isset($arrayDeErrores['username']) ? $arrayDeErrores['username'] : "" ?></small>
+
               <label for="password" id="it"> Contraseña</label>
-                  <input type="password" id="password" name="password" class="inputFormularioIngreso">
+              <input type="password" id="password" name="password" class="inputFormularioIngreso">
+<small class="text-danger"><?= isset($arrayDeErrores['password']) ? $arrayDeErrores['password'] : "" ?></small>
               <button type="submit" name="button" id="it">ENVIAR</button>
           </form>
         </div>
