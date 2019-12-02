@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="css/styles.css">
   <title>Modifica tu cuestionario</title>
 </head>
-<body>
+<body background="imgs/bg-body.png">
   <main id="mainInfoUsuario">
     <section id="cartaUsuario">
       <section id="info">
@@ -29,7 +29,7 @@
         <a href="formularioPlay.php" class="botonMenu">Regresar</a>
         <a href="editarUsuario.php" class="botonMenu">Editar información</a>
         <a href="#" class="botonMenu">Cambiar contraseña</a>
-        <a href="index.html" class="botonMenu">Cerrar sesión</a>
+        <a href="formularioDeIngreso.php" class="botonMenu">Cerrar sesión</a>
       </section>
     </section>
   </main>

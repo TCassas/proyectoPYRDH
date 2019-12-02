@@ -9,7 +9,7 @@
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
     <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
-<body>
+<body background="imgs/bg-body.png">
   <main id="mainMenuPrincipal">
     <section id="usuarioMenuPrincipal">
       <div id="botonesMenu">

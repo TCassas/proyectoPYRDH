@@ -34,7 +34,7 @@
           </form>
         </div>
 
-        <p id="i">¿No tenes una cuenta?  <a href="#">Registrate </a></p>
+        <p id="i">¿No tenes una cuenta?  <a href="index.php">Registrate </a></p>
         <p id="i"><a href="">Recuperar contraseña</a></p>
 
 </body>
