@@ -53,6 +53,16 @@ function validarRegistracion($unArray) {
         }
     }
 
+    // Validamos campo "username"
+    if( isset($unArray['username']) ) {
+        if( empty($unArray['username']) ) {
+            $errores['username'] = "Este campo debe completarse.";
+        }
+        elseif( strlen($unArray['username']) < 4 ) {
+            $errores['username'] = "Tu nombre debe tener al menos 4 caracteres.";
+        }
+    }
+
     return $errores;
 }
 
