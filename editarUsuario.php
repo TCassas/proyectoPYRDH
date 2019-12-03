@@ -2,6 +2,10 @@
   $errorCargaImagen = false;
   session_start();
 
+  if(!empty($_POST)) {
+    //Poder cambiar información ya existente sin tener que sobreescribir todo
+  }
+
   if(!empty($_FILES)) {
     var_dump($_FILES);
     if($_FILES["fotoPerfil"]["error"] != 0) {
