@@ -1,27 +1,110 @@
 <?php
+  $archivo = file_get_contents("usuariosPYRDH.json");
+
   $errorCargaImagen = false;
   session_start();
 
-  if(!empty($_POST)) {
-    //Poder cambiar información ya existente sin tener que sobreescribir todo
+  $cambios = 0;
+  $i = 0;
+
+  if(!empty($_POST['nombre'])) {
+    if(strlen($_POST['nombre']) >= 4) {
+      $archivoDeco = json_decode($archivo, true);
+
+      foreach ($archivoDeco['usuarios'] as $usuario) {
+        if($_SESSION['username'] == $usuario["username"]) {
+
+          //Actualizo el valor de la sesion, porque de lo contrario quedaría con el valor asignado en el inicio de sesión
+          $_SESSION["username"] = $_POST["nombre"];
+
+          $usuario['username'] = $_POST["nombre"];
+
+          array_splice($archivoDeco, $i);
+
+          $archivoDeco['usuarios'][$i] = $usuario;
+
+          $archivoDeco = json_encode($archivoDeco);
+
+          file_put_contents("usuariosPYRDH.json", $archivoDeco);
+        }
+
+        $i++;
+      }
+      $cambios++;
+    }
   }
 
+  $i = 0;
+
+  if(!empty($_POST['correo'])) {
+    if(filter_var($_POST['correo'], FILTER_VALIDATE_EMAIL)) {
+      $archivoDeco = json_decode($archivo, true);
+
+      foreach ($archivoDeco['usuarios'] as $usuario) {
+        if($_SESSION['username'] == $usuario["username"]) {
+
+          //Actualizo el valor de la sesion, porque de lo contrario quedaría con el valor asignado en el inicio de sesión
+          $_SESSION["email"] = $_POST["correo"];
+
+          $usuario["email"] = $_POST["correo"];
+
+          array_splice($archivoDeco, $i);
+
+          $archivoDeco['usuarios'][$i] = $usuario;
+
+          $archivoDeco = json_encode($archivoDeco);
+
+          file_put_contents("usuariosPYRDH.json", $archivoDeco);
+        }
+
+        $i++;
+      }
+      $cambios++;
+    }
+  }
+
+  $i = 0;
+
   if(!empty($_FILES)) {
-    var_dump($_FILES);
     if($_FILES["fotoPerfil"]["error"] != 0) {
 
     } else {
+
+      $archivoDeco = json_decode($archivo, true);
+
       $extension = pathinfo($_FILES["fotoPerfil"]["name"], PATHINFO_EXTENSION);
 
       if($extension == "jpg" || $extension == "png" || $extension == "jpeg") {
-        echo $extension;
-        move_uploaded_file($_FILES["fotoPerfil"]["tmp_name"], "imgs/" . $_SESSION["usuario"] . "." . $extension);
-        $_SESSION["fotoPerfil"] = "imgs/" . $_SESSION["usuario"] . "." . $extension;
-        header("Location: infoUsuario.php");
+        move_uploaded_file($_FILES["fotoPerfil"]["tmp_name"], "imgs/" . $_SESSION["username"] . "." . $extension);
+        $_SESSION["fotoPerfil"] = "imgs/" . $_SESSION["username"] . "." . $extension;
+
+        //El archivo ya está abierto
+
+        foreach ($archivoDeco['usuarios'] as $usuario) {
+          if($_SESSION['username'] == $usuario["username"]) {
+            $_SESSION["imgPerfil"] = "imgs/" . $_SESSION["username"] . "." . $extension;
+            $usuario['imgPerfil'] = "imgs/" . $_SESSION["username"] . "." . $extension;
+
+            array_splice($archivoDeco, $i);
+
+            $archivoDeco['usuarios'][$i] = $usuario;
+          }
+
+          $i++;
+        }
+
+        $archivoDeco = json_encode($archivoDeco);
+
+        file_put_contents("usuariosPYRDH.json", $archivoDeco);
       } else {
         $errorCargaImagen = true;
       }
     }
+    $cambios++;
+  }
+
+  if($cambios == 3) {
+    header("Location: infoUsuario.php");
   }
 ?>
 
@@ -45,23 +128,29 @@
           <ion-icon name="arrow-round-back"></ion-icon> Regresar
         </a>
         <figure id="fotoUsuarioPerfil">
-          <img src="<?= $_SESSION["fotoPerfil"]?>" alt="">
+          <img src="<?= $_SESSION["imgPerfil"]?>" alt="">
         </figure>
         <article class="infoUsuarioPerfil">
 
           <form class="" action="editarUsuario.php" method="post" enctype="multipart/form-data">
+
             <div class="grupoLIYEditar">
               <label for="">Nombre de usuario:</label>
-              <input type="text" name="nombre" value="<?= $_SESSION["usuario"]?>">
+              <input type="text" name="nombre" value="<?= $_SESSION["username"]?>">
+              <small></small>
             </div>
+
             <div class="grupoLIYEditar">
               <label for="">Correo Electronico:</label>
               <input type="mail" name="correo" value="<?= $_SESSION["email"]?>">
+              <small></small>
             </div>
+
             <div class="grupoLIYEditar">
               <label for="">Subir una foto de perfil</label>
               <input type="file" name="fotoPerfil" value="">
             </div>
+
             <button type="submit" name="button" class="enviarFormulario">Enviar</button>
           </form>
 

@@ -19,23 +19,20 @@ if($_POST) {
         // REGISTRO AL USUARIO
         $usuarioFinal = [
             'username' =>$_POST['username'],
-            'password' => password_hash($_POST['password'], PASSWORD_DEFAULT)
+            'password' => $_POST['password']
         ];
 
         $archivo = file_get_contents("usuariosPYRDH.json");
-        $archivo = explode(PHP_EOL, $archivo);
-        array_pop($archivo);
+        $archivoDeco = json_decode($archivo, true);
 
-        foreach($archivo as $usuario) {
-          $usuarioDeco = json_decode($usuario, true);
-            if($_POST["username"] == $usuarioDeco["username"] && password_verify($_POST["password"], $usuarioDeco["password"])) {
-
+        foreach ($archivoDeco['usuarios'] as $usuario) {
+          if($usuario['username'] == $usuarioFinal['username'] && password_verify($usuarioFinal['password'], $usuario['password'])) {
             session_start();
 
-            $_SESSION["usuario"] = $usuarioDeco["username"];
-            $_SESSION["email"] = $usuarioDeco["email"];
-            $_SESSION["password"] = $usuarioDeco["password"];
-            $_SESSION["imgPerfil"] = $usuarioDeco["imgPerfil"];
+            $_SESSION["username"] = $usuario["username"];
+            $_SESSION["email"] = $usuario["email"];
+            $_SESSION["password"] = $usuario["password"];
+            $_SESSION["imgPerfil"] = $usuario["imgPerfil"];
 
             header("Location: formularioPlay.php");
             exit;

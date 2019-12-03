@@ -19,10 +19,10 @@
     <section id="cartaUsuario">
       <section id="info">
         <figure id="fotoUsuarioPerfil">
-          <img src="<?= isset($_SESSION["fotoPerfil"]) ? $_SESSION["fotoPerfil"] : "imgs/fondoPunteado.jpg"?>" alt="">
+          <img src="<?= isset($_SESSION["imgPerfil"]) ? $_SESSION["imgPerfil"] : "imgs/fondoPunteado.jpg"?>" alt="">
         </figure>
         <article class="infoUsuarioPerfil">
-          <p>Nombre de usuario: <?= $_SESSION["usuario"] ?></p>
+          <p>Nombre de usuario: <?= $_SESSION["username"] ?></p>
           <p>Correo electronico: <?= $_SESSION["email"] ?></p>
           <p>Cantidad de cuestionarios creados: x</p>
           <p>Play count: x</p>

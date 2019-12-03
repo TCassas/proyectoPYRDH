@@ -20,12 +20,20 @@ if($_POST) {
           'username' => trim($_POST['username']),
           'email' => $_POST['email'],
           'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
-          'imgPerfil' => ''
+          'imgPerfil' => 'imgs/fondoPunteado.jpg'
       ];
       // ENVIAR A LA BASE DE DATOS $usuarioFinal
-      $usuarioFinal = json_encode($usuarioFinal);
-      file_put_contents("usuariosPYRDH.json", $usuarioFinal . PHP_EOL, FILE_APPEND);
+      $archivo = file_get_contents("usuariosPYRDH.json");
+      $archivoDeco = json_decode($archivo, true);
+
+      $archivoDeco['usuarios'][] = $usuarioFinal;
+
+      $archivoDeco = json_encode($archivoDeco);
+
+      file_put_contents("usuariosPYRDH.json", $archivoDeco);
+
       header("Location: formularioDeIngreso.php");
+
       exit;
     }
 }
