@@ -4,6 +4,10 @@
   $errorCargaImagen = false;
   session_start();
 
+  $errorUsuario  = "";
+  $errorCorreo  = "";
+  $errorImagen  = "";
+
   $cambios = 0;
   $i = 0;
 
@@ -34,6 +38,14 @@
     }
   }
 
+  if(!empty($_POST)) {
+    if(strlen($_POST['nombre']) == 0) {
+      if (strlen($_POST['nombre']) < 4) {
+        $errorUsuario = "El usuario no debe tener menos de 4 caracteres";
+      }
+    }
+  }
+
   $i = 0;
 
   if(!empty($_POST['correo'])) {
@@ -60,6 +72,8 @@
         $i++;
       }
       $cambios++;
+    } else {
+      $errorCorreo = "El correo no tiene el formato correcto";
     }
   }
 
@@ -100,6 +114,7 @@
         $errorCargaImagen = true;
       }
     }
+    $errorImagen = "No se pudo subir la imagen";
     $cambios++;
   }
 
@@ -137,18 +152,19 @@
             <div class="grupoLIYEditar">
               <label for="">Nombre de usuario:</label>
               <input type="text" name="nombre" value="<?= $_SESSION["username"]?>">
-              <small></small>
+              <small><?= $errorUsuario ?></small>
             </div>
 
             <div class="grupoLIYEditar">
               <label for="">Correo Electronico:</label>
               <input type="mail" name="correo" value="<?= $_SESSION["email"]?>">
-              <small></small>
+              <small><?= $errorCorreo ?></small>
             </div>
 
             <div class="grupoLIYEditar">
               <label for="">Subir una foto de perfil</label>
               <input type="file" name="fotoPerfil" value="">
+              <small><?= $errorImagen ?></small>
             </div>
 
             <button type="submit" name="button" class="enviarFormulario">Enviar</button>
