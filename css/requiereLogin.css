@@ -1,0 +1,33 @@
+#mainLogin {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 60%;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+}
+
+#mainLogin h1 {
+  text-align: center;
+}
+
+.linkLogin a {
+  text-decoration: none;
+  color: black;
+  height: 100%;
+  width: 100%;
+  padding-top: 18px;
+  text-align: center;
+  align-self: center;
+}
+
+.linkLogin {
+  display: flex;
+  width: 40%;
+  height: 10%;
+  background-color: rgba(216, 221, 215, 0.33);
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 2px dashed #5AB131;
+}

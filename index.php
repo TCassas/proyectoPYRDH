@@ -1,6 +1,13 @@
 <?php
 
+
 session_start();
+
+//Si el usuario está logeado, no tiene acceso a las paginas de login y sing in
+if(!empty($_SESSION)) {
+  header("Location: formularioPlay.php");
+}
+
 require_once 'controladores/funciones.php';
 
 $arrayDeErrores = "";
@@ -8,30 +15,18 @@ $arrayDeErrores = "";
 if($_POST) {
     $arrayDeErrores = validarRegistracion($_POST);
     if(count($arrayDeErrores) === 0) {
-      session_start();
-
-      $_SESSION["usuario"] = $_POST["username"];
-      $_SESSION["email"] = $_POST["email"];
-
-        // REGISTRO AL USUARIO
-        $usuarioFinal = [
-            'username' => trim($_POST['username']),
-            'email' => $_POST['email'],
-            'password' => password_hash($_POST['password'], PASSWORD_DEFAULT)
-        ];
-        // ENVIAR A LA BASE DE DATOS $usuarioFinal
-
-        //Guardo en $archivo el contenido del JSon
-        $archivo = json_decode(file_get_contents("usuariosPYRDH.json"), true);
-
-        //Trato el contenido del archivo como un array, es decir, un array donde cada elemento del mismo es un usuario
-        $archivo['usuarios'][] = $usuarioFinal;
-
-        //Subir lo anteriormente mencionado al archivo nuevamente -- Esto reescribe el contenido, habría que ver como se podría usar lo de FILE_APPEND
-        $jsonDeUsuario = json_encode($archivo);
-        file_put_contents('usuariosPYRDH.json', $jsonDeUsuario);
-        header("Location: formularioDeIngreso.php");
-        exit;
+      // REGISTRO AL USUARIO
+      $usuarioFinal = [
+          'username' => trim($_POST['username']),
+          'email' => $_POST['email'],
+          'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
+          'imgPerfil' => ''
+      ];
+      // ENVIAR A LA BASE DE DATOS $usuarioFinal
+      $usuarioFinal = json_encode($usuarioFinal);
+      file_put_contents("usuariosPYRDH.json", $usuarioFinal . PHP_EOL, FILE_APPEND);
+      header("Location: formularioDeIngreso.php");
+      exit;
     }
 }
 

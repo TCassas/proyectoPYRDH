@@ -2,6 +2,12 @@
 <?php
 
 session_start();
+
+//Si el usuario está logeado, no tiene acceso a las paginas de login y sing in
+if(!empty($_SESSION)) {
+  header("Location: formularioPlay.php");
+}
+
 require_once 'controladores/funciones.php';
 
 $arrayDeErrores = "";
@@ -17,11 +23,20 @@ if($_POST) {
         ];
 
         $archivo = file_get_contents("usuariosPYRDH.json");
-        $archivoDeco = json_decode($archivo, true);
+        $archivo = explode(PHP_EOL, $archivo);
+        array_pop($archivo);
 
-        foreach($archivoDeco["usuarios"] as $usuario) {
-          if($_POST["username"] == $usuario["username"] && password_verify($_POST["password"], $usuario["password"])) {
+        foreach($archivo as $usuario) {
+          $usuarioDeco = json_decode($usuario, true);
+            if($_POST["username"] == $usuarioDeco["username"] && password_verify($_POST["password"], $usuarioDeco["password"])) {
+
             session_start();
+
+            $_SESSION["usuario"] = $usuarioDeco["username"];
+            $_SESSION["email"] = $usuarioDeco["email"];
+            $_SESSION["password"] = $usuarioDeco["password"];
+            $_SESSION["imgPerfil"] = $usuarioDeco["imgPerfil"];
+
             header("Location: formularioPlay.php");
             exit;
           }

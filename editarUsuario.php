@@ -37,8 +37,11 @@
   <main id="mainInfoUsuario">
     <section id="cartaUsuarioEditar">
       <section id="infoUsuarioEditar">
+        <a href="infoUsuario.php" class="botonMenu">
+          <ion-icon name="arrow-round-back"></ion-icon> Regresar
+        </a>
         <figure id="fotoUsuarioPerfil">
-          <img src="<?= $_SESSION["fotoPerfil"] ?>" alt="">
+          <img src="<?= $_SESSION["fotoPerfil"]?>" alt="">
         </figure>
         <article class="infoUsuarioPerfil">
 
@@ -50,10 +53,6 @@
             <div class="grupoLIYEditar">
               <label for="">Correo Electronico:</label>
               <input type="mail" name="correo" value="<?= $_SESSION["email"]?>">
-            </div>
-            <div class="grupoLIYEditar">
-              <label for="">Fecha de nacimiento</label>
-              <input type="date" name="fecha" value="<?= $_SESSION["fecha"]?>">
             </div>
             <div class="grupoLIYEditar">
               <label for="">Subir una foto de perfil</label>

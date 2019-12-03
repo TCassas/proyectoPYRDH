@@ -30,6 +30,11 @@
   align-items: center;
 }
 
+#infoUsuarioEditar a.botonMenu {
+  float: right;
+  margin-bottom: 20px;
+}
+
 #fotoUsuarioPerfil {
   display: flex;
   justify-content: center;

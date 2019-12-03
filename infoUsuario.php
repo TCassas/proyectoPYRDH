@@ -11,7 +11,10 @@
   <title>Modifica tu cuestionario</title>
 </head>
 <body background="imgs/bg-body.png">
-  <?php session_start(); ?>
+  <?php
+    session_start();
+    if(!empty($_SESSION)) {
+  ?>
   <main id="mainInfoUsuario">
     <section id="cartaUsuario">
       <section id="info">
@@ -28,10 +31,15 @@
       <section id="configuracionUsuario">
         <a href="formularioPlay.php" class="botonMenu">Regresar</a>
         <a href="editarUsuario.php" class="botonMenu">Editar información</a>
-        <a href="#" class="botonMenu">Cambiar contraseña</a>
-        <a href="formularioDeIngreso.php" class="botonMenu">Cerrar sesión</a>
+        <a href="cambiarContraseña" class="botonMenu">Cambiar contraseña</a>
+        <a href="cerrarSesion.php" class="botonMenu">Cerrar sesión</a>
       </section>
     </section>
+  <?php
+    } else {
+      include("temporales/requiereLogin.php");
+    }
+  ?>
   </main>
 </body>
 </html>
