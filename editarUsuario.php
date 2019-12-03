@@ -95,7 +95,7 @@
 
         foreach ($archivoDeco['usuarios'] as $usuario) {
           if($_SESSION['username'] == $usuario["username"]) {
-            unlink("imgs/" . $_SESSION["imgPerfil"] . "." . $etension);
+            unlink($_SESSION["imgPerfil"]);
             $_SESSION["imgPerfil"] = "imgs/" . $_SESSION["username"] . "." . $extension;
             $usuario['imgPerfil'] = "imgs/" . $_SESSION["username"] . "." . $extension;
 
