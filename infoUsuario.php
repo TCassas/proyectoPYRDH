@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
-  <title>Modifica tu cuestionario</title>
+  <title>Tu perfil</title>
 </head>
 <body background="imgs/bg-body.png">
   <?php
@@ -31,7 +31,7 @@
       <section id="configuracionUsuario">
         <a href="formularioPlay.php" class="botonMenu">Regresar</a>
         <a href="editarUsuario.php" class="botonMenu">Editar información</a>
-        <a href="cambiarContraseña" class="botonMenu">Cambiar contraseña</a>
+        <a href="cambiarContrasenia.php" class="botonMenu">Cambiar contraseña</a>
         <a href="cerrarSesion.php" class="botonMenu">Cerrar sesión</a>
       </section>
     </section>

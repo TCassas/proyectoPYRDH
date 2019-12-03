@@ -135,7 +135,7 @@
   <link rel="stylesheet" href="css/styles.css">
   <title>Modifica tu información de usuario</title>
 </head>
-<body>
+<body background="imgs/bg-body.png">
   <main id="mainInfoUsuario">
     <section id="cartaUsuarioEditar">
       <section id="infoUsuarioEditar">
