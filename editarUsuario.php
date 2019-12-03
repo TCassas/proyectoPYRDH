@@ -90,12 +90,12 @@
 
       if($extension == "jpg" || $extension == "png" || $extension == "jpeg") {
         move_uploaded_file($_FILES["fotoPerfil"]["tmp_name"], "imgs/" . $_SESSION["username"] . "." . $extension);
-        $_SESSION["fotoPerfil"] = "imgs/" . $_SESSION["username"] . "." . $extension;
 
         //El archivo ya está abierto
 
         foreach ($archivoDeco['usuarios'] as $usuario) {
           if($_SESSION['username'] == $usuario["username"]) {
+            unlink("imgs/" . $_SESSION["imgPerfil"] . "." . $etension);
             $_SESSION["imgPerfil"] = "imgs/" . $_SESSION["username"] . "." . $extension;
             $usuario['imgPerfil'] = "imgs/" . $_SESSION["username"] . "." . $extension;
 

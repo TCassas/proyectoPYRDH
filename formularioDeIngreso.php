@@ -39,9 +39,6 @@ if($_POST) {
               setcookie("usuarioRecordado", $usuario["username"], time() + 60 * 60 * 60 * 24 * 365);
             }
 
-            var_dump($_COOKIE);
-            exit;
-
             header("Location: formularioPlay.php");
             exit;
           }
