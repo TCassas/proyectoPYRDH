@@ -93,6 +93,7 @@
 
         //El archivo ya está abierto
 
+        //Encontrar el usuario al que se le cambiará la imagen
         foreach ($archivoDeco['usuarios'] as $usuario) {
           if($_SESSION['username'] == $usuario["username"]) {
             unlink($_SESSION["imgPerfil"]);
