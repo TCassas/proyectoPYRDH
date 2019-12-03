@@ -15,6 +15,9 @@ function validarRegistracion($unArray) {
 
     $errores = [];
 
+    $archivo = file_get_contents("usuariosPYRDH.json");
+    $archivoDeco = json_decode($archivo, true);
+
     // Validamos campo "nombre"
     if( isset($unArray['nombre']) ) {
         if( empty($unArray['nombre']) ) {
@@ -22,6 +25,13 @@ function validarRegistracion($unArray) {
         }
         elseif( strlen($unArray['nombre']) < 4 ) {
             $errores['nombre'] = "Tu nombre debe tener al menos 4 caracteres.";
+        }
+
+        foreach ($archivoDeco['usuarios'] as $usuario) {
+          if($usuario["username"] == $unArray["nombre"]) {
+            $errores['nombre'] = "Ese nombre de usuario ya está registrado";
+            return;
+          }
         }
     }
 
@@ -32,6 +42,13 @@ function validarRegistracion($unArray) {
         }
         elseif( !filter_var($unArray['email'], FILTER_VALIDATE_EMAIL) ) {
             $errores['email'] = "Debés ingresar un email válido.";
+        }
+
+        foreach ($archivoDeco['usuarios'] as $usuario) {
+          if($usuario["email"] == $unArray["email"]) {
+            $errores['email'] = "Ese correo ya está registrado";
+            return;
+          }
         }
     }
 

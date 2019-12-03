@@ -27,12 +27,20 @@ if($_POST) {
 
         foreach ($archivoDeco['usuarios'] as $usuario) {
           if($usuario['username'] == $usuarioFinal['username'] && password_verify($usuarioFinal['password'], $usuario['password'])) {
-            session_start();
+
+            //Creo una sesión con información util del usuario
 
             $_SESSION["username"] = $usuario["username"];
             $_SESSION["email"] = $usuario["email"];
             $_SESSION["password"] = $usuario["password"];
             $_SESSION["imgPerfil"] = $usuario["imgPerfil"];
+
+            if(isset($_POST["recordarUsuario"]) && $_POST["recordarUsuario"] == "siRecordar") {
+              setcookie("usuarioRecordado", $usuario["username"], time() + 60 * 60 * 60 * 24 * 365);
+            }
+
+            var_dump($_COOKIE);
+            exit;
 
             header("Location: formularioPlay.php");
             exit;
@@ -68,12 +76,16 @@ if($_POST) {
           <form action="formularioDeIngreso.php" method="POST" id="formulario">
 
               <label for="username" id="it"> Usuario</label>
-              <input type="text" id="username" name="username" class="inputFormularioIngreso" value="<?= persistirDato($arrayDeErrores, 'username'); ?>">
+              <input type="text" id="username" name="username" class="inputFormularioIngreso" value="<?= (isset($_COOKIE["usuarioRecordado"])) ? $_COOKIE["usuarioRecordado"] : persistirDato($arrayDeErrores, 'username') ?>">
               <small class="text-danger"><?= isset($arrayDeErrores['username']) ? $arrayDeErrores['username'] : "" ?></small>
 
               <label for="password" id="it"> Contraseña</label>
               <input type="password" id="password" name="password" class="inputFormularioIngreso">
-<small class="text-danger"><?= isset($arrayDeErrores['password']) ? $arrayDeErrores['password'] : "" ?></small>
+              <small class="text-danger"><?= isset($arrayDeErrores['password']) ? $arrayDeErrores['password'] : "" ?></small>
+
+              <label for="password">Recordar usuario</label>
+              <input type="checkbox" id="password" name="recordarUsuario" class="inputFormularioIngreso" value="siRecordar">
+
               <button type="submit" name="button" id="it">ENVIAR</button>
               <small class="text-danger"><?= ($errorInicioSesion) ? "Los datos ingresados no corresponden a una cuenta registrada" : "" ?></small>
           </form>
