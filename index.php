@@ -32,7 +32,7 @@ if($_POST) {
 
       file_put_contents("usuariosPYRDH.json", $archivoDeco);
 
-      header("Location: formularioDeIngreso.php");
+      header("Location: registrook.php");
 
       exit;
     }
@@ -65,8 +65,8 @@ if($_POST) {
 
 	</br> </br> <div class="contenedor">
 			<label for="username">Usuario</label> <br>
-			<input type="text" name="username" id="nombre" value="<?= persistirDato($arrayDeErrores, 'nombre'); ?>">
-			<small class="text-danger"><?= isset($arrayDeErrores['nombre']) ? $arrayDeErrores['nombre'] : "" ?></small>
+			<input type="text" name="username" id="username" value="<?= persistirDato($arrayDeErrores, 'username'); ?>">
+			<small class="text-danger"><?= isset($arrayDeErrores['username']) ? $arrayDeErrores['username'] : "" ?></small>
 		</div>
 
 

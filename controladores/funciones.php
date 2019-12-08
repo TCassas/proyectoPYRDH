@@ -19,21 +19,21 @@ function validarRegistracion($unArray) {
     $archivoDeco = json_decode($archivo, true);
 
     // Validamos campo "nombre"
-    if( isset($unArray['nombre']) ) {
-        if( empty($unArray['nombre']) ) {
-            $errores['nombre'] = "Este campo debe completarse.";
-        }
-        elseif( strlen($unArray['nombre']) < 4 ) {
-            $errores['nombre'] = "Tu nombre debe tener al menos 4 caracteres.";
-        }
+    // if( isset($unArray['nombre']) ) {
+    //     if( empty($unArray['nombre']) ) {
+    //         $errores['nombre'] = "Este campo debe completarse.";
+    //     }
+    //     elseif( strlen($unArray['nombre']) < 4 ) {
+    //         $errores['nombre'] = "Tu nombre debe tener al menos 4 caracteres.";
+    //     }username
 
         foreach ($archivoDeco['usuarios'] as $usuario) {
-          if($usuario["username"] == $unArray["nombre"]) {
-            $errores['nombre'] = "Ese nombre de usuario ya está registrado";
+          if($usuario["username"] == $unArray["username"]) {
+            $errores['username'] = "Ese nombre de usuario ya está registrado";
             return;
           }
         }
-    }
+    //}
 
     // Validamos campo "email"
     if( isset($unArray['email']) ) {
