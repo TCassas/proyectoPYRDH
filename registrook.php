@@ -1,5 +1,3 @@
-¡
-
 
 <!DOCTYPE html>
 <html>
@@ -20,11 +18,11 @@
 
 
 	<section>
-		<form method="" action="">
+		<form method="" action="" class=form2>
 
 			<div class="contenedor">
 			<br>
-			<label for="username">USUARIO CREADO EXITOSAMENTE!!!</label>
+			<label for="username">USUARIO CREADO!!!</label>
 			<br><br>
 			<a href="formularioDeIngreso.php" ><input type="button" id="botonEnviarRegistro" value="Volver a Inicio"></a>
 			</div>
@@ -33,16 +31,15 @@
 	</form>
 	</section>
 
-	<footer>
-  <div class="final">
 
-		<div class="redes">
-		<img src="imgs/fb-logo.png" alt="">
-		<img src="imgs/instagram.png" alt="">
-		<img src="imgs/twitter.png" alt="">
-		</div>
+  <div class="final2">
+
+		<img src="imgs/fb-logo.png" alt="" class="redes">
+		<img src="imgs/instagram.png" alt="" class="redes">
+		<img src="imgs/twitter.png" alt="" class="redes">
+
 	</div>
-	</footer>
+
 
 </body>
 </html>
