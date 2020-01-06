@@ -51,20 +51,20 @@ if($_POST) {
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Preguntados</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <link rel="stylesheet" href="css/estilo.css">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body background="imgs/bg-body.png">
 
 
-  <nav>
+  <nav id="navLogin">
   <div class="contenedor-nav">
   	<h1>REGISTRO</h1>
   </div>
   </nav>
 
-<main>
+<main id="mainLogin2">
 
-	<section>
+	<section id="sectionLogin1">
 <div class="formu">
   <form method="POST" action=>
 
@@ -108,7 +108,7 @@ if($_POST) {
 </div>
   </section>
 
-  <section>
+  <section id="sectionLogin2">
   	<div class="contenedor-section2">
   		<img src="imgs/foto.jpg" alt="" class="foto">
   	</div>
@@ -116,7 +116,7 @@ if($_POST) {
 
 </main>
 
-	<footer>
+	<footer id="footerLogin">
   <div class="final">
 
 		<img src="imgs/fb-logo.png" alt="" class="redes">
