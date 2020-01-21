@@ -32,26 +32,18 @@
     </header>
     <section id="formularioNuevoCuestionario">
       <form id="formularioNC" action="formularioNuevoCuestionario.php" method="post">
-        <div class="preguntasYRespuestas">
-          <!-- Pregunta tipo 4 respuestas -->
-          <?php for ($i = 0; $i < 5; $i++) {
-            include("temporales/preguntaTipoTexto.php");
-          }?>
+        <div id="preguntasYRespuestas">
 
-          <!-- Pregunta tipo numerica -->
-          <?php
-            include("temporales/preguntaTipoNumerico.php");
-          ?>
-
-          <!-- Pregunta tipo verdadero o falso -->
-          <?php
-            include("temporales/preguntaTipoVerdaderOFalso.php");
-          ?>
-
+        </div>
+        <div id="botonesCuestionario">
+          <button id="inputTexto" type="button">Agregar pregunta de texto</button>
+          <button id="inputVOF" type="button">Agregar pregunta de verdadero o falso</button>
         </div>
         <button type="submit" name="button" id="botonEnviarFormulario">¡Crear formulario!</button>
       </form>
     </section>
   </main>
+
+  <script src="js/creacionDeCuestionarios.js"></script>
 </body>
 </html>
