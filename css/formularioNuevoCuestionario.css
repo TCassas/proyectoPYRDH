@@ -1,194 +1,192 @@
-#headerNuevoCuestionarioFormulario {
+/*Clase para JS*/
+.aquiTaH {
+  width: 90% !important;
+  color: black !important;
+}
+
+.aquiTaV {
+  max-height: 15em !important;
+  opacity: 1 !important;
+  -webkit-box-shadow: -9px 0px 1px 0px rgba(112,112,112,0.31) !important;
+  -moz-box-shadow: -9px 0px 1px 0px rgba(112,112,112,0.31) !important;
+  box-shadow: -9px 0px 1px 0px rgba(112,112,112,0.31) !important;
+}
+
+/*Main creacion cuestionario*/
+#mainCreacionCuestinario {
   display: flex;
+  height: 100vh;
+  font-size: 1.4em;
+}
+
+/*Seccion izquierda*/
+#seccionIzquierdaCC {
+  padding: 1%;
+  width: 73vw;
+  overflow: auto;
+}
+
+#seccionPreguntasYRespuestas {
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-}
-
-#botonesMenu {
-  display: flex;
-}
-
-#botonesMenu > a {
-  margin-right: 10px;
-}
-
-#nombreNuevoCuestionario {
-  width: 40%;
-}
-
-#nombreNuevoCuestionario input {
-  font-size: 4vw;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  width: 100%;
-  height: 100%;
-}
-
-#mainNuevoFormulario {
-  width: 95%;
-  margin: 32px auto;
-  font-size: 1.7em;
-}
-
-#botonUsuario ion-icon, #botonVolver ion-icon{
-  font-size: 3em;
-  background-color: none;
-}
-
-#botonUsuario, #botonVolver {
-  border-radius: 5px;
-  background-color: white;
-  border-top: none;
-  border-left: none;
-}
-
-#formularioNuevoCuestionario {
-  width: 100%;
-  padding-top: 23px;
-}
-
-#formularioNC {
-  width: 80%;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-#formularioNC #botonEnviarFormulario {
-  width: 100%;
-  border: 1px solid lightgrey;
-  font-size: 1.2em;
-  color: grey;
-  padding: 10px 0;
-}
-
-
-#botonesCuestionario {
-  display: flex;
-  width: 100%;
-}
-
-#botonesCuestionario button {
-  width: 50%;
-  font-size: 0.7em;
-  border: none;
-  border: 1px solid lightgrey;
-  font-size: 2vw;
-  padding: 10px 0;
-}
-
-.preguntasYRespuestas {
-  margin-bottom: 20px;
-}
-
-.preguntaYRespuesta {
-  margin-bottom: 40px;
-  font-size: 2vw;
-}
-
-.preguntasYRespuestas hr {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  border-style: ridge;
-  -webkit-box-shadow: 0px 10px 5px -5px rgba(0,0,0,0.44);
-  -moz-box-shadow: 0px 10px 5px -5px rgba(0,0,0,0.44);
-  box-shadow: 0px 10px 5px -5px rgba(0,0,0,0.44)
 }
 
 .pregunta {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  width: 0;
+  padding: 2%;
+  border: 2px solid #707070;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  max-height:20px;
+  overflow: hidden;
+  opacity: 0;
+  transition: 0.5s;
+  color: white;
 }
 
-.consignaPregunta {
+.preguntaCarta input {
+  font-size: 1.2em;
+  border: none;
+  border-bottom: 2px dashed #4FC99C;
+  margin-bottom: 20px;
+}
+
+.respuestas p {
+  margin-bottom: 14px;
+}
+
+.respuestas p span {
+  font-size: 0.4em;
+  font-style: italic;
+}
+
+.respuestas > div {
+  display: flex;
+  flex-direction: column;
+  padding-left: 40px;
+}
+
+.respuestas div input {
+  display: flex;
+  flex-direction: column;
+  padding-left: 40px;
+  font-size: 0.8em;
+  border: none;
+  border-left: 8px solid #C94F74;
+  background-color: rgba(201, 80, 117, 0.18);
+  padding: 4px;
+  margin-bottom: 10px;
+}
+
+.respuestas div input:nth-of-type(1) {
+  border-left: 8px solid #4FC99C;
+  background-color: rgba(80, 201, 156, 0.18);
+}
+
+.inputRadio {
+  display: inline !important;
+}
+
+.inputRadio .radioInput {
+  display: inline;
+}
+
+/*Seccion derecha*/
+#seccionDerechaCC {
+  height: 100%;
+  width: 27vw;
+  min-width: 279px;
+  padding: 1%;
+  border-left: 2px solid #707070;
+  -webkit-box-shadow: -9px 0px 1px 0px rgba(112,112,112,0.31);
+  -moz-box-shadow: -9px 0px 1px 0px rgba(112,112,112,0.31);
+  box-shadow: -9px 0px 1px 0px rgba(112,112,112,0.31);
+}
+
+#seccionDerechaCC label {
+  color: #707070;
+}
+
+#seccionDerechaCC form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+#seccionDerechaCC div.grupoLI, #seccionIzquierdaCC div.grupoLI {
   display: flex;
   flex-direction: column;
 }
 
-.funcionesPregunta button {
-  background-color: white;
-  border-top: none;
-  border-left: none;
-  border-radius: 3px;
+#seccionDerechaCC div.grupoLI input, textarea {
+  font-size: 0.8em;
+  border: none;
+  border-left: 8px solid #4FC99C;
+  background-color: rgba(80, 201, 156, 0.18);
+  padding: 4px;
 }
 
-.funcionesPregunta ion-icon {
-  font-size: 1.4em;
-  background-color: none;
+#seccionDerechaCC textarea {
+  resize: none;
 }
 
-.pregunta input {
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  height: 40px;
-  font-size: 1.1em;
-  padding-left: 5px;
-  margin-bottom: 10px;
+#seccionDerechaCC select {
+  width: 40%;
+  color: #707070;
 }
 
-.unasRespuestas {
-  margin-left: 2%;
+#seccionDerechaCC select {
+  font-size: 0.8em;
 }
 
-.unasRespuestas input {
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  height: 40px;
-  font-size: 0.7em;
-  padding-left: 5px;
-  padding-bottom: 0;
-  margin-bottom: 10px;
+#seccionDerechaCC hr {
+  border: 1px dashed #707070;;
   width: 100%;
 }
 
-.unasRespuestas input[type="radio"] {
-  width: auto;
-  margin-right: 10px;
-}
-
-.formularioInput {
+#botonesCC {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
 }
 
-.unasRespuestas .formularioInput:first-of-type input {
-  border-bottom-color: #5AB131;
+#botonesCC button {
+  border: none;
+  padding: 10px;
+  color: white;
+  font-size: 0.65em;
+  cursor: pointer;
 }
 
-.unasRespuestas .formularioInput input {
-  border-bottom-color: #BF4133;
+#botonesCC h4 {
+  color: #707070;
+  margin-top: 10px;
 }
 
-.textoChiquito {
-  font-size: 0.4em;
+#botonesCC div + div {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  margin-bottom: 10px;
 }
 
-@media (max-width: 550px) {
-  #headerNuevoCuestionarioFormulario {
-    flex-direction: column;
-  }
-
-  #nombreNuevoCuestionario {
-    width: 100%;
-    order: 2;
-    margin-top: 20px;
-  }
-
-  #botonesCuestionario button {
-    font-size: 3vw;
-  }
+#botonesCC button:nth-of-type(1) {
+  background-color: #4FC99C;
 }
 
-@media (max-width: 850px) {
-  #formularioNC {
-    width: 100%;
-  }
+#botonesCC button:nth-of-type(2) {
+  background-color: #C94F74;
+}
 
-  .preguntaYRespuesta {
-    font-size: 4vw;
-    width: 100%;
-  }
+#seccionDerechaCC button[type="submit"] {
+  font-size: 1.2em;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border: none;
+  background-color: #4FC99C;
+  color: white;
 }
