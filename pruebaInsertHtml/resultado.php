@@ -7,6 +7,8 @@
     $respuesta = 1;
     $i = 0;
 
+    echo "<em>" . var_dump($_POST) . "</em>";
+
     foreach ($_POST as $info => $valor) {
       if($valor == 't' || $evaluarPregunta) {
         switch ($i) {

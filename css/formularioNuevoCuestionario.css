@@ -108,7 +108,7 @@
   color: #707070;
 }
 
-#seccionDerechaCC form {
+#seccionDerechaCC #formDerecho {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
