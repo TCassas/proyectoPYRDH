@@ -13,7 +13,23 @@
   text-align: center;
 }
 
-#inputBuscarCuestionario input {
+#inputBuscarCuestionario form input {
+  font-size: 1.1em;
+  margin-left: 2%;
+  padding-left: 1%;
+  border: none;
+  border-bottom: 2px solid #4FC99C;
+  margin-bottom: 20px;
+  transition: 0.1s;
+  outline: none;
+}
+
+#inputBuscarCuestionario form button {
+  font-size: 1.1em;
+  padding: 0 20px;
+  border: none;
+  border-bottom: 2px solid #4FC99C;
+  margin-bottom: 20px;
   transition: 0.1s;
   outline: none;
 }
@@ -58,7 +74,7 @@
 
 .articuloCuestionario {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   margin-left: 2%;
   background-color: rgba(216, 221, 215, 0.33);
   border-radius: 10px;
@@ -86,6 +102,8 @@
 .infoCuestionario {
   display: flex;
   align-items: center;
+  /* background-color: red; */
+  width: 50%;
 }
 
 .infoCuestionario a {
@@ -97,6 +115,8 @@
   flex-direction: column;
   font-size: 0.7em;
   justify-content: center;
+  width: 30%;
+  /* background-color: green; */
 }
 
 .creadorCuestionario a {
@@ -108,6 +128,9 @@
 .jugarCuestionario {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+  width: 20%;
+  /* background-color: yellow; */
 }
 
 .jugarCuestionario ion-icon {
@@ -161,5 +184,21 @@
 
   .infoCuestionario {
     flex-direction: column;
+  }
+
+  .infoCuestionario {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .creadorCuestionario {
+    width: 100%;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .jugarCuestionario {
+    width: 100%;
   }
 }

@@ -1,8 +1,9 @@
 <?php
-    $archivo = file_get_contents("usuariosPYRDH.json");
-
     $errorContraseña = "";
     $errorNuevaContraseña = "";
+
+    require("pdo.php");
+    require("Usuario.php");
 
     session_start();
 
@@ -15,39 +16,41 @@
         "newPassword2" => $_POST["newPassword2"]
       ];
 
-      $archivoDeco = json_decode($archivo, true);
+      $query = $db->prepare("SELECT * FROM usuarios WHERE id = :id");
+      $query->bindValue(":id", $_SESSION['id']);
+      $query->execute();
+      $result = $query->fetch(PDO::FETCH_ASSOC);
 
-      foreach ($archivoDeco['usuarios'] as $usuario) {
-        if(password_verify($infoFormulario["password"], $usuario["password"])) {
-          if($infoFormulario["newPassword"] == $infoFormulario["newPassword2"]) {
-            if(strlen($infoFormulario["newPassword"]) >= 6 && strlen($infoFormulario["newPassword2"]) >= 6) {
-              if(!password_verify($infoFormulario["newPassword"], $usuario["password"])) {
-                $_SESSION["password"] = $infoFormulario["password"];
+      if(password_verify($infoFormulario["password"], $result["contrasenia"])) {
 
-                $usuario['password'] = password_hash($infoFormulario["newPassword"], PASSWORD_DEFAULT);
+        if($infoFormulario["newPassword"] == $infoFormulario["newPassword2"]) {
 
-                array_splice($archivoDeco, $i);
+          if(strlen($infoFormulario["newPassword"]) >= 6 && strlen($infoFormulario["newPassword2"]) >= 6) {
 
-                $archivoDeco['usuarios'][$i] = $usuario;
+            if(!password_verify($infoFormulario["newPassword"], $result["contrasenia"])) {
 
-                $archivoDeco = json_encode($archivoDeco);
+              $query2 = $db->prepare("UPDATE usuarios SET contrasenia = :contrasenia WHERE id = :id");
+              $query2->bindValue(":contrasenia", password_hash($infoFormulario["newPassword"], PASSWORD_DEFAULT));
+              $query2->bindvalue(":id", $_SESSION["id"]);
+              $query2->execute();
 
-                file_put_contents("usuariosPYRDH.json", $archivoDeco);
+              header("Location: infoUsuario.php");
+              exit;
 
-                header("Location: infoUsuario.php");
-                exit;
-              } else {
-                $errorContraseña = "Tu nueva contraseña no puede ser la <br> misma que la actual";
-              }
             } else {
-              $errorNuevaContraseña = "Las contraseñas deben tener <br> al menos 6 caracteres";
+              $errorContraseña = "Tu nueva contraseña no puede ser la <br> misma que la actual";
             }
+
           } else {
-            $errorNuevaContraseña = "Las contraseñas no son iguales";
+            $errorNuevaContraseña = "Las contraseñas deben tener <br> al menos 6 caracteres";
           }
+
         } else {
-          $errorContraseña = "Esa no es tu actual contraseña";
+          $errorNuevaContraseña = "Las contraseñas no son iguales";
         }
+
+      } else {
+        $errorContraseña = "Esa no es tu actual contraseña";
       }
     }
 

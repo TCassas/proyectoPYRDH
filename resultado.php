@@ -42,6 +42,8 @@
     "preguntas" => $preguntas
     // "autor_id" => $_SESSION["id"]
   ];
+
+  require("guardarCuestionario.php");
 ?>
 
 <!DOCTYPE html>
@@ -60,7 +62,7 @@
     </article>
     <article class="">
       <p style="font-size: 1.7em;"><strong>Array final</strong></p>
-      <pre><?php var_export($cuestionarioFinal);?></pre>
+      <pre><?php var_dump($cuestionarioFinal);?></pre>
     </article>
   </section>
 </body>

@@ -5,10 +5,13 @@
 
   $id = $_SESSION["id"];
 
+  $busqueda = $_GET["cuestionarioBusqueda"];
+
   $query = $db->prepare("SELECT usuarios.nombre as 'username', categorias.nombre as 'categoria', cuestionarios.titulo as 'titulo', cuestionarios.cantidad_preguntas as 'cantidad de preguntas'
                          FROM cuestionarios
                          INNER JOIN usuarios ON usuario_id = usuarios.id
-                         INNER JOIN categorias ON categoria_id = categorias.id");
+                         INNER JOIN categorias ON categoria_id = categorias.id
+                         WHERE cuestionarios.titulo LIKE '%$busqueda%'");
   $query->execute();
   $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
