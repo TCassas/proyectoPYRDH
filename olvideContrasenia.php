@@ -1,8 +1,9 @@
 <?php
-    $archivo = file_get_contents("usuariosPYRDH.json");
-
     $errorContraseña = "";
     $errorNuevaContraseña = "";
+
+    require("pdo.php");
+    require("Usuario.php");
 
     session_start();
 
@@ -15,7 +16,12 @@
         "newPassword2" => $_POST["newPassword2"]
       ];
 
-      $archivoDeco = json_decode($archivo, true);
+      $query = $db->prepare("SELECT * FROM usuarios WHERE id = :id");
+      $query->bindValue(":id", $_SESSION['id']);
+      $query->fetch(PDO::FETCH_ASSOC);
+
+      var_dump($query);
+      exit;
 
 
       foreach ($archivoDeco['usuarios'] as $usuario) {

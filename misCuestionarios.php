@@ -1,3 +1,20 @@
+<?php
+  require("pdo.php");
+
+  session_start();
+
+  $id = $_SESSION["id"];
+
+  $query = $db->prepare("SELECT cuestionarios.id as id, usuarios.nombre as 'username', categorias.nombre as 'categoria', cuestionarios.titulo as 'titulo', cuestionarios.cantidad_preguntas as 'cantidad de preguntas'
+                         FROM cuestionarios
+                         INNER JOIN usuarios ON usuario_id = usuarios.id
+                         INNER JOIN categorias ON categoria_id = categorias.id
+                         WHERE cuestionarios.usuario_id = $id");
+  $query->execute();
+  $result = $query->fetchAll(PDO::FETCH_ASSOC);
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -37,12 +54,38 @@
       <div id="inputBuscarCuestionario" class="unasRespuestas">
         <input type="text" name="cuestionarioBusqueda" value="" placeholder="Buscar">
       </div>
-      <h1>Mis cuestionarios (10) </h1>
+      <h1>Mis cuestionarios (<?= count($result) ?>) </h1>
       <!-- Lista de cuestionarios -->
       <div class="cuestionarios">
-        <?php for ($i = 0; $i < 10; $i++) {
-          include("temporales/articuloListaCuestionarioEditable.php");
-        }?>
+          <?php forEach($result as $cuestionario) { ?>
+
+            <article class="articuloCuestionario">
+              <div class="infoCuestionario">
+                <div class="fotoCuestionario">
+
+                </div>
+                <div class="infoLista">
+                  <h4><?= $cuestionario["titulo"] ?></h4>
+                  <p><?= $cuestionario["cantidad de preguntas"] ?> preguntas</p>
+                </div>
+              </div>
+              <div class="creadorCuestionario">
+                <p class="creador">Autor: <?= $cuestionario["username"] ?></p>
+                <a href="ranking.php" class="ranking">Ranking<ion-icon name="list"></ion-icon></a>
+                <p> Genero: <?= $cuestionario["categoria"] ?></p>
+              </div>
+              <div class="jugarCuestionario">
+                <a href="editarCuestionario.php">
+                  <ion-icon name="create"></ion-icon>
+                </a>
+                <a href="borrarCuestionario.php?id=<?= $cuestionario["id"] ?>">
+                  <ion-icon name="trash"></ion-icon>
+                </a>
+              </div>
+            </article>
+
+          <?php }
+        ?>
       </div>
 
     </section>

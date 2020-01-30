@@ -1,5 +1,9 @@
 <?php
-  $archivo = file_get_contents("usuariosPYRDH.json");
+  $errorContraseña = "";
+  $errorNuevaContraseña = "";
+
+  require("pdo.php");
+  require("Usuario.php");
 
   $errorCargaImagen = false;
   session_start();
@@ -8,34 +12,25 @@
   $errorCorreo  = "";
   $errorImagen  = "";
 
+  $query = $db->prepare("SELECT * FROM usuarios WHERE id = :id");
+  $query->bindValue(":id", $_SESSION['id']);
+  $query->execute();
+  $result = $query->fetch(PDO::FETCH_ASSOC);
+
   $cambios = 0;
   $i = 0;
 
   if(!empty($_POST['nombre'])) {
     if(strlen($_POST['nombre']) >= 4) {
-      $archivoDeco = json_decode($archivo, true);
+      //Actualizo el valor de la sesion, porque de lo contrario quedaría con el valor asignado en el inicio de sesión
+      $_SESSION["username"] = $_POST["nombre"];
 
-      foreach ($archivoDeco['usuarios'] as $usuario) {
-        if($_SESSION['username'] == $usuario["username"]) {
-
-          //Actualizo el valor de la sesion, porque de lo contrario quedaría con el valor asignado en el inicio de sesión
-          $_SESSION["username"] = $_POST["nombre"];
-
-          $usuario['username'] = $_POST["nombre"];
-
-          array_splice($archivoDeco, $i);
-
-          $archivoDeco['usuarios'][$i] = $usuario;
-
-          $archivoDeco = json_encode($archivoDeco);
-
-          file_put_contents("usuariosPYRDH.json", $archivoDeco);
-        }
-
-        $i++;
-      }
-      $cambios++;
+      $query = $db->prepare("UPDATE usuarios SET nombre = :nombre WHERE id = :id");
+      $query->bindValue(":nombre", $_POST['nombre']);
+      $query->bindvalue(":id", $_SESSION["id"]);
+      $query->execute();
     }
+    $i++;
   }
 
   if(!empty($_POST)) {
@@ -46,80 +41,47 @@
     }
   }
 
-  $i = 0;
-
   if(!empty($_POST['correo'])) {
     if(filter_var($_POST['correo'], FILTER_VALIDATE_EMAIL)) {
-      $archivoDeco = json_decode($archivo, true);
+      //Actualizo el valor de la sesion, porque de lo contrario quedaría con el valor asignado en el inicio de sesión
+      $_SESSION["email"] = $_POST["correo"];
 
-      foreach ($archivoDeco['usuarios'] as $usuario) {
-        if($_SESSION['username'] == $usuario["username"]) {
-
-          //Actualizo el valor de la sesion, porque de lo contrario quedaría con el valor asignado en el inicio de sesión
-          $_SESSION["email"] = $_POST["correo"];
-
-          $usuario["email"] = $_POST["correo"];
-
-          array_splice($archivoDeco, $i);
-
-          $archivoDeco['usuarios'][$i] = $usuario;
-
-          $archivoDeco = json_encode($archivoDeco);
-
-          file_put_contents("usuariosPYRDH.json", $archivoDeco);
-        }
-
-        $i++;
-      }
-      $cambios++;
+      $query2 = $db->prepare("UPDATE usuarios SET mail = :mail WHERE id = :id");
+      $query2->bindValue(":mail", $_POST['correo']);
+      $query2->bindvalue(":id", $_SESSION["id"]);
+      $query2->execute();
     } else {
       $errorCorreo = "El correo no tiene el formato correcto";
     }
+    $i++;
   }
-
-  $i = 0;
 
   if(!empty($_FILES)) {
     if($_FILES["fotoPerfil"]["error"] != 0) {
 
     } else {
-
-      $archivoDeco = json_decode($archivo, true);
-
       $extension = pathinfo($_FILES["fotoPerfil"]["name"], PATHINFO_EXTENSION);
 
       if($extension == "jpg" || $extension == "png" || $extension == "jpeg") {
+        unlink($result["img"]);
+
         move_uploaded_file($_FILES["fotoPerfil"]["tmp_name"], "imgs/" . $_SESSION["username"] . "." . $extension);
 
-        //El archivo ya está abierto
+        $_SESSION["imgPerfil"] = "imgs/" . $_SESSION["username"] . "." . $extension;
 
-        //Encontrar el usuario al que se le cambiará la imagen
-        foreach ($archivoDeco['usuarios'] as $usuario) {
-          if($_SESSION['username'] == $usuario["username"]) {
-            unlink($_SESSION["imgPerfil"]);
-            $_SESSION["imgPerfil"] = "imgs/" . $_SESSION["username"] . "." . $extension;
-            $usuario['imgPerfil'] = "imgs/" . $_SESSION["username"] . "." . $extension;
-
-            array_splice($archivoDeco, $i);
-
-            $archivoDeco['usuarios'][$i] = $usuario;
-          }
-
-          $i++;
-        }
-
-        $archivoDeco = json_encode($archivoDeco);
-
-        file_put_contents("usuariosPYRDH.json", $archivoDeco);
+        $query3 = $db->prepare("UPDATE usuarios SET img = :img WHERE id = :id");
+        $query3->bindValue(":img", $_SESSION["imgPerfil"]);
+        $query3->bindvalue(":id", $_SESSION["id"]);
+        $query3->execute();
       } else {
         $errorCargaImagen = true;
       }
     }
     $errorImagen = "No se pudo subir la imagen";
-    $cambios++;
+    $i++;
   }
 
-  if($cambios == 3) {
+  if($i == 3) {
     header("Location: infoUsuario.php");
   }
 ?>
@@ -144,7 +106,7 @@
           <ion-icon name="arrow-round-back"></ion-icon> Regresar
         </a>
         <figure id="fotoUsuarioPerfil">
-          <img src="<?= $_SESSION["imgPerfil"]?>" alt="">
+          <img src="<?= $result["img"] ?>" alt="">
         </figure>
         <article class="infoUsuarioPerfil">
 

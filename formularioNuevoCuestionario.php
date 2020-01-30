@@ -38,7 +38,7 @@
         <div>
           <label for="">Genero</label>
           <select name="genero" id="">
-            <option value="test">test</option>
+            <?php require("traerGeneros.php"); ?>
           </select>
         </div>
         <div id="botonesCC">

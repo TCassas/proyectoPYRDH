@@ -1,3 +1,14 @@
+<?php
+  require("pdo.php");
+
+  session_start();
+
+  $query = $db->prepare("SELECT * FROM usuarios WHERE id = :id");
+  $query->bindValue(":id", $_SESSION['id']);
+  $query->execute();
+  $result = $query->fetch(PDO::FETCH_ASSOC);
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -12,14 +23,13 @@
 </head>
 <body background="imgs/bg-body.png">
   <?php
-    session_start();
     if(!empty($_SESSION)) {
   ?>
   <main id="mainInfoUsuario">
     <section id="cartaUsuario">
       <section id="info">
         <figure id="fotoUsuarioPerfil">
-          <img src="<?= isset($_SESSION["imgPerfil"]) ? $_SESSION["imgPerfil"] : "imgs/fondoPunteado.jpg"?>" alt="">
+          <img src="<?= $result["img"] ?>" alt="">
         </figure>
         <article class="infoUsuarioPerfil">
           <p>Nombre de usuario: <?= $_SESSION["username"] ?></p>

@@ -3,35 +3,53 @@
 
 session_start();
 
+require("pdo.php");
+require("Usuario.php");
+
 //Si el usuario está logeado, no tiene acceso a las paginas de login y sing in
 if(!empty($_SESSION)) {
   header("Location: formularioPlay.php");
 }
 
-require_once 'controladores/funciones.php';
+require('controladores/funciones.php');
 
-$arrayDeErrores = "";
+$arrayDeErrores = [];
 
 if($_POST) {
     $arrayDeErrores = validarRegistracion($_POST);
-    if(count($arrayDeErrores) === 0) {
-      // REGISTRO AL USUARIO
+    if(count($arrayDeErrores) == 0 || $arrayDeErrores == NULL) {
       $usuarioFinal = [
           'username' => trim($_POST['username']),
           'email' => $_POST['email'],
-          'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
+          'password' => $_POST['password'],
           'imgPerfil' => 'imgs/fondoPunteado.jpg'
       ];
+
+
+      $usuario = New Usuario($usuarioFinal['username'], $usuarioFinal['email'], $usuarioFinal['password']);
+
+      echo var_dump(Date("Y-m-d"));
+
+      $query = $db->prepare("INSERT INTO usuarios VALUES(default, :nombre, :mail, :contrasenia, :fecha, :img)");
+      $query->bindValue(":nombre", $usuario->getNombre());
+      $query->bindValue(":mail", $usuario->getMail());
+      $query->bindValue(":contrasenia", $usuario->getContrasenia());
+      $query->bindValue(":fecha", Date("Y-m-d"));
+      $query->bindValue(":img", 'imgs/fondoPunteado.jpg');
+
+      $query->execute();
+
+
       // ENVIAR A LA BASE DE DATOS $usuarioFinal
-      $archivo = file_get_contents("usuariosPYRDH.json");
-      $archivoDeco = json_decode($archivo, true);
-
-      $archivoDeco['usuarios'][] = $usuarioFinal;
-
-      $archivoDeco = json_encode($archivoDeco);
-
-      file_put_contents("usuariosPYRDH.json", $archivoDeco);
-
+      // $archivo = file_get_contents("usuariosPYRDH.json");
+      // $archivoDeco = json_decode($archivo, true);
+      //
+      // $archivoDeco['usuarios'][] = $usuarioFinal;
+      //
+      // $archivoDeco = json_encode($archivoDeco);
+      //
+      // file_put_contents("usuariosPYRDH.json", $archivoDeco);
+      //
       header("Location: registrook.php");
 
       exit;

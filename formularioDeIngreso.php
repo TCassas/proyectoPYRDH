@@ -1,5 +1,7 @@
-
 <?php
+
+require("pdo.php");
+require("Usuario.php");
 
 session_start();
 
@@ -8,32 +10,34 @@ if(!empty($_SESSION)) {
   header("Location: formularioPlay.php");
 }
 
-require_once 'controladores/funciones.php';
+require('controladores/funciones.php');
 
-$arrayDeErrores = "";
+$arrayDeErrores = [];
 $errorInicioSesion = false;
 
 if($_POST) {
     $arrayDeErrores = validarRegistracion($_POST);
-    if(count($arrayDeErrores) === 0) {
+    if(count($arrayDeErrores) == 0 || $arrayDeErrores === NULL) {
         // REGISTRO AL USUARIO
         $usuarioFinal = [
             'username' =>$_POST['username'],
             'password' => $_POST['password']
         ];
 
-        $archivo = file_get_contents("usuariosPYRDH.json");
-        $archivoDeco = json_decode($archivo, true);
+        $query = $db->prepare("SELECT * FROM usuarios WHERE nombre = :nombre");
 
-        foreach ($archivoDeco['usuarios'] as $usuario) {
-          if($usuario['username'] == $usuarioFinal['username'] && password_verify($usuarioFinal['password'], $usuario['password'])) {
+        $query->bindValue(":nombre", $usuarioFinal['username']);
 
-            //Creo una sesión con información util del usuario
+        $query->execute();
 
-            $_SESSION["username"] = $usuario["username"];
-            $_SESSION["email"] = $usuario["email"];
-            $_SESSION["password"] = $usuario["password"];
-            $_SESSION["imgPerfil"] = $usuario["imgPerfil"];
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        if(count($result) == 1) {
+          if(password_verify($usuarioFinal['password'], $result[0]['contrasenia'])) {
+            $_SESSION["id"] = $result[0]['id'];
+            $_SESSION["username"] = $result[0]["nombre"];
+            $_SESSION["email"] = $result[0]["mail"];
+            $_SESSION["imgPerfil"] = $result[0]["imgPerfil"];
 
             if(isset($_POST["recordarUsuario"]) && $_POST["recordarUsuario"] == "siRecordar") {
               setcookie("usuarioRecordado", $usuario["username"], time() + 60 * 60 * 60 * 24 * 365);
@@ -91,7 +95,7 @@ if($_POST) {
         <p id="i">¿No tenes una cuenta?  <a href="index.php">Registrate </a></p>
         <p id="i"><a href="olvideContrasenia.php">Recuperar contraseña</a></p>
 
-        
+
 
 </body>
 </html>
