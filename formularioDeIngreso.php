@@ -17,7 +17,7 @@ $errorInicioSesion = false;
 
 if($_POST) {
     $arrayDeErrores = validarRegistracion($_POST);
-    if(count($arrayDeErrores) == 0 || $arrayDeErrores === NULL) {
+    if(count($arrayDeErrores) == 0 || $arrayDeErrores == NULL) {
         // REGISTRO AL USUARIO
         $usuarioFinal = [
             'username' =>$_POST['username'],

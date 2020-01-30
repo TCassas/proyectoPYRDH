@@ -51,8 +51,11 @@
     <section id="cuestionariosLista">
 
       <!-- Input busqueda de cuestionarnios -->
-      <div id="inputBuscarCuestionario" class="unasRespuestas">
-        <input type="text" name="cuestionarioBusqueda" value="" placeholder="Buscar">
+      <div class="unasRespuestas" id="inputBuscarCuestionario">
+        <form class="" action="buscador.php" method="GET">
+          <input type="text" name="cuestionarioBusqueda" value="" placeholder="Buscar">
+          <button type="submit" name="button">Buscar</button>
+        </form>
       </div>
       <h1>Mis cuestionarios (<?= count($result) ?>) </h1>
       <!-- Lista de cuestionarios -->

@@ -7,8 +7,6 @@
 
     session_start();
 
-    $i = 0;
-
     if(!empty($_POST)) {
       $infoFormulario = [
         "correo" => $_POST["correo"],
@@ -16,13 +14,11 @@
         "newPassword2" => $_POST["newPassword2"]
       ];
 
-      $query = $db->prepare("SELECT * FROM usuarios WHERE id = :id");
-      $query->bindValue(":id", $_SESSION['id']);
-      $query->fetch(PDO::FETCH_ASSOC);
+      $query = $db->prepare("SELECT * FROM usuarios WHERE mail = :mail");
 
-      var_dump($query);
-      exit;
+      $query->bindValue(":mail", $infoFormulario['correo']);
 
+      $query->execute();
 
       foreach ($archivoDeco['usuarios'] as $usuario) {
         if($usuario["email"] == $infoFormulario["correo"]) {

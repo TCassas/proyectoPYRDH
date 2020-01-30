@@ -162,6 +162,13 @@
   cursor: pointer;
 }
 
+.divBorrarCuestionario {
+  display: flex;
+  justify-content: space-around;
+  width: 20%;
+  font-size: 2em;
+}
+
 #botonesCC h4 {
   color: #707070;
   margin-top: 10px;
