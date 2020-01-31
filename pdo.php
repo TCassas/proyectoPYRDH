@@ -3,7 +3,7 @@
     $db = new PDO(
       "mysql:host=127.0.0.1;dbname=proyectopyrdh;port3306",
       "root",
-      "admin"
+      "root"
     );
 
     return $db;

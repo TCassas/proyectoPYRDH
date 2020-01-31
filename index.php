@@ -28,7 +28,7 @@ if($_POST) {
 
       $usuario = New Usuario($usuarioFinal['username'], $usuarioFinal['email'], $usuarioFinal['password']);
 
-      echo var_dump(Date("Y-m-d"));
+      //echo var_dump(Date("Y-m-d"));
 
       $query = $db->prepare("INSERT INTO usuarios VALUES(default, :nombre, :mail, :contrasenia, :fecha, :img)");
       $query->bindValue(":nombre", $usuario->getNombre());
