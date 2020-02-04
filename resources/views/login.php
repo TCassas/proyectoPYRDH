@@ -77,11 +77,11 @@ if($_POST) {
           <form action="formularioDeIngreso.php" method="POST" id="formulario">
 
               <label for="username" id="it"> Usuario</label>
-              <input type="text" id="username" name="username" class="inputFormularioIngreso" value="<?= (isset($_COOKIE["usuarioRecordado"])) ? $_COOKIE["usuarioRecordado"] : persistirDato($arrayDeErrores, 'username') ?>">
+              <input type="text" id="username" name="nombre" class="inputFormularioIngreso" value="<?= (isset($_COOKIE["usuarioRecordado"])) ? $_COOKIE["usuarioRecordado"] : persistirDato($arrayDeErrores, 'username') ?>">
               <small class="text-danger"><?= isset($arrayDeErrores['username']) ? $arrayDeErrores['username'] : "" ?></small>
 
               <label for="password" id="it"> Contraseña</label>
-              <input type="password" id="password" name="password" class="inputFormularioIngreso">
+              <input type="password" id="password" name="contrasenia" class="inputFormularioIngreso">
               <small class="text-danger"><?= isset($arrayDeErrores['password']) ? $arrayDeErrores['password'] : "" ?></small>
 
               <label for="password">Recordar usuario</label>

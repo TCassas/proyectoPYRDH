@@ -88,27 +88,27 @@ if($_POST) {
 
         <div class="contenedor">
     		<label for="username">Usuario</label>
-    		<input type="text" name="username" id="username" value="<?= persistirDato($arrayDeErrores, 'username'); ?>">
+    		<input type="text" name="username" id="nombre" value="<?= persistirDato($arrayDeErrores, 'username'); ?>">
     		<small class="text-danger"><?= isset($arrayDeErrores['username']) ? $arrayDeErrores['username'] : "" ?></small>
     	</div>
 
 
       <div class="contenedor">
     		<label for="email">Correo</label>
-    		<input type="email" name="email" id="email" value="<?= persistirDato($arrayDeErrores, 'email'); ?>">
+    		<input type="email" name="email" id="mail" value="<?= persistirDato($arrayDeErrores, 'email'); ?>">
     		<small class="text-danger"><?= isset($arrayDeErrores['email']) ? $arrayDeErrores['email'] : "" ?></small>
     	</div>
 
 
       <div class="contenedor">
     		<label for="password">Contraseña</label>
-    	 <input type="password" name="password" id="password">
+    	 <input type="password" name="contrasenia" id="password">
     		 <small class="text-danger"><?= isset($arrayDeErrores['password']) ? $arrayDeErrores['password'] : "" ?></small>
     	</div>
 
       <div class="contenedor">
     		<label for="pass2">Verificar Contraseña</label>
-    	 <input type="password" name="repassword" id="pass2">
+    	 <input type="password" name="recontrasenia" id="pass2">
     	 <small class="text-danger"><?= isset($arrayDeErrores['repassword']) ? $arrayDeErrores['repassword'] : "" ?></small>
     	</div>
 
