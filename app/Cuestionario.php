@@ -12,10 +12,6 @@ class Cuestionario extends Model
   public $guarded = [];
 
   public function usuario() {
-    return $this->belongsTo("App\Usuario", "usuario_id");
-  }
-
-  public function encriptarPass($pass) {
-    return password_hash($pass, PASSWORD_DEFAULT);
+    return $this->belongsTo("App\User", "usuario_id");
   }
 }

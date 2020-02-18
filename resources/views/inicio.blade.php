@@ -13,16 +13,16 @@
   <main id="mainMenuPrincipal">
     <section id="usuarioMenuPrincipal">
       <div id="botonesMenu">
-        <a href="infoUsuario.php" class="botonMenu">
+        <a href="/perfil" class="botonMenu">
           <ion-icon name="contact"></ion-icon> Usuario
         </a>
       </div>
     </section>
     <section id="opcionesMenuPrincipal">
-      <a href="menuBuscarCuestionario.php" class="botonMenu">Jugar</a>
-      <a href="misCuestionarios.php" class="botonMenu">Mis cuestionarios</a>
+      <a href="/cuestionarios" class="botonMenu">Jugar</a>
+      <a href="/perfil/cuestionarios" class="botonMenu">Mis cuestionarios</a>
       <div id="botonesConfigYAyuda">
-        <a href="ayuda.php" class="botonMenu"><ion-icon name="help"></ion-icon></a>
+        <a href="/ayuda" class="botonMenu"><ion-icon name="help"></ion-icon></a>
         <a href="#" class="botonMenu"><ion-icon name="settings"></ion-icon></a>
       </div>
     </section>

@@ -8,12 +8,12 @@
   <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
-  <title>Modifica tu cuestionario</title>
+  <title>Ayuda</title>
 </head>
 <body background="imgs/bg-body.png">
   <main id="mainPaginaAyuda">
     <section id="cartaPaginaAyuda">
-      <a href="formularioPlay.php" class="botonMenu">
+      <a href="/inicio" class="botonMenu">
         <ion-icon name="arrow-round-back"></ion-icon> Regresar
       </a>
       <section id="nosotros">

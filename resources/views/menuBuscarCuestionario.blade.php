@@ -1,19 +1,3 @@
-<?php
-  require("pdo.php");
-
-  session_start();
-
-  $id = $_SESSION["id"];
-
-  $query = $db->prepare("SELECT usuarios.nombre as 'username', categorias.nombre as 'categoria', cuestionarios.titulo as 'titulo', cuestionarios.cantidad_preguntas as 'cantidad de preguntas'
-                         FROM cuestionarios
-                         INNER JOIN usuarios ON usuario_id = usuarios.id
-                         INNER JOIN categorias ON categoria_id = categorias.id");
-  $query->execute();
-  $result = $query->fetchAll(PDO::FETCH_ASSOC);
-
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -31,7 +15,7 @@
     <section id="menuBuscarCuestionario">
       <div>
 
-        <a href="infoUsuario.php" class="botonMenu">
+        <a href="/perfil" class="botonMenu">
           <ion-icon name="contact"></ion-icon> Usuario
         </a>
 
@@ -55,22 +39,21 @@
 
       <!-- Lista de cuestionarios -->
       <div class="cuestionarios">
-        <?php forEach($result as $cuestionario) { ?>
-
+        @foreach ($cuestionarios as $cuestionario)
           <article class="articuloCuestionario">
             <div class="infoCuestionario">
               <div class="fotoCuestionario">
 
               </div>
               <div class="infoLista">
-                <h4><?= $cuestionario["titulo"] ?></h4>
-                <p><?= $cuestionario["cantidad de preguntas"] ?> preguntas</p>
+                <h4>{{$cuestionario->titulo}}</h4>
+                <p> preguntas</p>
               </div>
             </div>
             <div class="creadorCuestionario">
-              <p class="creador">Autor: <?= $cuestionario["username"] ?></p>
-              <a href="ranking.php" class="ranking">Ranking<ion-icon name="list"></ion-icon></a>
-              <p> Genero: <?= $cuestionario["categoria"] ?></p>
+              <p class="creador">Autor: {{$cuestionario}}</p>
+              <a href="/ranking" class="ranking">Ranking<ion-icon name="list"></ion-icon></a>
+              <p> Genero: </p>
             </div>
             <div class="jugarCuestionario">
               <a href="preguntaTexto.php">
@@ -78,11 +61,8 @@
               </a>
             </div>
           </article>
-
-        <?php }
-      ?>
+        @endforeach
       </div>
-
     </section>
   </main>
 </body>

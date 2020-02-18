@@ -12,13 +12,22 @@
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('welcome');
 });
 
-Route::post('/', "UsuarioController@login");
+Route::get('/inicio', function() { return view('inicio'); });
 
-Route::get('/login', function() {
-  return view("login");
-});
 
-Route::post('/login', "UsuarioController@registrar");
+Route::get('/perfil', 'UsuarioController@info');
+
+Route::get('/perfil/editar', 'UsuarioController@editarInfo');
+
+Route::get('/cuestionarios', 'CuestionarioController@listar');
+
+Route::get('/perfil/cuestionarios', 'UsuarioController@listarCuestionarios');
+
+Route::get('/ayuda', function() { return view('ayuda'); });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
