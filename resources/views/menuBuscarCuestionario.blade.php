@@ -46,14 +46,14 @@
 
               </div>
               <div class="infoLista">
-                <h4>{{$cuestionario->titulo}}</h4>
-                <p> preguntas</p>
+                <h4><a href="/cuestionarios/{{$cuestionario->id}}">{{$cuestionario->titulo}}</a></h4>
+                <p> Preguntas: {{$cuestionario->cantidad_preguntas}} </p>
               </div>
             </div>
             <div class="creadorCuestionario">
-              <p class="creador">Autor: {{$cuestionario}}</p>
+              <p class="creador">Autor: {{$cuestionario->usuario->name}}</p>
               <a href="/ranking" class="ranking">Ranking<ion-icon name="list"></ion-icon></a>
-              <p> Genero: </p>
+              <p> Categoria: {{$cuestionario->categoria->nombre}} </p>
             </div>
             <div class="jugarCuestionario">
               <a href="preguntaTexto.php">

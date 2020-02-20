@@ -24,6 +24,10 @@ Route::get('/perfil/editar', 'UsuarioController@editarInfo');
 
 Route::get('/cuestionarios', 'CuestionarioController@listar');
 
+Route::get('/cuestionarios/{id}', function() {
+  return "xD";
+});
+
 Route::get('/perfil/cuestionarios', 'UsuarioController@listarCuestionarios');
 
 Route::get('/ayuda', function() { return view('ayuda'); });
