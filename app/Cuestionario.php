@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Cuestionario extends Model
 {
   public $table = "cuestionarios";
-  public $id = "id";
   public $timestamps = false;
   public $guarded = [];
 

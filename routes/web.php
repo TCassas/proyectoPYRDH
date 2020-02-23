@@ -28,6 +28,8 @@ Route::get('/cuestionarios/{id}', function() {
   return "xD";
 });
 
+Route::get('/cuestionarios/editar/{id}', 'CuestionarioController@mostrarCuestionarioAEditar');
+
 Route::get('/perfil/cuestionarios', 'UsuarioController@listarCuestionarios');
 
 Route::get('/ayuda', function() { return view('ayuda'); });

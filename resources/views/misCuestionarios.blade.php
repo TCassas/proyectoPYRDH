@@ -51,13 +51,13 @@
               </div>
               <div class="infoLista">
                 <h4>{{$cuestionario->titulo}}</h4>
-                <p>{{$cuestionario->preguntas}} preguntas</p>
+                <p>{{$cuestionario->cantidad_preguntas}} preguntas</p>
               </div>
             </div>
             <div class="creadorCuestionario">
               <p class="creador">Autor: {{$usuario->name}}</p>
               <a href="/ranking/{{$cuestionario->id}}" class="ranking">Ranking<ion-icon name="list"></ion-icon></a>
-              <p> Genero: </p>
+              <p> Genero: {{$cuestionario->categoria->nombre}}</p>
             </div>
             <div class="jugarCuestionario">
               <a href="/cuestionarios/editar/{{$cuestionario->id}}">

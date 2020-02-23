@@ -12,4 +12,10 @@ class cuestionarioController extends Controller
 
       return view('menuBuscarCuestionario')->with('cuestionarios', $cuestionarios);
     }
+
+    public function mostrarCuestionarioAEditar($id) {
+      $cuestionario = Cuestionario::find($id);
+
+      return view('editarCuestionario')->with('cuestionario', $cuestionario);
+    }
 }

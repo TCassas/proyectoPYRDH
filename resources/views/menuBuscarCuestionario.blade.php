@@ -21,7 +21,7 @@
 
         <!-- nombre de usuario -->
 
-        <a href="formularioPlay.php" class="botonMenu">
+        <a href="/inicio" class="botonMenu">
           <ion-icon name="home"></ion-icon> Inicio
         </a>
 
