@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class PreguntaVOF extends Model
 {
   public $table = "preguntasvof";
-  public $id = "id";
   public $timestamps = false;
   public $guarded = [];
 

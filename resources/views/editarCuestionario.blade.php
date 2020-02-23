@@ -15,7 +15,6 @@
     <section id="seccionIzquierdaCC">
       <section id="seccionPreguntasYRespuestas">
         @foreach ($cuestionario->preguntas4respuestas as $pregunta)
-          {{dd($pregunta)}}
           <article class="pregunta preguntaCarta aquiTaH aquiTaV">
             <div class="grupoLI">
               <label for="Pregunta">Pregunta</label>
@@ -27,13 +26,12 @@
                 <input type="text" name="" placeholder="Respuesta 1" value="{{$pregunta->respuesta_correcta}}">
                 <input type="text" name="" placeholder="Respuesta 2" value="{{$pregunta->segunda_respuesta}}">
                 <input type="text" name="" placeholder="Respuesta 3" value="{{$pregunta->tercera_respuesta}}">
-                <input type="text" name="" placeholder="Respuesta 4" value="{{$pregunta->cuarta_respuesta}}">
+                <input type="text" name="" placeholder="Respuesta 4" value="{{$pregunta->cuarta_respeusta}}">
               </div>
             </div>
           </article>
         @endforeach
         @foreach ($cuestionario->preguntasvof as $pregunta)
-          {{var_dump($pregunta)}}
           <article class="pregunta preguntaCarta aquiTaH aquiTaV">
               <div class="grupoLI">
                 <label for="Pregunta">Pregunta</label>
@@ -42,22 +40,22 @@
               <div class="respuestas">
                 <p>Respuestas</p>
 
-                @if ($pregunta->respuesta_correcta === 1)
+                @if ($pregunta->respuesta_correcta)
                   <div>
                     <div class="inputRadio">
-                      <input type="radio" name="respuesta" id="respuestaVerdadero" class="radioInput" checked> <label for="respuestaVerdadero">Verdadero</label>
+                      <input type="radio" name="respuestavof{{$pregunta->id}}" id="respuestaVerdadero" class="radioInput" checked> <label for="respuestaVerdadero">Verdadero</label>
                     </div>
                     <div class="inputRadio">
-                      <input type="radio" name="respuesta" id="respuestaFalso" class="radioInput"> <label for="respuestaFalso">Falso</label>
+                      <input type="radio" name="respuestavof{{$pregunta->id}}" id="respuestaFalso" class="radioInput"> <label for="respuestaFalso">Falso</label>
                     </div>
                   </div>
                 @else
                   <div>
                     <div class="inputRadio">
-                      <input type="radio" name="respuesta" id="respuestaVerdadero" class="radioInput"> <label for="respuestaVerdadero">Verdadero</label>
+                      <input type="radio" name="respuestavof{{$pregunta->id}}" id="respuestaVerdadero" class="radioInput"> <label for="respuestaVerdadero">Verdadero</label>
                     </div>
                     <div class="inputRadio">
-                      <input type="radio" name="respuesta" id="respuestaFalso" class="radioInput" checked> <label for="respuestaFalso">Falso</label>
+                      <input type="radio" name="respuestavof{{$pregunta->id}}" id="respuestaFalso" class="radioInput" checked> <label for="respuestaFalso">Falso</label>
                     </div>
                   </div>
                 @endif
