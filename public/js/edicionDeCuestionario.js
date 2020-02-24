@@ -12,7 +12,8 @@ window.onload = function() {
 
   articulos.forEach(function(articulo) {
     let inputs = articulo.children[1].children[1].children,
-        consigna = articulo.children[0].children[1];
+        consigna = articulo.children[0].children[1],
+        preguntaId = articulo.children;
 
     consigna.setAttribute("name", "pregunta" + id);
 
