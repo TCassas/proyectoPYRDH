@@ -10,11 +10,13 @@
   <title>Document</title>
 </head>
 <body>
-  <form action="resultado.php" enctype="multipart/form-data" method="POST">
+  <form action="/cuestionarios/editar/{{$cuestionario->id}}" enctype="multipart/form-data" method="POST">
+  {{csrf_field()}}
   <main id="mainCreacionCuestinario">
     <section id="seccionIzquierdaCC">
       <section id="seccionPreguntasYRespuestas">
         @foreach ($cuestionario->preguntas4respuestas as $pregunta)
+          <input type="hidden" name="" value="{{$pregunta->id}}">
           <article class="pregunta preguntaCarta aquiTaH aquiTaV">
             <div class="grupoLI">
               <label for="Pregunta">Pregunta</label>
@@ -32,6 +34,7 @@
           </article>
         @endforeach
         @foreach ($cuestionario->preguntasvof as $pregunta)
+          <input type="hidden" name="" value="{{$pregunta->id}}">
           <article class="pregunta preguntaCarta aquiTaH aquiTaV">
               <div class="grupoLI">
                 <label for="Pregunta">Pregunta</label>
@@ -43,19 +46,19 @@
                 @if ($pregunta->respuesta_correcta)
                   <div>
                     <div class="inputRadio">
-                      <input type="radio" name="respuestavof{{$pregunta->id}}" id="respuestaVerdadero" class="radioInput" checked> <label for="respuestaVerdadero">Verdadero</label>
+                      <input type="radio" name="" class="radioInput" value=1 checked> <label for="respuestaVerdadero">Verdadero</label>
                     </div>
                     <div class="inputRadio">
-                      <input type="radio" name="respuestavof{{$pregunta->id}}" id="respuestaFalso" class="radioInput"> <label for="respuestaFalso">Falso</label>
+                      <input type="radio" name="" class="radioInput" value=0> <label for="respuestaFalso">Falso</label>
                     </div>
                   </div>
                 @else
                   <div>
                     <div class="inputRadio">
-                      <input type="radio" name="respuestavof{{$pregunta->id}}" id="respuestaVerdadero" class="radioInput"> <label for="respuestaVerdadero">Verdadero</label>
+                      <input type="radio" name="" class="radioInput" value=1> <label for="respuestaVerdadero">Verdadero</label>
                     </div>
                     <div class="inputRadio">
-                      <input type="radio" name="respuestavof{{$pregunta->id}}" id="respuestaFalso" class="radioInput" checked> <label for="respuestaFalso">Falso</label>
+                      <input type="radio" name="" class="radioInput" value=0 checked> <label for="respuestaFalso">Falso</label>
                     </div>
                   </div>
                 @endif
@@ -96,12 +99,13 @@
           </div>
           <hr>
         </div>
-        <button type="Submit">Enviar</button>
+        <input type="hidden" name="_method" value="put">
+        <button type="Submit">Actualizar</button>
       </div>
       </form>
     </section>
   </main>
 
-
+  <script src="{{asset('js/edicionDeCuestionario.js')}}" charset="utf-8"></script>
 </body>
 </html>

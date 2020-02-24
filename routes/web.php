@@ -30,6 +30,8 @@ Route::get('/cuestionarios/{id}', function() {
 
 Route::get('/cuestionarios/editar/{id}', 'CuestionarioController@mostrarCuestionarioAEditar');
 
+Route::put('/cuestionarios/editar/{id}', 'CuestionarioController@actualizarCuestionario');
+
 Route::get('/perfil/cuestionarios', 'UsuarioController@listarCuestionarios');
 
 Route::get('/ayuda', function() { return view('ayuda'); });
