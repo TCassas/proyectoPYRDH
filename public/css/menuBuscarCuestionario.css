@@ -99,6 +99,20 @@
   margin-right: 10px;
 }
 
+.portadaCuestionario {
+  display: flex;
+  justify-content: center;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px dotted grey;
+  height: 74px;
+  width: 74px;
+}
+
+.portadaCuestionario img {
+  width: inherit;
+}
+
 .infoCuestionario {
   display: flex;
   align-items: center;
@@ -108,6 +122,10 @@
 
 .infoCuestionario a {
   text-decoration: none;
+}
+
+.infoLista {
+  padding-left: 20px;
 }
 
 .creadorCuestionario {
@@ -164,6 +182,10 @@
 
   #cuestionariosLista {
     width: 100%;
+  }
+
+  .infoLista {
+    padding-left: 0;
   }
 }
 

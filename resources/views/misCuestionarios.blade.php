@@ -46,8 +46,12 @@
         @foreach ($usuario->cuestionarios as $cuestionario)
           <article class="articuloCuestionario">
             <div class="infoCuestionario">
-              <div class="fotoCuestionario">
-
+              <div class="portadaCuestionario">
+                @if ($cuestionario->portada != "imagen predefinida")
+                  <img src="/storage/cuestionariosImgs/{{$cuestionario->portada}}" alt="">
+                @else
+                  <img src="/imgs/fondoPunteado.jpg" alt="">
+                @endif
               </div>
               <div class="infoLista">
                 <h4>{{$cuestionario->titulo}}</h4>

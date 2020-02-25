@@ -25,27 +25,29 @@ class cuestionarioController extends Controller
     }
 
     public function actualizarCuestionario(Request $req, $id) {
-      try {
-
-      } catch (Exception $e) {
-
-      } finally {
-
-      }
-
       $cuestionario = Cuestionario::find($id);
       $usuarioLog = Auth::user();
       // dd($req->all());
       $cuestionarioActualizado = $this->acondicionarReq($req->all());
       // dd($cuestionarioActualizado); //Para ver como queda el array luego de ser _acondicionado_
 
+      // dd($cuestionarioActualizado);
 
       //Actualizo los datos del cuestionario
       $cuestionario->usuario_id = $usuarioLog->id;
       $cuestionario->titulo = $cuestionarioActualizado["titulo"];
-      $cuestionario->portada = $cuestionarioActualizado["portada"];
       $cuestionario->descripcion = $cuestionarioActualizado["descripcion"];
       $cuestionario->categoria_id = $cuestionarioActualizado["categoria_id"];
+
+      if(!empty($req->file("img"))) {
+        unlink("storage/cuestionariosImgs/$cuestionario->portada");
+        $path = $req->file("img")->store("public/cuestionariosImgs");
+        $imagenPortada = basename($path);
+
+        $cuestionario->portada = $imagenPortada;
+      }  else {
+        echo "no hay foto";
+      }
 
       // $cuestionario->save();
 
@@ -122,7 +124,7 @@ class cuestionarioController extends Controller
       $preguntas = [];
       $preguntaN = 1;
 
-      for($i = 1; $i <= count($req) - 5; $i++) { // Este -7 la verdad no tengo idea porque lo puse pero hace que funcione como se espera xD
+      for($i = 1; $i <= count($req) - 6; $i++) { // Este -7 la verdad no tengo idea porque lo puse pero hace que funcione como se espera xD
         if($req["tipo_".$preguntaN] == "t") {
           for($j = 1; $j <= 5; $j++) {
             switch ($j) {
