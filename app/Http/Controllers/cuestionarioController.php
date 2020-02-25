@@ -126,30 +126,38 @@ class cuestionarioController extends Controller
 
       for($i = 1; $i <= count($req) - 6; $i++) { // Este -7 la verdad no tengo idea porque lo puse pero hace que funcione como se espera xD
         if($req["tipo_".$preguntaN] == "t") {
-          for($j = 1; $j <= 5; $j++) {
-            switch ($j) {
-              case 1:
+          if($req["pregunta".$preguntaN] === "borrar") {
+            $i+=6;
+          } else {
+            for($j = 1; $j <= 5; $j++) {
+              switch ($j) {
+                case 1:
                 $preguntas["input".$preguntaN]["tipo"] = $req["tipo_".$preguntaN];
                 $preguntas["input".$preguntaN]["id"] = $req["pregunta_id_".$preguntaN];
                 $preguntas["input".$preguntaN]["consigna"] = $req["pregunta".$preguntaN];
                 $preguntas["input".$preguntaN]["respuestas"][] = $req["respuesta".$preguntaN."_".$j];
                 break;
-              case 2:
-              case 3:
-              case 4:
+                case 2:
+                case 3:
+                case 4:
                 $preguntas["input".$preguntaN]["respuestas"][] = $req["respuesta".$preguntaN."_".$j];
                 break;
-              case 5:
+                case 5:
                 $i+=6;
                 break;
+              }
             }
           }
         } elseif ($req["tipo_".$preguntaN] == "v") {
-            $preguntas["input".$preguntaN]["tipo"] = $req["tipo_".$preguntaN];
-            $preguntas["input".$preguntaN]["id"] = $req["pregunta_id_".$preguntaN];
-            $preguntas["input".$preguntaN]["consigna"] = $req["pregunta".$preguntaN];
-            $preguntas["input".$preguntaN]["respuestas"][] = $req["respuesta".$preguntaN];
-            $i+=4;
+            if($req["pregunta".$preguntaN] === "borrar") {
+              $i+=4;
+            } else {
+              $preguntas["input".$preguntaN]["tipo"] = $req["tipo_".$preguntaN];
+              $preguntas["input".$preguntaN]["id"] = $req["pregunta_id_".$preguntaN];
+              $preguntas["input".$preguntaN]["consigna"] = $req["pregunta".$preguntaN];
+              $preguntas["input".$preguntaN]["respuestas"][] = $req["respuesta".$preguntaN];
+              $i+=3;
+            }
           }
         $preguntaN++;
       }
@@ -161,6 +169,8 @@ class cuestionarioController extends Controller
         "categoria_id" => $categoria_id,
         "preguntas" => $preguntas
       ];
+
+      // dd($cuestionarioFinal);
 
       return $cuestionarioFinal;
     }

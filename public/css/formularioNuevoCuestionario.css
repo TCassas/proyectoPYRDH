@@ -34,6 +34,7 @@
 
 .pregunta {
   width: 0;
+  position: relative;
   padding: 2%;
   border: 2px solid #707070;
   border-radius: 20px;
@@ -43,6 +44,17 @@
   opacity: 0;
   transition: 0.5s;
   color: white;
+}
+
+.borrarPregunta {
+  position: absolute;
+  top: 4%;
+  right: 2%;
+}
+
+.borrarPregunta i {
+  font-size: 1.2em;
+  color: #C94F74;
 }
 
 .preguntaCarta input {
