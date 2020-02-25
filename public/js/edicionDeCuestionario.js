@@ -13,9 +13,10 @@ window.onload = function() {
   articulos.forEach(function(articulo) {
     let inputs = articulo.children[1].children[1].children,
         consigna = articulo.children[0].children[1],
-        preguntaId = articulo.children;
+        preguntaId = articulo.children[0].children[2];
 
     consigna.setAttribute("name", "pregunta" + id);
+    preguntaId.setAttribute("name", "pregunta_id_" + id)
 
     if(inputs.length === 4) {
       articulo.insertAdjacentHTML("afterbegin", "<input type='hidden' name='tipo " + id + "' value='t'>");
@@ -36,7 +37,7 @@ window.onload = function() {
   });
 
   botonTexto.addEventListener('click', (e) => {
-    seccion.insertAdjacentHTML("beforeend", "<article class='pregunta preguntaCarta'><input type='hidden' name='tipo " + id + "' value='t'><div class='grupoLI'><label for='Pregunta'>Pregunta</label><input type='text' name='pregunta" + id + "'></div><div class='respuestas'><p>Respuestas <span>La primera debe ser la correcta!</span></p><div><input type='text' name='respuesta" + id + "_1' placeholder='Respuesta 1'><input type='text' name='respuesta" + id + "_2' placeholder='Respuesta 2'><input type='text' name='respuesta" + id + "_3' placeholder='Respuesta 3'><input type='text' name='respuesta" + id + "_4' placeholder='Respuesta 4'></div></div></article>");
+    seccion.insertAdjacentHTML("beforeend", "<article class='pregunta preguntaCarta'><input type='hidden' name='tipo " + id + "' value='t'><div class='grupoLI'><label for='Pregunta'>Pregunta</label><input type='text' name='pregunta" + id + "' required><input type='hidden' name='pregunta_id_" + id + "' value=''></div><div class='respuestas'><p>Respuestas <span>La primera debe ser la correcta!</span></p><div><input type='text' name='respuesta" + id + "_1' placeholder='Respuesta 1' required><input type='text' name='respuesta" + id + "_2' placeholder='Respuesta 2' required><input type='text' name='respuesta" + id + "_3' placeholder='Respuesta 3' required><input type='text' name='respuesta" + id + "_4' placeholder='Respuesta 4' required></div></div></article>");
 
     let pregunta = document.querySelector('.pregunta:nth-of-type(' + id + ')');
 
@@ -52,7 +53,7 @@ window.onload = function() {
   });
 
   botonVof.addEventListener('click', (e) => {
-    seccion.insertAdjacentHTML("beforeend", "<article class='pregunta preguntaCarta'><input type='hidden' name='tipo " + id + "' value='v'><div class='grupoLI'><label for='Pregunta'>Pregunta</label><input type='text' name='pregunta" + id +"'></div><div class='respuestas'><p>Respuestas</p><div><div class='inputRadio'><input type='radio' value='1' name='respuesta" + id +"' id='respuestaVerdadero" + id + "' class='radioInput'> <label for='respuestaVerdadero" + id + "'>Verdadero</label></div><div class='inputRadio'><input type='radio' value='0' name='respuesta" + id +"' id='respuestaFalso" + id + "' class='radioInput'> <label for='respuestaFalso" + id + "'>Falso</label></div></div></div></article>");
+    seccion.insertAdjacentHTML("beforeend", "<article class='pregunta preguntaCarta'><input type='hidden' name='tipo " + id + "' value='v'><div class='grupoLI'><label for='Pregunta'>Pregunta</label><input type='text' name='pregunta" + id +"' required><input type='hidden' name='pregunta_id_" + id + "' value=''></div><div class='respuestas'><p>Respuestas</p><div><div class='inputRadio'><input type='radio' value='1' name='respuesta" + id +"' id='respuestaVerdadero" + id + "' class='radioInput' required> <label for='respuestaVerdadero" + id + "'>Verdadero</label></div><div class='inputRadio'><input type='radio' value='0' name='respuesta" + id +"' id='respuestaFalso" + id + "' class='radioInput' required> <label for='respuestaFalso" + id + "'>Falso</label></div></div></div></article>");
 
     let pregunta = document.querySelector('.pregunta:nth-of-type(' + id + ')');
 

@@ -16,19 +16,19 @@
     <section id="seccionIzquierdaCC">
       <section id="seccionPreguntasYRespuestas">
         @foreach ($cuestionario->preguntas4respuestas as $pregunta)
-          <input type="hidden" name="" value="{{$pregunta->id}}">
           <article class="pregunta preguntaCarta aquiTaH aquiTaV">
             <div class="grupoLI">
               <label for="Pregunta">Pregunta</label>
-              <input type="text" value="{{$pregunta->consigna}}">
+              <input type="text" value="{{$pregunta->consigna}}" required>
+              <input type="hidden" name="" value="{{$pregunta->id}}">
             </div>
             <div class="respuestas">
               <p>Respuestas <span>La primera debe ser la correcta!</span></p>
               <div>
-                <input type="text" name="" placeholder="Respuesta 1" value="{{$pregunta->respuesta_correcta}}">
-                <input type="text" name="" placeholder="Respuesta 2" value="{{$pregunta->segunda_respuesta}}">
-                <input type="text" name="" placeholder="Respuesta 3" value="{{$pregunta->tercera_respuesta}}">
-                <input type="text" name="" placeholder="Respuesta 4" value="{{$pregunta->cuarta_respeusta}}">
+                <input type="text" name="" placeholder="Respuesta 1" value="{{$pregunta->respuesta_correcta}}" required>
+                <input type="text" name="" placeholder="Respuesta 2" value="{{$pregunta->segunda_respuesta}}" required>
+                <input type="text" name="" placeholder="Respuesta 3" value="{{$pregunta->tercera_respuesta}}" required>
+                <input type="text" name="" placeholder="Respuesta 4" value="{{$pregunta->cuarta_respuesta}}" required>
               </div>
             </div>
           </article>
@@ -38,7 +38,8 @@
           <article class="pregunta preguntaCarta aquiTaH aquiTaV">
               <div class="grupoLI">
                 <label for="Pregunta">Pregunta</label>
-                <input type="text" value="{{$pregunta->consigna}}">
+                <input type="text" value="{{$pregunta->consigna}}" required>
+                <input type="hidden" name="" value="{{$pregunta->id}}">
               </div>
               <div class="respuestas">
                 <p>Respuestas</p>
@@ -46,19 +47,19 @@
                 @if ($pregunta->respuesta_correcta)
                   <div>
                     <div class="inputRadio">
-                      <input type="radio" name="" class="radioInput" value=1 checked> <label for="respuestaVerdadero">Verdadero</label>
+                      <input type="radio" name="" class="radioInput" value=1 checked required> <label for="respuestaVerdadero">Verdadero</label>
                     </div>
                     <div class="inputRadio">
-                      <input type="radio" name="" class="radioInput" value=0> <label for="respuestaFalso">Falso</label>
+                      <input type="radio" name="" class="radioInput" value=0 required> <label for="respuestaFalso">Falso</label>
                     </div>
                   </div>
                 @else
                   <div>
                     <div class="inputRadio">
-                      <input type="radio" name="" class="radioInput" value=1> <label for="respuestaVerdadero">Verdadero</label>
+                      <input type="radio" name="" class="radioInput" value=1 required> <label for="respuestaVerdadero">Verdadero</label>
                     </div>
                     <div class="inputRadio">
-                      <input type="radio" name="" class="radioInput" value=0 checked> <label for="respuestaFalso">Falso</label>
+                      <input type="radio" name="" class="radioInput" value=0 checked required> <label for="respuestaFalso">Falso</label>
                     </div>
                   </div>
                 @endif
@@ -71,7 +72,7 @@
       <div id="formDerecho">
         <div class="grupoLI">
           <label for="">Nombre</label>
-          <input type="text" name="nombre" value="{{$cuestionario->titulo}}">
+          <input type="text" name="nombre" value="{{$cuestionario->titulo}}" required>
         </div>
         <div class="grupoLI">
           <label for="">Portada</label>
@@ -83,9 +84,14 @@
           <textarea name="descripcion" rows="8" cols="80"></textarea>
         </div>
         <div>
-          <label for="">Genero</label>
-          <select name="genero" id="">
-
+          <label for="categoria">Genero</label>
+          <select name="categoria" id="categoria" required>
+            @foreach ($categorias as $categoria)
+              @if ($cuestionario->categoria_id == $categoria->id)
+                <option value="{{$categoria->id}}" selected>{{$categoria->nombre}}</option>
+              @endif
+              <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
+            @endforeach
           </select>
         </div>
         <div id="botonesCC">

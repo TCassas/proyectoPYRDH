@@ -51,7 +51,7 @@
               </div>
               <div class="infoLista">
                 <h4>{{$cuestionario->titulo}}</h4>
-                <p>{{$cuestionario->cantidad_preguntas}} preguntas</p>
+                <p>{{count($cuestionario->preguntasvof) + count($cuestionario->preguntas4respuestas)}} preguntas</p>
               </div>
             </div>
             <div class="creadorCuestionario">

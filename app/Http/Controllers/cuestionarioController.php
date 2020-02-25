@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Cuestionario;
+use App\Categoria;
+use App\Pregunta4Respuestas;
+use App\PreguntaVOF;
 use Auth;
 
 class cuestionarioController extends Controller
@@ -16,41 +19,116 @@ class cuestionarioController extends Controller
 
     public function mostrarCuestionarioAEditar($id) {
       $cuestionario = Cuestionario::find($id);
+      $categorias = Categoria::all();
 
-      return view('editarCuestionario')->with('cuestionario', $cuestionario);
+      return view('editarCuestionario', compact('cuestionario', 'categorias'));
     }
 
-    public function actualizarCuestionario(Request $req) {
-      $cuestionario = New Cuestionario();
-      $usuarioLog = Auth::user();
+    public function actualizarCuestionario(Request $req, $id) {
+      try {
 
-      dd($this->acondicionarReq($req->all()));
+      } catch (Exception $e) {
 
-      $cuestionario->usuario_id = $usuarioLog->id;
-      $cuestionario->titulo = $req["nombre"];
-      if(isset($req["img"])) {
-        $cuestionario->img = $req["img"];
-      } else {
-        $cuestionario->img = "imagen predefinida";
+      } finally {
+
       }
-      $cuestionario->fecha_de_creacion = Date("Y-m-d");
-      $cuestionario->puntuacion = 0;
+
+      $cuestionario = Cuestionario::find($id);
+      $usuarioLog = Auth::user();
+      // dd($req->all());
+      $cuestionarioActualizado = $this->acondicionarReq($req->all());
+      // dd($cuestionarioActualizado); //Para ver como queda el array luego de ser _acondicionado_
+
+
+      //Actualizo los datos del cuestionario
+      $cuestionario->usuario_id = $usuarioLog->id;
+      $cuestionario->titulo = $cuestionarioActualizado["titulo"];
+      $cuestionario->portada = $cuestionarioActualizado["portada"];
+      $cuestionario->descripcion = $cuestionarioActualizado["descripcion"];
+      $cuestionario->categoria_id = $cuestionarioActualizado["categoria_id"];
+
+      // $cuestionario->save();
+
+      //Actualizo las preguntas
+      foreach ($cuestionarioActualizado["preguntas"] as $pregunta) {
+        if($pregunta["tipo"] === 't') {
+          $nuevaPregunta = Pregunta4Respuestas::find($pregunta["id"]);
+          if(isset($nuevaPregunta)) {
+            echo "Existe texto<br>";
+            $nuevaPregunta->consigna = $pregunta["consigna"];
+            $nuevaPregunta->respuesta_correcta = $pregunta["respuestas"][0];
+            $nuevaPregunta->segunda_respuesta = $pregunta["respuestas"][1];
+            $nuevaPregunta->tercera_respuesta = $pregunta["respuestas"][2];
+            $nuevaPregunta->cuarta_respuesta = $pregunta["respuestas"][3];
+
+            $nuevaPregunta->save();
+          } else {
+            var_dump($pregunta);
+            echo "No existe texto<br>";
+            $nuevaPregunta = New Pregunta4Respuestas;
+            $nuevaPregunta->cuestionario_id = $id;
+            $nuevaPregunta->consigna = $pregunta["consigna"];
+            $nuevaPregunta->respuesta_correcta = $pregunta["respuestas"][0];
+            $nuevaPregunta->segunda_respuesta = $pregunta["respuestas"][1];
+            $nuevaPregunta->tercera_respuesta = $pregunta["respuestas"][2];
+            $nuevaPregunta->cuarta_respuesta = $pregunta["respuestas"][3];
+
+            $nuevaPregunta->save();
+          }
+        } else {
+          $nuevaPregunta = PreguntaVOF::find($pregunta["id"]);
+          if(isset($nuevaPregunta)) {
+            echo "Existe vof<br>";
+            $nuevaPregunta->consigna = $pregunta["consigna"];
+            $nuevaPregunta->respuesta_correcta = $pregunta["respuestas"][0];
+
+            $nuevaPregunta->save();
+          } else {
+            echo "No existe vof<br>";
+            $nuevaPregunta = New Pregunta4Respuestas;
+            $nuevaPregunta->cuestionario_id = $id;
+            $nuevaPregunta->consigna = $pregunta["consigna"];
+            $nuevaPregunta->respuesta_correcta = $pregunta["respuestas"][0];
+
+
+            $nuevaPregunta->save();
+          }
+        }
+
+        $cuestionario->save();
+      }
+
+      return redirect("/perfil/cuestionarios");
     }
 
     private function acondicionarReq($req) {
-      $nombre = $req["nombre"];
-      $desc = $req["descripcion"];
-      // $genero = $req["genero"];
-      // $img = $req["img"];
+      $cuestionario = New Cuestionario;
+      $titulo = $req["nombre"];
+
+      $categoria_id = $req["categoria"];
+
+      if(!empty($req["img"])) {
+        $portada = $req["img"];
+      } else {
+        $portada = "imagen predefinida";
+      }
+
+      if(!empty($req["descripcion"])) {
+        $descripcion = $req["descripcion"];
+      } else {
+        $descripcion = "Sin descripción";
+      }
+
       $preguntas = [];
       $preguntaN = 1;
 
-      for($i = 1; $i <= count($req) - 3; $i++) {
+      for($i = 1; $i <= count($req) - 5; $i++) { // Este -7 la verdad no tengo idea porque lo puse pero hace que funcione como se espera xD
         if($req["tipo_".$preguntaN] == "t") {
           for($j = 1; $j <= 5; $j++) {
             switch ($j) {
               case 1:
                 $preguntas["input".$preguntaN]["tipo"] = $req["tipo_".$preguntaN];
+                $preguntas["input".$preguntaN]["id"] = $req["pregunta_id_".$preguntaN];
                 $preguntas["input".$preguntaN]["consigna"] = $req["pregunta".$preguntaN];
                 $preguntas["input".$preguntaN]["respuestas"][] = $req["respuesta".$preguntaN."_".$j];
                 break;
@@ -60,28 +138,28 @@ class cuestionarioController extends Controller
                 $preguntas["input".$preguntaN]["respuestas"][] = $req["respuesta".$preguntaN."_".$j];
                 break;
               case 5:
-                $i+=5;
+                $i+=6;
                 break;
             }
           }
         } elseif ($req["tipo_".$preguntaN] == "v") {
             $preguntas["input".$preguntaN]["tipo"] = $req["tipo_".$preguntaN];
+            $preguntas["input".$preguntaN]["id"] = $req["pregunta_id_".$preguntaN];
             $preguntas["input".$preguntaN]["consigna"] = $req["pregunta".$preguntaN];
             $preguntas["input".$preguntaN]["respuestas"][] = $req["respuesta".$preguntaN];
-            $i+=3;
+            $i+=4;
           }
         $preguntaN++;
       }
 
       $cuestionarioFinal = [
-        "nombre" => $nombre,
-        "descripcion" => $desc,
-        "img" => "imagen predefinida",
-        // "genero" => $genero,
+        "titulo" => $titulo,
+        "descripcion" => $descripcion,
+        "portada" => $portada,
+        "categoria_id" => $categoria_id,
         "preguntas" => $preguntas
-        // "autor_id" => $_SESSION["id"]
       ];
 
-      dd($cuestionarioFinal);
+      return $cuestionarioFinal;
     }
 }

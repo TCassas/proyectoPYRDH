@@ -15,7 +15,6 @@ class CambioNombreYAgregarDescripcion extends Migration
     {
         Schema::table('preguntas4respuestas', function(Blueprint $table) {
           $table->renameColumn('cuarta_respeusta', 'cuarta_respuesta');
-          $table->string('descripcion', 100);
         });
     }
 
@@ -28,7 +27,6 @@ class CambioNombreYAgregarDescripcion extends Migration
     {
       Schema::table('preguntas4respuestas', function (Blueprint $table) {
         $table->renameColumn('cuarta_respuesta', 'cuarta_respeusta');
-        $table->dropColumn('descripcion');
       });
     }
 }
