@@ -152,9 +152,7 @@ class cuestionarioController extends Controller
 
       for($i = 1; $i <= count($req) - 6; $i++) { // Este -6 la verdad no tengo idea porque lo puse pero hace que funcione como se espera xD
         if($req["tipo_".$preguntaN] == "t") {
-          if($req["pregunta".$preguntaN] === "borrar") {
-            $i+=6;
-          } else {
+
             for($j = 1; $j <= 5; $j++) {
               switch ($j) {
                 case 1:
@@ -173,7 +171,7 @@ class cuestionarioController extends Controller
                   break;
               }
             }
-          }
+
         } elseif ($req["tipo_".$preguntaN] == "v") {
             if($req["pregunta".$preguntaN] === "borrar") {
               $preguntas["input".$preguntaN]["tipo"] = $req["tipo_".$preguntaN];
@@ -189,6 +187,7 @@ class cuestionarioController extends Controller
               $i+=3;
             }
           }
+          
         $preguntaN++;
       }
 
