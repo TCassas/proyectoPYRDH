@@ -37,6 +37,31 @@ window.onload = function() {
     i = 1;
   });
 
+  let botonesBorrarExistentes = document.querySelectorAll('i');
+  botonesBorrarExistentes.forEach(function(boton) {
+    boton.addEventListener("click", function() {
+      setTimeout(function () {
+        boton.parentElement.parentElement.classList.remove("aquiTaV");
+        setTimeout(function () {
+          boton.parentElement.parentElement.classList.remove("aquiTaH");
+          boton.parentElement.parentElement.style.display = "none";
+          boton.parentElement.parentElement.children[1].children[1].setAttribute("value", "borrar");
+
+          if(boton.parentElement.parentElement.children[0].value === "v") {
+            boton.parentElement.parentElement.children[2].children[1].children[0].children[0].removeAttribute("required");
+            boton.parentElement.parentElement.children[2].children[1].children[1].children[0].removeAttribute("required");
+          }
+
+          // pregunta.children[2].children[1].children[0].children[0].removeAttribute("required");
+          // pregunta.children[2].children[1].children[1].children[0].removeAttribute("required");
+
+          console.log(boton.parentElement.parentElement.children[1].children[1].value);
+        }, 200);
+      }, 10);
+    });
+  });
+
+
   botonTexto.addEventListener('click', (e) => {
     seccion.insertAdjacentHTML("beforeend", "<article class='pregunta preguntaCarta'><input type='hidden' name='tipo " + id + "' value='t'><div class='grupoLI'><label for='Pregunta'>Pregunta</label><input type='text' name='pregunta" + id + "' required><input type='hidden' name='pregunta_id_" + id + "' value=''></div><div class='respuestas'><p>Respuestas <span>La primera debe ser la correcta!</span></p><div><input type='text' name='respuesta" + id + "_1' placeholder='Respuesta 1' required><input type='text' name='respuesta" + id + "_2' placeholder='Respuesta 2' required><input type='text' name='respuesta" + id + "_3' placeholder='Respuesta 3' required><input type='text' name='respuesta" + id + "_4' placeholder='Respuesta 4' required></div></div><div class='borrarPregunta'><i class='fas fa-times-circle'></i></div></article>");
 

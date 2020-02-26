@@ -52,9 +52,26 @@ class cuestionarioController extends Controller
       // $cuestionario->save();
 
       //Actualizo las preguntas
+
+      /*
+
+
+
+          Continuar: si la consigna de la pregunta es "borrar", fijarse si existe en la base de datos, si existe borrarla.
+
+
+
+      */
       foreach ($cuestionarioActualizado["preguntas"] as $pregunta) {
         if($pregunta["tipo"] === 't') {
           $nuevaPregunta = Pregunta4Respuestas::find($pregunta["id"]);
+
+          if(isset($nuevaPregunta) && $pregunta["consigna"] === "borrar") {
+            $nuevaPregunta->delete();
+
+            continue;
+          }
+
           if(isset($nuevaPregunta)) {
             echo "Existe texto<br>";
             $nuevaPregunta->consigna = $pregunta["consigna"];
@@ -79,6 +96,13 @@ class cuestionarioController extends Controller
           }
         } else {
           $nuevaPregunta = PreguntaVOF::find($pregunta["id"]);
+
+          if(isset($nuevaPregunta) && $pregunta["consigna"] === "borrar") {
+            $nuevaPregunta->delete();
+
+            continue;
+          }
+
           if(isset($nuevaPregunta)) {
             echo "Existe vof<br>";
             $nuevaPregunta->consigna = $pregunta["consigna"];
@@ -97,8 +121,8 @@ class cuestionarioController extends Controller
           }
         }
 
-        $cuestionario->save();
       }
+      $cuestionario->save();
 
       return redirect("/perfil/cuestionarios");
     }
@@ -106,6 +130,8 @@ class cuestionarioController extends Controller
     private function acondicionarReq($req) {
       $cuestionario = New Cuestionario;
       $titulo = $req["nombre"];
+
+      // dd($req);
 
       $categoria_id = $req["categoria"];
 
@@ -124,7 +150,7 @@ class cuestionarioController extends Controller
       $preguntas = [];
       $preguntaN = 1;
 
-      for($i = 1; $i <= count($req) - 6; $i++) { // Este -7 la verdad no tengo idea porque lo puse pero hace que funcione como se espera xD
+      for($i = 1; $i <= count($req) - 6; $i++) { // Este -6 la verdad no tengo idea porque lo puse pero hace que funcione como se espera xD
         if($req["tipo_".$preguntaN] == "t") {
           if($req["pregunta".$preguntaN] === "borrar") {
             $i+=6;
@@ -132,24 +158,28 @@ class cuestionarioController extends Controller
             for($j = 1; $j <= 5; $j++) {
               switch ($j) {
                 case 1:
-                $preguntas["input".$preguntaN]["tipo"] = $req["tipo_".$preguntaN];
-                $preguntas["input".$preguntaN]["id"] = $req["pregunta_id_".$preguntaN];
-                $preguntas["input".$preguntaN]["consigna"] = $req["pregunta".$preguntaN];
-                $preguntas["input".$preguntaN]["respuestas"][] = $req["respuesta".$preguntaN."_".$j];
-                break;
+                  $preguntas["input".$preguntaN]["tipo"] = $req["tipo_".$preguntaN];
+                  $preguntas["input".$preguntaN]["id"] = $req["pregunta_id_".$preguntaN];
+                  $preguntas["input".$preguntaN]["consigna"] = $req["pregunta".$preguntaN];
+                  $preguntas["input".$preguntaN]["respuestas"][] = $req["respuesta".$preguntaN."_".$j];
+                  break;
                 case 2:
                 case 3:
                 case 4:
-                $preguntas["input".$preguntaN]["respuestas"][] = $req["respuesta".$preguntaN."_".$j];
-                break;
+                  $preguntas["input".$preguntaN]["respuestas"][] = $req["respuesta".$preguntaN."_".$j];
+                  break;
                 case 5:
-                $i+=6;
-                break;
+                  $i+=6;
+                  break;
               }
             }
           }
         } elseif ($req["tipo_".$preguntaN] == "v") {
             if($req["pregunta".$preguntaN] === "borrar") {
+              $preguntas["input".$preguntaN]["tipo"] = $req["tipo_".$preguntaN];
+              $preguntas["input".$preguntaN]["id"] = $req["pregunta_id_".$preguntaN];
+              $preguntas["input".$preguntaN]["consigna"] = $req["pregunta".$preguntaN];
+              $preguntas["input".$preguntaN]["respuestas"][] = "1";
               $i+=4;
             } else {
               $preguntas["input".$preguntaN]["tipo"] = $req["tipo_".$preguntaN];
