@@ -67,14 +67,20 @@
               <a href="/cuestionarios/editar/{{$cuestionario->id}}">
                 <ion-icon name="create"></ion-icon>
               </a>
-              <a href="/cuestionarios/borrar/{{$cuestionario->id}}">
-                <ion-icon name="trash"></ion-icon>
-              </a>
+              <form class="" action="/cuestionarios/borrar/{{$cuestionario->id}}" method="post">
+                {{csrf_field()}}
+                <button type="submit" class="borrarCuestionario">
+                  <ion-icon name="trash"></ion-icon>
+                </button>
+                <input type="hidden" name="_method" value="delete">
+              </form>
             </div>
           </article>
         @endforeach
       </div>
     </section>
+
+    <script src="{{asset('js/borrarCuestionario.js')}}" charset="utf-8"></script>
   </main>
 </body>
 </html>

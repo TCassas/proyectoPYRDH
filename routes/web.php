@@ -25,12 +25,12 @@ Route::get('/perfil/editar', 'UsuarioController@editarInfo');
 Route::get('/cuestionarios', 'CuestionarioController@listar');
 
 Route::get('/cuestionarios/{id}', function() {
-  return "xD";
+  return "Test";
 });
 
 Route::get('/cuestionarios/editar/{id}', 'CuestionarioController@mostrarCuestionarioAEditar');
 
-Route::put('/cuestionarios/editar/{id}', 'CuestionarioController@actualizarCuestionario');
+Route::delete('/cuestionarios/borrar/{id}', 'CuestionarioController@borrarCuestionario');
 
 Route::get('/perfil/cuestionarios', 'UsuarioController@listarCuestionarios');
 

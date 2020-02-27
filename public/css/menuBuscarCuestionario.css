@@ -128,6 +128,14 @@
   padding-left: 20px;
 }
 
+.borrarCuestionario {
+  border: none;
+  background-color: transparent;
+  font-size: 1.1em;
+  cursor: pointer;
+  outline: none;
+}
+
 .creadorCuestionario {
   display: flex;
   flex-direction: column;

@@ -49,19 +49,8 @@ class cuestionarioController extends Controller
         echo "no hay foto";
       }
 
-      // $cuestionario->save();
+      $cuestionario->save();
 
-      //Actualizo las preguntas
-
-      /*
-
-
-
-          Continuar: si la consigna de la pregunta es "borrar", fijarse si existe en la base de datos, si existe borrarla.
-
-
-
-      */
       foreach ($cuestionarioActualizado["preguntas"] as $pregunta) {
         if($pregunta["tipo"] === 't') {
           $nuevaPregunta = Pregunta4Respuestas::find($pregunta["id"]);
@@ -127,6 +116,29 @@ class cuestionarioController extends Controller
       return redirect("/perfil/cuestionarios");
     }
 
+    public function borrarCuestionario($id) {
+      $cuestionario = Cuestionario::find($id);
+      $usuarioLog = Auth::user();
+
+      if($cuestionario->usuario_id === $usuarioLog->id) {
+
+      }
+
+      foreach ($cuestionario->preguntas4respuestas as $pregunta) {
+        $pregunta->delete();
+      }
+
+      foreach ($cuestionario->preguntasvof as $pregunta) {
+        $pregunta->delete();
+      }
+
+      $cuestionario->delete();
+
+      return redirect("/perfil/cuestionarios");
+    } else {
+      return redirect("/perfil/cuestionarios");
+    }
+
     private function acondicionarReq($req) {
       $cuestionario = New Cuestionario;
       $titulo = $req["nombre"];
@@ -187,7 +199,7 @@ class cuestionarioController extends Controller
               $i+=3;
             }
           }
-          
+
         $preguntaN++;
       }
 
