@@ -24,6 +24,52 @@ class cuestionarioController extends Controller
       return view('editarCuestionario', compact('cuestionario', 'categorias'));
     }
 
+    public function crearCuestionario(Request $req) {
+      $usuarioLog = Auth::user();
+      $cuestionario = New Cuestionario;
+
+      $cuestionarioActualizado = $this->acondicionarReq($req->all());
+
+      $cuestionario->usuario_id = $usuarioLog->id;
+      $cuestionario->titulo = $cuestionarioActualizado["titulo"];
+      $cuestionario->descripcion = $cuestionarioActualizado["descripcion"];
+      $cuestionario->categoria_id = $cuestionarioActualizado["categoria_id"];
+
+      if(!empty($req->file("img"))) {
+        $path = $req->file("img")->store("public/cuestionariosImgs");
+        $imagenPortada = basename($path);
+
+        $cuestionario->portada = $imagenPortada;
+      }
+
+      foreach ($cuestionarioActualizado["preguntas"] as $pregunta) {
+        if($pregunta["tipo"] === 't') {
+          var_dump($pregunta);
+          echo "No existe texto<br>";
+          $nuevaPregunta = New Pregunta4Respuestas;
+          $nuevaPregunta->cuestionario_id = $id;
+          $nuevaPregunta->consigna = $pregunta["consigna"];
+          $nuevaPregunta->respuesta_correcta = $pregunta["respuestas"][0];
+          $nuevaPregunta->segunda_respuesta = $pregunta["respuestas"][1];
+          $nuevaPregunta->tercera_respuesta = $pregunta["respuestas"][2];
+          $nuevaPregunta->cuarta_respuesta = $pregunta["respuestas"][3];
+
+          $nuevaPregunta->save();
+        } else {
+          $nuevaPregunta = New Pregunta4Respuestas;
+          $nuevaPregunta->cuestionario_id = $id;
+          $nuevaPregunta->consigna = $pregunta["consigna"];
+          $nuevaPregunta->respuesta_correcta = $pregunta["respuestas"][0];
+
+          $nuevaPregunta->save();
+        }
+      }
+
+      $cuestionario->save();
+
+      return redirect("/perfil/cuestionarios");
+    }
+
     public function actualizarCuestionario(Request $req, $id) {
       $cuestionario = Cuestionario::find($id);
       $usuarioLog = Auth::user();
@@ -48,8 +94,6 @@ class cuestionarioController extends Controller
       }  else {
         echo "no hay foto";
       }
-
-      $cuestionario->save();
 
       foreach ($cuestionarioActualizado["preguntas"] as $pregunta) {
         if($pregunta["tipo"] === 't') {
@@ -111,6 +155,7 @@ class cuestionarioController extends Controller
         }
 
       }
+
       $cuestionario->save();
 
       return redirect("/perfil/cuestionarios");
@@ -121,22 +166,19 @@ class cuestionarioController extends Controller
       $usuarioLog = Auth::user();
 
       if($cuestionario->usuario_id === $usuarioLog->id) {
+        foreach ($cuestionario->preguntas4respuestas as $pregunta) {
+          $pregunta->delete();
+        }
 
-      }
+        foreach ($cuestionario->preguntasvof as $pregunta) {
+          $pregunta->delete();
+        }
 
-      foreach ($cuestionario->preguntas4respuestas as $pregunta) {
-        $pregunta->delete();
-      }
+        $cuestionario->delete();
 
-      foreach ($cuestionario->preguntasvof as $pregunta) {
-        $pregunta->delete();
-      }
-
-      $cuestionario->delete();
-
-      return redirect("/perfil/cuestionarios");
-    } else {
-      return redirect("/perfil/cuestionarios");
+        return redirect("/perfil/cuestionarios");
+      } else {
+        return redirect("/perfil/cuestionarios");
     }
 
     private function acondicionarReq($req) {
