@@ -18,9 +18,9 @@ Route::get('/', function () {
 Route::get('/inicio', function() { return view('inicio'); });
 
 
-Route::get('/perfil', 'UsuarioController@info');
+Route::get('/perfil', 'UsuarioController@infoUsuario');
 
-Route::get('/perfil/editar', 'UsuarioController@infoUsuario');
+Route::get('/perfil/editar', 'UsuarioController@editarUsuarioFormulario');
 
 Route::post('/perfil/editar', 'UsuarioController@editarUsuario');
 
@@ -33,6 +33,8 @@ Route::post('/cuestionarios/crear' , 'CuestionarioController@crearCuestionario')
 Route::get('/cuestionarios/{id}', function() {
   return "Test";
 });
+
+Route::get('/cuestionarios/buscar', 'CuestionarioController@buscarCuestionario');
 
 Route::get('/cuestionarios/editar/{id}', 'CuestionarioController@mostrarCuestionarioAEditar');
 

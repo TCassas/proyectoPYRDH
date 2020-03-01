@@ -14,12 +14,38 @@ class usuarioController extends Controller
     return view('infoUsuario')->with('usuario', $usuarioLog);
   }
 
-  public function editarUsuario(Request $req) {
+  public function editarUsuarioFormulario() {
     $usuarioLog = Auth::user();
 
-    dd($req->all());
     $usuario = User::find($usuarioLog->id);
 
+    return view('editarUsuario')->with('usuario', $usuarioLog);
+  }
+
+  public function editarUsuario(Request $req) {
+    $usuarioLog = Auth::user();
+    $usuario = User::find($usuarioLog->id);
+
+    if(!empty($req->file("fotoPerfil"))) {
+      if($usuario->foto_perfil != "imagen predefinida") {
+        unlink("storage/usuarioPerfil/$usuario->foto_perfil");
+      }
+
+      $path = $req->file("fotoPerfil")->store("public/usuarioPerfil");
+      $foto_perfil = basename($path);
+
+      $usuario->foto_perfil = $foto_perfil;
+    }  else {
+
+    }
+
+    $usuario->name = $req["nombre"];
+
+    $usuario->email = $req["correo"];
+
+    $usuario->save();
+
+    return redirect("/perfil");
   }
 
   public function listarCuestionarios() {

@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="{{asset('css/styles.css')}}">
   <title>Mis cuestionarios</title>
 </head>
-<body background="imgs/bg-body.png">
+<body background="/storage/bg-body.png">
   <main id="mainBuscarCuestionario">
     <section id="menuBuscarCuestionario">
       <div>
@@ -35,7 +35,7 @@
 
       <!-- Input busqueda de cuestionarnios -->
       <div class="unasRespuestas" id="inputBuscarCuestionario">
-        <form class="" action="buscador.php" method="GET">
+        <form class="" action="/cuestionarios/buscar" method="GET">
           <input type="text" name="cuestionarioBusqueda" value="" placeholder="Buscar">
           <button type="submit" name="button">Buscar</button>
         </form>

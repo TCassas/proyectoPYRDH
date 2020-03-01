@@ -30,6 +30,10 @@ class cuestionarioController extends Controller
       return view('crearCuestionario', compact('categorias'));
     }
 
+    // public function buscarCuestionario(Request $req) {
+    //   $cuestionarios = Cuestionario::
+    // }
+
     public function crearCuestionario(Request $req) {
       $usuarioLog = Auth::user();
       $cuestionario = New Cuestionario;
@@ -98,7 +102,7 @@ class cuestionarioController extends Controller
 
         $cuestionario->portada = $imagenPortada;
       }  else {
-        echo "no hay foto";
+
       }
 
       foreach ($cuestionarioActualizado["preguntas"] as $pregunta) {

@@ -7,15 +7,19 @@
   <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="{{asset('css/styles.css')}}">
   <title>Tu perfil</title>
 </head>
-<body background="imgs/bg-body.png">
+<body background="/storage/bg-body.png">
   <main id="mainInfoUsuario">
     <section id="cartaUsuario">
       <section id="info">
         <figure id="fotoUsuarioPerfil">
-          <img src="" alt="">
+          @if ($usuario->foto_perfil != "imagen predefinida")
+            <img src="/storage/usuarioPerfil/{{$usuario->foto_perfil}}" alt="">
+          @else
+            <img src="/imgs/fondoPunteado.jpg" alt="">
+          @endif
         </figure>
         <article class="infoUsuarioPerfil">
           <p>Nombre de usuario: {{$usuario->name}}</p>
@@ -27,7 +31,7 @@
       <section id="configuracionUsuario">
         <a href="/inicio" class="botonMenu">Regresar</a>
         <a href="/perfil/editar" class="botonMenu">Editar información</a>
-        <a href="cambiarContrasenia.php" class="botonMenu">Cambiar contraseña</a>
+        <a href="" class="botonMenu">Cambiar contraseña</a>
         <a href="cerrarSesion.php" class="botonMenu">Cerrar sesión</a>
       </section>
     </section>

@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="css/styles.css">
   <title>¡Elegí que cuestionario jugar!</title>
 </head>
-<body background="imgs/bg-body.png">
+<body background="/storage/bg-body.png">
   <main id="mainBuscarCuestionario">
     <section id="menuBuscarCuestionario">
       <div>
@@ -42,18 +42,28 @@
         @foreach ($cuestionarios as $cuestionario)
           <article class="articuloCuestionario">
             <div class="infoCuestionario">
-              <div class="fotoCuestionario">
-
+              <div class="portadaCuestionario">
+                @if ($cuestionario->portada != "imagen predefinida")
+                  <img src="/storage/cuestionariosImgs/{{$cuestionario->portada}}" alt="">
+                @else
+                  <img src="/imgs/fondoPunteado.jpg" alt="">
+                @endif
               </div>
               <div class="infoLista">
-                <h4><a href="/cuestionarios/{{$cuestionario->id}}">{{$cuestionario->titulo}}</a></h4>
-                <p> Preguntas: {{$cuestionario->cantidad_preguntas}} </p>
+                <h4><a href="/cuestionarios/{{$cuestionario->id}}">
+                  @if (strlen($cuestionario->titulo) < 16)
+                    {{$cuestionario->titulo}}
+                  @else
+                    {{substr($cuestionario->titulo, 0, 14)}} ...
+                  @endif
+                </a></h4>
+                <p> Preguntas: {{count($cuestionario->preguntasvof) + count($cuestionario->preguntas4respuestas)}} </p>
               </div>
             </div>
             <div class="creadorCuestionario">
               <p class="creador">Autor: {{$cuestionario->usuario->name}}</p>
               <a href="/ranking" class="ranking">Ranking<ion-icon name="list"></ion-icon></a>
-              <p> Categoria: {{$cuestionario->categoria->nombre}} </p>
+              <p> Categoria: <span id="categoria">{{$cuestionario->categoria->nombre}}</span></p>
             </div>
             <div class="jugarCuestionario">
               <a href="preguntaTexto.php">
