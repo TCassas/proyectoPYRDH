@@ -8,16 +8,18 @@ use Auth;
 
 class usuarioController extends Controller
 {
-  public function info() {
+  public function infoUsuario() {
     $usuarioLog = Auth::user();
 
     return view('infoUsuario')->with('usuario', $usuarioLog);
   }
 
-  public function editarInfo() {
+  public function editarUsuario(Request $req) {
     $usuarioLog = Auth::user();
 
-    return view('editarUsuario')->with('usuario', $usuarioLog);
+    dd($req->all());
+    $usuario = User::find($usuarioLog->id);
+
   }
 
   public function listarCuestionarios() {

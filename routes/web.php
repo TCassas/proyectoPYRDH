@@ -20,11 +20,13 @@ Route::get('/inicio', function() { return view('inicio'); });
 
 Route::get('/perfil', 'UsuarioController@info');
 
-Route::get('/perfil/editar', 'UsuarioController@editarInfo');
+Route::get('/perfil/editar', 'UsuarioController@infoUsuario');
+
+Route::post('/perfil/editar', 'UsuarioController@editarUsuario');
 
 Route::get('/cuestionarios', 'CuestionarioController@listar');
 
-Route::get('/cuestionarios/crear', function() { return view('crearCuestionario')});
+Route::get('/cuestionarios/crear', 'CuestionarioController@formularioCrearCuestionario');
 
 Route::post('/cuestionarios/crear' , 'CuestionarioController@crearCuestionario');
 

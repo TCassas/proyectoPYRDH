@@ -7,7 +7,7 @@
   <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{asset('css/styles.css')}}">
+  <link rel="stylesheet" href="/css/styles.css">
   <title>Modifica tu información de usuario</title>
 </head>
 <body background="imgs/bg-body.png">
@@ -22,8 +22,8 @@
         </figure>
         <article class="infoUsuarioPerfil">
 
-          <form class="" action="editarUsuario.php" method="post" enctype="multipart/form-data">
-
+          <form class="" action="/perfil/editar" method="post" enctype="multipart/form-data">
+            {{csrf_field()}}
             <div class="grupoLIYEditar">
               <label for="">Nombre de usuario:</label>
               <input type="text" name="nombre" value="{{$usuario->name}}">

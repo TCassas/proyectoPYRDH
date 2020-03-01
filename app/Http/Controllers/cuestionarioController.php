@@ -24,6 +24,12 @@ class cuestionarioController extends Controller
       return view('editarCuestionario', compact('cuestionario', 'categorias'));
     }
 
+    public function formularioCrearCuestionario() {
+      $categorias = Categoria::all();
+
+      return view('crearCuestionario', compact('categorias'));
+    }
+
     public function crearCuestionario(Request $req) {
       $usuarioLog = Auth::user();
       $cuestionario = New Cuestionario;
@@ -42,12 +48,14 @@ class cuestionarioController extends Controller
         $cuestionario->portada = $imagenPortada;
       }
 
+      $cuestionario->save();
+
       foreach ($cuestionarioActualizado["preguntas"] as $pregunta) {
         if($pregunta["tipo"] === 't') {
           var_dump($pregunta);
           echo "No existe texto<br>";
           $nuevaPregunta = New Pregunta4Respuestas;
-          $nuevaPregunta->cuestionario_id = $id;
+          $nuevaPregunta->cuestionario_id = $cuestionario->id;
           $nuevaPregunta->consigna = $pregunta["consigna"];
           $nuevaPregunta->respuesta_correcta = $pregunta["respuestas"][0];
           $nuevaPregunta->segunda_respuesta = $pregunta["respuestas"][1];
@@ -57,15 +65,13 @@ class cuestionarioController extends Controller
           $nuevaPregunta->save();
         } else {
           $nuevaPregunta = New Pregunta4Respuestas;
-          $nuevaPregunta->cuestionario_id = $id;
+          $nuevaPregunta->cuestionario_id = $cuestionario->id;
           $nuevaPregunta->consigna = $pregunta["consigna"];
           $nuevaPregunta->respuesta_correcta = $pregunta["respuestas"][0];
 
           $nuevaPregunta->save();
         }
       }
-
-      $cuestionario->save();
 
       return redirect("/perfil/cuestionarios");
     }
@@ -179,6 +185,7 @@ class cuestionarioController extends Controller
         return redirect("/perfil/cuestionarios");
       } else {
         return redirect("/perfil/cuestionarios");
+      }
     }
 
     private function acondicionarReq($req) {
