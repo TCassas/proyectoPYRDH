@@ -23,6 +23,24 @@ class cuestionarioController extends Controller
       return view('menuBuscarCuestionario')->with('cuestionarios', $cuestionarios);
     }
 
+    public function infoCuestionario($id) {
+      $cuestionario = Cuestionario::find($id);
+      if(isset($cuestionario)) {
+        return view('infoCuestionario')->with('cuestionario', $cuestionario);
+      } else {
+        return redirect('/cuestionarios');
+      }
+    }
+
+    public function infoPerfilCuestionario($id) {
+      $cuestionario = Cuestionario::find($id);
+      if(isset($cuestionario)) {
+        return view('infoPerfilCuestionario')->with('cuestionario', $cuestionario);
+      } else {
+        return redirect('/perfil/cuestionarios');
+      }
+    }
+
     public function mostrarCuestionarioAEditar($id) {
       $cuestionario = Cuestionario::find($id);
       $categorias = Categoria::all();

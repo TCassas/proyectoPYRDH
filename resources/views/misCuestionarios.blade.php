@@ -54,13 +54,18 @@
                 @endif
               </div>
               <div class="infoLista">
-                <h4>{{$cuestionario->titulo}}</h4>
+                <h4><a href="/perfil/cuestionarios/{{$cuestionario->id}}">
+                  @if (strlen($cuestionario->titulo) < 16)
+                    {{$cuestionario->titulo}}
+                  @else
+                    {{substr($cuestionario->titulo, 0, 14)}} ...
+                  @endif
+                </a></h4>
                 <p>{{count($cuestionario->preguntasvof) + count($cuestionario->preguntas4respuestas)}} preguntas</p>
               </div>
             </div>
             <div class="creadorCuestionario">
               <p class="creador">Autor: {{$usuario->name}}</p>
-              <a href="/ranking/{{$cuestionario->id}}" class="ranking">Ranking<ion-icon name="list"></ion-icon></a>
               <p> Genero: {{$cuestionario->categoria->nombre}}</p>
             </div>
             <div class="jugarCuestionario">

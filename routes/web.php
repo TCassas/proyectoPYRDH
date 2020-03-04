@@ -32,9 +32,9 @@ Route::get('/cuestionarios/crear', 'CuestionarioController@formularioCrearCuesti
 
 Route::post('/cuestionarios/crear' , 'CuestionarioController@crearCuestionario');
 
-Route::get('/cuestionarios/{id}', function() {
-  return "Test";
-});
+Route::get('/cuestionarios/{id}', 'CuestionarioController@infoCuestionario');
+
+Route::get('/perfil/cuestionarios/{id}', 'CuestionarioController@infoPerfilCuestionario');
 
 Route::get('/cuestionarios/buscar', 'CuestionarioController@buscarCuestionario');
 

@@ -7,7 +7,7 @@
   <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="{{asset('css/styles.css')}}">
   <title>¡Elegí que cuestionario jugar!</title>
 </head>
 <body>
@@ -15,18 +15,13 @@
     <section id="menuBuscarCuestionario">
       <div>
 
-        <a href="infoUsuario.php" class="botonMenu">
-          <ion-icon name="contact"></ion-icon>
-          <p>Usuario</p>
-        </a>
-
         <!-- nombre de usuario -->
 
-        <a href="formularioPlay.php" class="botonMenu">
+        <a href="/inicio" class="botonMenu">
           <ion-icon name="home"></ion-icon> Inicio
         </a>
 
-        <a href="menuBuscarCuestionario.php" class="botonMenu">
+        <a href="/perfil/cuestionarios" class="botonMenu">
           <ion-icon name="arrow-round-back"></ion-icon> Regresar
         </a>
 
@@ -34,9 +29,36 @@
     </section>
     <section id="cuestionariosLista">
       <div class="cuestionarioRanking">
-        <?php
-          include("temporales/articuloListaCuestionario.php");
-        ?>
+        <article class="articuloCuestionario">
+          <div class="infoCuestionario">
+            <div class="portadaCuestionario">
+              @if ($cuestionario->portada != "imagen predefinida")
+                <img src="/storage/cuestionariosImgs/{{$cuestionario->portada}}" alt="">
+              @else
+                <img src="/imgs/fondoPunteado.jpg" alt="">
+              @endif
+            </div>
+            <div class="infoLista">
+              <h4><a href="/cuestionarios/{{$cuestionario->id}}">
+                @if (strlen($cuestionario->titulo) < 16)
+                  {{$cuestionario->titulo}}
+                @else
+                  {{substr($cuestionario->titulo, 0, 14)}} ...
+                @endif
+              </a></h4>
+              <p> Preguntas: {{count($cuestionario->preguntasvof) + count($cuestionario->preguntas4respuestas)}} </p>
+            </div>
+          </div>
+          <div class="creadorCuestionario">
+            <p class="creador">Autor: {{$cuestionario->usuario->name}}</p>
+            <p> Categoria: <span id="categoria">{{$cuestionario->categoria->nombre}}</span></p>
+          </div>
+          <div class="jugarCuestionario">
+            <a href="preguntaTexto.php">
+              <ion-icon name="play-circle"></ion-icon>
+            </a>
+          </div>
+        </article>
       </div>
       <h1 class="tituloRanking">Ranking</h1>
       <table>
@@ -74,7 +96,6 @@
           }
         ?>
       </table>
-      <a href="menuBuscarCuestionario.php" id="botonRegresar">Regresar</a>
     </section>
   </main>
 </body>

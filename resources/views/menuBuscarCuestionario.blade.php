@@ -63,7 +63,6 @@
             </div>
             <div class="creadorCuestionario">
               <p class="creador">Autor: {{$cuestionario->usuario->name}}</p>
-              <a href="/ranking" class="ranking">Ranking<ion-icon name="list"></ion-icon></a>
               <p> Categoria: <span id="categoria">{{$cuestionario->categoria->nombre}}</span></p>
             </div>
             <div class="jugarCuestionario">
