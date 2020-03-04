@@ -7,7 +7,7 @@
   <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="{{asset('css/styles.css')}}">
   <title>¡Elegí que cuestionario jugar!</title>
 </head>
 <body background="/storage/bg-body.png">
@@ -31,7 +31,8 @@
 
       <!-- Input busqueda de cuestionarnios -->
       <div class="unasRespuestas" id="inputBuscarCuestionario">
-        <form class="" action="buscador.php" method="GET">
+        <form class="" action="/cuestionarios/buscar" method="GET">
+          {{csrf_field()}}
           <input type="text" name="cuestionarioBusqueda" value="" placeholder="Buscar">
           <button type="submit" name="button">Buscar</button>
         </form>

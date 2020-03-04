@@ -17,6 +17,12 @@ class cuestionarioController extends Controller
       return view('menuBuscarCuestionario')->with('cuestionarios', $cuestionarios);
     }
 
+    public function buscarCuestionario(Request $req) {
+      $cuestionarios = Cuestionario::where('titulo', 'like', '%' . $req['cuestionarioBusqueda'] . '%')->orWhere('descripcion', 'like', '%' . $req['cuestionarioBusqueda'] . '%')->get();
+
+      return view('menuBuscarCuestionario')->with('cuestionarios', $cuestionarios);
+    }
+
     public function mostrarCuestionarioAEditar($id) {
       $cuestionario = Cuestionario::find($id);
       $categorias = Categoria::all();

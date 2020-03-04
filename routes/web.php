@@ -26,6 +26,8 @@ Route::post('/perfil/editar', 'UsuarioController@editarUsuario');
 
 Route::get('/cuestionarios', 'CuestionarioController@listar');
 
+Route::get('/cuestionarios/buscar', 'CuestionarioController@buscarCuestionario');
+
 Route::get('/cuestionarios/crear', 'CuestionarioController@formularioCrearCuestionario');
 
 Route::post('/cuestionarios/crear' , 'CuestionarioController@crearCuestionario');
