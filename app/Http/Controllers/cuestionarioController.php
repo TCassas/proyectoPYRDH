@@ -32,6 +32,7 @@ class cuestionarioController extends Controller
       }
     }
 
+    //Esta hace lo mismo que infoCuestionario, pero las separé porque ambas envian a distintas rutas, y en las rutas cambian los links, no se me ocurrió otra forma de hacerlo xD
     public function infoPerfilCuestionario($id) {
       $cuestionario = Cuestionario::find($id);
       if(isset($cuestionario)) {
@@ -53,10 +54,6 @@ class cuestionarioController extends Controller
 
       return view('crearCuestionario', compact('categorias'));
     }
-
-    // public function buscarCuestionario(Request $req) {
-    //   $cuestionarios = Cuestionario::
-    // }
 
     public function crearCuestionario(Request $req) {
       $usuarioLog = Auth::user();

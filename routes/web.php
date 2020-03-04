@@ -36,8 +36,6 @@ Route::get('/cuestionarios/{id}', 'CuestionarioController@infoCuestionario');
 
 Route::get('/perfil/cuestionarios/{id}', 'CuestionarioController@infoPerfilCuestionario');
 
-Route::get('/cuestionarios/buscar', 'CuestionarioController@buscarCuestionario');
-
 Route::get('/cuestionarios/editar/{id}', 'CuestionarioController@mostrarCuestionarioAEditar');
 
 Route::delete('/cuestionarios/borrar/{id}', 'CuestionarioController@borrarCuestionario');
