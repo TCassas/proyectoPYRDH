@@ -20,6 +20,7 @@
       </section>
     </section>
     <section id="seccionDerechaCC">
+      <span id="desplegarMenu"><i class="fas fa-angle-double-right"></i></span>
       <div id="formDerecho">
         <div class="grupoLI">
           <label for="">Nombre</label>
@@ -59,6 +60,7 @@
     </section>
   </main>
 
+  <script src="{{asset('js/menuDesplegableCuestionario.js')}}" charset="utf-8"></script>
   <script src="{{asset('js/edicionDeCuestionario.js')}}" charset="utf-8"></script>
 </body>
 </html>
