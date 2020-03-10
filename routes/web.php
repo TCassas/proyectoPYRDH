@@ -34,9 +34,13 @@ Route::post('/cuestionarios/crear' , 'CuestionarioController@crearCuestionario')
 
 Route::get('/cuestionarios/{id}', 'CuestionarioController@infoCuestionario');
 
+Route::get('/api/cuestionarios/{id}', 'CuestionarioController@getPreguntas');
+
 Route::get('/perfil/cuestionarios/{id}', 'CuestionarioController@infoPerfilCuestionario');
 
 Route::get('/cuestionarios/editar/{id}', 'CuestionarioController@mostrarCuestionarioAEditar');
+
+Route::put('/cuestionarios/editar/{id}', 'CuestionarioController@actualizarCuestionario');
 
 Route::delete('/cuestionarios/borrar/{id}', 'CuestionarioController@borrarCuestionario');
 

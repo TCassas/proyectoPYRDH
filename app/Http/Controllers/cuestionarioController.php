@@ -32,6 +32,17 @@ class cuestionarioController extends Controller
       }
     }
 
+    public function getPreguntas($id) {
+      $cuestionario = Cuestionario::find($id);
+
+      $preguntas[] = json_decode($cuestionario->preguntas4respuestas, true);
+      $preguntas[] = json_decode($cuestionario->preguntasvof, true);
+
+      dd($preguntas);
+
+      return $cuestionario;
+    }
+
     //Esta hace lo mismo que infoCuestionario, pero las separé porque ambas envian a distintas rutas, y en las rutas cambian los links, no se me ocurrió otra forma de hacerlo xD
     public function infoPerfilCuestionario($id) {
       $cuestionario = Cuestionario::find($id);
@@ -89,7 +100,7 @@ class cuestionarioController extends Controller
 
           $nuevaPregunta->save();
         } else {
-          $nuevaPregunta = New Pregunta4Respuestas;
+          $nuevaPregunta = New PreguntaVOF;
           $nuevaPregunta->cuestionario_id = $cuestionario->id;
           $nuevaPregunta->consigna = $pregunta["consigna"];
           $nuevaPregunta->respuesta_correcta = $pregunta["respuestas"][0];
@@ -175,7 +186,7 @@ class cuestionarioController extends Controller
             $nuevaPregunta->save();
           } else {
             echo "No existe vof<br>";
-            $nuevaPregunta = New Pregunta4Respuestas;
+            $nuevaPregunta = New PreguntaVOF;
             $nuevaPregunta->cuestionario_id = $id;
             $nuevaPregunta->consigna = $pregunta["consigna"];
             $nuevaPregunta->respuesta_correcta = $pregunta["respuestas"][0];
