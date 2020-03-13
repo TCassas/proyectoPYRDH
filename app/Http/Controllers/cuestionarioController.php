@@ -38,9 +38,11 @@ class cuestionarioController extends Controller
       $preguntas[] = json_decode($cuestionario->preguntas4respuestas, true);
       $preguntas[] = json_decode($cuestionario->preguntasvof, true);
 
-      dd($preguntas);
+      return json_encode($preguntas);
+    }
 
-      return $cuestionario;
+    public function jugarCuestionario($id) {
+      return view('jugar');
     }
 
     //Esta hace lo mismo que infoCuestionario, pero las separé porque ambas envian a distintas rutas, y en las rutas cambian los links, no se me ocurrió otra forma de hacerlo xD

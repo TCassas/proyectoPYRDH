@@ -38,6 +38,8 @@ Route::get('/api/cuestionarios/{id}', 'CuestionarioController@getPreguntas');
 
 Route::get('/perfil/cuestionarios/{id}', 'CuestionarioController@infoPerfilCuestionario');
 
+Route::get('/cuestionarios/jugar/{id}', 'CuestionarioController@jugarCuestionario');
+
 Route::get('/cuestionarios/editar/{id}', 'CuestionarioController@mostrarCuestionarioAEditar');
 
 Route::put('/cuestionarios/editar/{id}', 'CuestionarioController@actualizarCuestionario');

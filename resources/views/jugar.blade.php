@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="{{asset('css/styles.css')}}">
   <title>¡A jugar!</title>
 </head>
 <body>
@@ -62,17 +62,10 @@
       </article>
       <a href="#seccionIzquierdaPreguntaTexto" id="irAPregunta"><ion-icon name="arrow-round-up"></ion-icon></a>
       <section id="cantidadPreguntas">
-        <?php
-          for ($i = 0; $i < 10; $i++) {
-            ?>
-              <div class="puntitoPregunta">
 
-              </div>
-            <?php
-          }
-        ?>
       </section>
     </section>
   </main>
+  <script src="{{asset('js/jugar.js')}}" charset="utf-8"></script>
 </body>
 </html>

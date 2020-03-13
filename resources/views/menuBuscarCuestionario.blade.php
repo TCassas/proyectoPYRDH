@@ -66,7 +66,7 @@
               <p> Categoria: <span id="categoria">{{$cuestionario->categoria->nombre}}</span></p>
             </div>
             <div class="jugarCuestionario">
-              <a href="preguntaTexto.php">
+              <a href="/cuestionarios/jugar/{{$cuestionario->id}}">
                 <ion-icon name="play-circle"></ion-icon>
               </a>
             </div>
