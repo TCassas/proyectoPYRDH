@@ -17,7 +17,7 @@
         <p>60 seg</p>
       </div>
       <div class="preguntaTexto">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus assumenda, doloremque error velit magni a veniam, beatae fugit laborum mollitia?</p>
+        <p id="pregunta"></p>
       </div>
       <div class="contadorErrores">
         <div class="errorCruz">
@@ -48,22 +48,15 @@
       </div>
     </section>
     <section id="seccionDerechaPreguntaTexto">
-      <article class="respuestaOpcion">
-        <p>Respuesta 1</p>
-      </article>
-      <article class="respuestaOpcion">
-        <p>Respuesta 2</p>
-      </article>
-      <article class="respuestaOpcion">
-        <p>Respuesta 3</p>
-      </article>
-      <article class="respuestaOpcion">
-        <p>Respuesta 4</p>
-      </article>
+      <div id="preguntas">
+
+      </div>
+
       <a href="#seccionIzquierdaPreguntaTexto" id="irAPregunta"><ion-icon name="arrow-round-up"></ion-icon></a>
       <section id="cantidadPreguntas">
 
       </section>
+      <button type="button" name="button"  id="responder">Enviar</button>
     </section>
   </main>
   <script src="{{asset('js/jugar.js')}}" charset="utf-8"></script>
