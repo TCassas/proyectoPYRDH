@@ -156,6 +156,7 @@ main#mainPreguntaTexto {
 }
 
 .opcionSeleccionada {
+  border: 3px solid green !important;
   -webkit-box-shadow: 0 7px 4px #777;
 	-moz-box-shadow: 0 7px 4px #777;
 	box-shadow: 0 7px 4px #777;

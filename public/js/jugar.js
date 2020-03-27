@@ -3,6 +3,7 @@ window.onload = () => {
       consigna = document.querySelector('#pregunta'),
       responder = document.querySelector('#responder'),
       seccionRespuestas = document.querySelector('#preguntas'),
+      seccionDerecha = document.querySelector('#seccionDerechaPreguntaTexto'),
       id = url[5];
 
   fetch('/api/cuestionarios/' + id)
@@ -15,6 +16,7 @@ window.onload = () => {
     //Desordeno las preguntas en un arreglo de objetos literales, mas facil de manipular.
     let preguntasArray = ordenarPreguntas(preguntas),
         preguntaNumero = 0,
+        aciertos = 0,
         seJuega = true;
 
     //Seteo la primera pregunta y la variable donde se guardara la respuesta parcial del jugador
@@ -24,15 +26,34 @@ window.onload = () => {
     let respuestas = document.querySelectorAll('.respuestaOpcion');
 
     for(let respuesta of respuestas) {
-      respuesta.addEventListener('click', () => {
+      respuesta.addEventListener('click', (e) => {
         respuestaFinal = respuesta.children[0].innerText;
+
+        for(let respuesta of respuestas) {
+          if(respuesta.classList.contains("opcionSeleccionada")) {
+            respuesta.classList.remove("opcionSeleccionada");
+          }
+        }
+
+        respuesta.classList.add("opcionSeleccionada");
+
+        e.stopPropagation();
       });
     }
+
+    seccionDerecha.addEventListener('click', (e) => {
+      for(let respuesta of respuestas) {
+        if(respuesta.classList.contains("opcionSeleccionada")) {
+          respuesta.classList.remove("opcionSeleccionada");
+        }
+      }
+    });
 
     //Cada vez que se le da al boton, carga la siguiente pregunta
     responder.addEventListener('click', (e) => {
       if(seJuega) {
         if(respuestaFinal == preguntasArray[preguntaNumero].respuestaCorrecta) {
+          aciertos++;
           console.log("Respuesta correcta!");
         } else {
           console.log("Respuesta incorrecta :o");
