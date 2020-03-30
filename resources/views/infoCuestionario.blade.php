@@ -31,11 +31,11 @@
       <div class="cuestionarioRanking">
         <article class="articuloCuestionario">
           <div class="infoCuestionario">
-            <div class="portadaCuestionario">
-              @if ($cuestionario->portada != "imagen predefinida")
-                <img src="/storage/cuestionariosImgs/{{$cuestionario->portada}}" alt="">
+            <div class="portadaCuestionario"
+              @if ($cuestionario->portada != 'imagen predefinida')
+                style="background-image: url(/storage/cuestionariosImgs/{{$cuestionario->portada}}); background-size: cover;">
               @else
-                <img src="/imgs/fondoPunteado.jpg" alt="">
+                style="background-image: url(/imgs/fondoPunteado.jpg);">
               @endif
             </div>
             <div class="infoLista">

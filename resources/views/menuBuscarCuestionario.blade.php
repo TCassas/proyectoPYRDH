@@ -43,14 +43,12 @@
         @foreach ($cuestionarios as $cuestionario)
           <article class="articuloCuestionario">
             <div class="infoCuestionario">
-
               <div class="portadaCuestionario"
-              @if ($cuestionario->portada != 'imagen predefinida')
-                style="background-image: url(/storage/cuestionariosImgs/{{$cuestionario->portada}}); background-size: cover;">
-              @else
-                style="background-image: url(/imgs/fondoPunteado.jpg);">
-              @endif
-
+                @if ($cuestionario->portada != 'imagen predefinida')
+                  style="background-image: url(/storage/cuestionariosImgs/{{$cuestionario->portada}}); background-size: cover;">
+                @else
+                  style="background-image: url(/imgs/fondoPunteado.jpg);">
+                @endif
               </div>
               <div class="infoLista">
                 <h4><a href="/cuestionarios/{{$cuestionario->id}}">

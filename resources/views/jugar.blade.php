@@ -14,7 +14,7 @@
     <a href="#seccionDerechaPreguntaTexto" id="irARespuestas"><ion-icon name="arrow-round-down"></ion-icon></a>
     <section id="seccionIzquierdaPreguntaTexto">
       <div class="cronometro">
-        <p>60 seg</p>
+        <p>25 seg</p>
       </div>
       <div class="preguntaTexto">
         <p id="pregunta"></p>

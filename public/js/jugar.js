@@ -14,15 +14,13 @@ window.onload = () => {
   .then((preguntas) => {
 
 
-    //Desordeno las preguntas en un arreglo de objetos literales, mas facil de manipular.
+    //Desordeno las preguntas en un arreglo de objetos literales, mas facil de manipular. Creo las variables necesarias para la logica del juego
     let preguntasArray = ordenarPreguntas(preguntas),
         preguntaNumero = 0,
         aciertos = 0,
         tiempo = 25,
-        contador,
+        contador = setInterval(iniciarCronometro, 1000),
         seJuega = true;
-
-    contador = setInterval(iniciarCronometro, 1000);
 
     //Seteo la primera pregunta y la variable donde se guardara la respuesta parcial del jugador
     setPregunta(preguntasArray[preguntaNumero]);
@@ -87,9 +85,10 @@ window.onload = () => {
       }
     });
 
+    //Funcion que llama la variable "contador" para iniciar el cronometro
     function iniciarCronometro() {
       tiempo--;
-      cronometro.innerText = tiempo;
+      cronometro.innerText = tiempo + " seg";
 
       console.log(cronometro);
 
