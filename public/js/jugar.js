@@ -4,6 +4,7 @@ window.onload = () => {
       responder = document.querySelector('#responder'),
       seccionRespuestas = document.querySelector('#preguntas'),
       seccionDerecha = document.querySelector('#seccionDerechaPreguntaTexto'),
+      cronometro = document.querySelector('.cronometro p'),
       id = url[5];
 
   fetch('/api/cuestionarios/' + id)
@@ -17,37 +18,17 @@ window.onload = () => {
     let preguntasArray = ordenarPreguntas(preguntas),
         preguntaNumero = 0,
         aciertos = 0,
+        tiempo = 25,
+        contador,
         seJuega = true;
+
+    contador = setInterval(iniciarCronometro, 1000);
 
     //Seteo la primera pregunta y la variable donde se guardara la respuesta parcial del jugador
     setPregunta(preguntasArray[preguntaNumero]);
-    let respuestaFinal;
+    let respuestaFinal = "";
 
     let respuestas = document.querySelectorAll('.respuestaOpcion');
-
-    for(let respuesta of respuestas) {
-      respuesta.addEventListener('click', (e) => {
-        respuestaFinal = respuesta.children[0].innerText;
-
-        for(let respuesta of respuestas) {
-          if(respuesta.classList.contains("opcionSeleccionada")) {
-            respuesta.classList.remove("opcionSeleccionada");
-          }
-        }
-
-        respuesta.classList.add("opcionSeleccionada");
-
-        e.stopPropagation();
-      });
-    }
-
-    seccionDerecha.addEventListener('click', (e) => {
-      for(let respuesta of respuestas) {
-        if(respuesta.classList.contains("opcionSeleccionada")) {
-          respuesta.classList.remove("opcionSeleccionada");
-        }
-      }
-    });
 
     //Cada vez que se le da al boton, carga la siguiente pregunta
     responder.addEventListener('click', (e) => {
@@ -72,11 +53,51 @@ window.onload = () => {
           }
         } else {
           seJuega = false;
+          clearInterval(contador);
+        }
+
+        tiempo = 25;
+      }
+    });
+
+    //Poder seleccionar o deseleccionar una respuesta
+    for(let respuesta of respuestas) {
+      respuesta.addEventListener('click', (e) => {
+        respuestaFinal = respuesta.children[0].innerText;
+
+        for(let respuesta of respuestas) {
+          if(respuesta.classList.contains("opcionSeleccionada")) {
+            respuesta.classList.remove("opcionSeleccionada");
+          }
+        }
+
+        respuesta.classList.add("opcionSeleccionada");
+
+        e.stopPropagation();
+      });
+    }
+
+    //Si se presiona fuera de las preguntas teniendo una seleccionada, se deselecciona
+    seccionDerecha.addEventListener('click', (e) => {
+      for(let respuesta of respuestas) {
+        if(respuesta.classList.contains("opcionSeleccionada")) {
+          respuesta.classList.remove("opcionSeleccionada");
+          respuestaFinal = "";
         }
       }
     });
 
+    function iniciarCronometro() {
+      tiempo--;
+      cronometro.innerText = tiempo;
 
+      console.log(cronometro);
+
+      if(tiempo == 0) {
+        responder.click();
+        tiempo = 25;
+      }
+    }
   })
   .catch((err) => {
     console.log(err);
@@ -134,8 +155,6 @@ window.onload = () => {
   //Las siguientes 2 funciones, preparan el dom para cada pregunta, en cuanto a las preguntas, cada vez que se llama borra las que había anteriormente
   function setPreguntaTexto(pregunta) {
     let orden = shuffle([0, 1, 2, 3]);
-
-    console.log(pregunta);
 
     consigna.innerText = pregunta.consigna;
 
