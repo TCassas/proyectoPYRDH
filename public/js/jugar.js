@@ -2,7 +2,7 @@ window.onload = () => {
   let url = window.location.href.split('/'),
       consigna = document.querySelector('#pregunta'),
       responder = document.querySelector('#responder'),
-      seccionRespuestas = document.querySelector('#preguntas'),
+      seccionRespuestas = document.querySelector('#opciones'),
       seccionDerecha = document.querySelector('#seccionDerechaPreguntaTexto'),
       cronometro = document.querySelector('.cronometro p'),
       id = url[5];
@@ -19,24 +19,32 @@ window.onload = () => {
         preguntaNumero = 0,
         aciertos = 0,
         tiempo = 25,
+        tiempoTotal = 0,
         contador = setInterval(iniciarCronometro, 1000),
+        arrayAciertos = [],
         seJuega = true;
+
+    const time = 25;
 
     //Seteo la primera pregunta y la variable donde se guardara la respuesta parcial del jugador
     setPregunta(preguntasArray[preguntaNumero]);
     let respuestaFinal = "";
 
     let respuestas = document.querySelectorAll('.respuestaOpcion');
+    efectosVisuales(respuestas, seccionRespuestas);
 
     //Cada vez que se le da al boton, carga la siguiente pregunta
     responder.addEventListener('click', (e) => {
       if(seJuega) {
         if(respuestaFinal == preguntasArray[preguntaNumero].respuestaCorrecta) {
-          aciertos++;
+          arrayAciertos.push(true);
           console.log("Respuesta correcta!");
         } else {
+          arrayAciertos.push(false);
           console.log("Respuesta incorrecta :o");
         }
+
+        tiempoTotal += time - parseInt(cronometro.innerText);
 
         preguntaNumero++;
         if(preguntaNumero < preguntasArray.length) {
@@ -49,39 +57,65 @@ window.onload = () => {
               respuestaFinal = respuesta.children[0].innerText;
             });
           }
+
+          efectosVisuales(respuestas, seccionRespuestas);
         } else {
           seJuega = false;
           clearInterval(contador);
+
+          let play = {
+            id: parseInt(id[0]),
+            tiempo: tiempoTotal,
+            aciertos: JSON.stringify(arrayAciertos)
+          }
+
+          let datosFormulario = new FormData();
+          datosFormulario.append('datos', JSON.stringify(play));
+
+          fetch("/api/cuestionarios", {
+            method: 'POST',
+            body: datosFormulario,
+            headers: {
+              'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+            }
+          });
+
+          // let form = document.querySelector('form'),
+          //     url = '/api/cuestionarios',
+          //     token = document.querySelector("input[name='_token']");
+          //
+          // form.innerHTML += `
+          //   <input type='text' name='tiempo' value='${tiempoTotal}'>
+          //   <input type='text' name='aciertos' value='${JSON.stringify(arrayAciertos)}'>
+          //   <button type='submit' id='enviarForm'>
+          // `;
+          //
+          // let fd = new FormData(form);
+          //
+          // var request = new XMLHttpRequest();
+          // request.open("POST", "/api/cuestionarios");
+          // request.send(new FormData(form));
+
+          // fd.append('_token', token.value);
+          //
+          // console.log(fd);
+          //
+          // let obj = {};
+          // fd.forEach((value, key) => {obj[key] = value});
+          //
+          // fetch(url, {
+          //   method: "POST",
+          //   body: JSON.stringify(obj),
+          //   headers: {
+          //     "Content-Type": "application/json"
+          //   }
+          // })
+          // .then(res => res.json())
+          // .catch(error => console.error('Error:', error))
+          // .then(response => console.log('Success:', response));
         }
 
         tiempo = 25;
-      }
-    });
-
-    //Poder seleccionar o deseleccionar una respuesta
-    for(let respuesta of respuestas) {
-      respuesta.addEventListener('click', (e) => {
-        respuestaFinal = respuesta.children[0].innerText;
-
-        for(let respuesta of respuestas) {
-          if(respuesta.classList.contains("opcionSeleccionada")) {
-            respuesta.classList.remove("opcionSeleccionada");
-          }
-        }
-
-        respuesta.classList.add("opcionSeleccionada");
-
-        e.stopPropagation();
-      });
-    }
-
-    //Si se presiona fuera de las preguntas teniendo una seleccionada, se deselecciona
-    seccionDerecha.addEventListener('click', (e) => {
-      for(let respuesta of respuestas) {
-        if(respuesta.classList.contains("opcionSeleccionada")) {
-          respuesta.classList.remove("opcionSeleccionada");
-          respuestaFinal = "";
-        }
       }
     });
 
@@ -89,8 +123,6 @@ window.onload = () => {
     function iniciarCronometro() {
       tiempo--;
       cronometro.innerText = tiempo + " seg";
-
-      console.log(cronometro);
 
       if(tiempo == 0) {
         responder.click();
@@ -207,5 +239,35 @@ window.onload = () => {
       <p>Falso</p>
     </article>
     `
+  }
+
+  //Agregar efectos visuales a las respuestas, y lo de "seccion derecha" es para que al clickear fuera de una pregunta esta se desmarque
+  function efectosVisuales(respuestas, seccionDerecha) {
+    //Poder seleccionar o deseleccionar una respuesta
+    for(let respuesta of respuestas) {
+      respuesta.addEventListener('click', (e) => {
+        respuestaFinal = respuesta.children[0].innerText;
+
+        for(let respuesta of respuestas) {
+          if(respuesta.classList.contains("opcionSeleccionada")) {
+            respuesta.classList.remove("opcionSeleccionada");
+          }
+        }
+
+        respuesta.classList.add("opcionSeleccionada");
+
+        e.stopPropagation();
+      });
+    }
+
+    //Si se presiona fuera de las preguntas teniendo una seleccionada, se deselecciona
+    seccionDerecha.addEventListener('click', (e) => {
+      for(let respuesta of respuestas) {
+        if(respuesta.classList.contains("opcionSeleccionada")) {
+          respuesta.classList.remove("opcionSeleccionada");
+          respuestaFinal = "";
+        }
+      }
+    });
   }
 }

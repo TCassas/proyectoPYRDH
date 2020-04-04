@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="csrf-token" content="{{csrf_token()}}">
   <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{asset('css/styles.css')}}">
@@ -48,15 +49,17 @@
       </div>
     </section>
     <section id="seccionDerechaPreguntaTexto">
-      <div id="preguntas">
+      <form class="preguntas">
+        <div id="opciones" class="preguntas">
 
-      </div>
+        </div>
 
-      <a href="#seccionIzquierdaPreguntaTexto" id="irAPregunta"><ion-icon name="arrow-round-up"></ion-icon></a>
-      <section id="cantidadPreguntas">
+        <a href="#seccionIzquierdaPreguntaTexto" id="irAPregunta"><ion-icon name="arrow-round-up"></ion-icon></a>
+        {{-- <section id="cantidadPreguntas">
 
-      </section>
-      <button type="button" name="button"  id="responder">Enviar</button>
+        </section> --}}
+        <button type="button" name="button"  id="responder">Enviar</button>
+      </form>
     </section>
   </main>
   <script src="{{asset('js/jugar.js')}}" charset="utf-8"></script>
