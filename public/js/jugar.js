@@ -79,40 +79,6 @@ window.onload = () => {
               'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
             }
           });
-
-          // let form = document.querySelector('form'),
-          //     url = '/api/cuestionarios',
-          //     token = document.querySelector("input[name='_token']");
-          //
-          // form.innerHTML += `
-          //   <input type='text' name='tiempo' value='${tiempoTotal}'>
-          //   <input type='text' name='aciertos' value='${JSON.stringify(arrayAciertos)}'>
-          //   <button type='submit' id='enviarForm'>
-          // `;
-          //
-          // let fd = new FormData(form);
-          //
-          // var request = new XMLHttpRequest();
-          // request.open("POST", "/api/cuestionarios");
-          // request.send(new FormData(form));
-
-          // fd.append('_token', token.value);
-          //
-          // console.log(fd);
-          //
-          // let obj = {};
-          // fd.forEach((value, key) => {obj[key] = value});
-          //
-          // fetch(url, {
-          //   method: "POST",
-          //   body: JSON.stringify(obj),
-          //   headers: {
-          //     "Content-Type": "application/json"
-          //   }
-          // })
-          // .then(res => res.json())
-          // .catch(error => console.error('Error:', error))
-          // .then(response => console.log('Success:', response));
         }
 
         tiempo = 25;

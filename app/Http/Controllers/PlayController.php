@@ -16,11 +16,6 @@ class PlayController extends Controller
       $tiempo = $play["tiempo"];
       $respuestas = $play["aciertos"];
 
-      // var_dump($idCuestionario);
-      // var_dump($tiempo);
-      // var_dump($respuestas);
-
-
       $play = New Play;
       $play->usuario_id = $usuarioId;
       $play->cuestionario_id = $idCuestionario;
