@@ -126,7 +126,7 @@ main#mainPreguntaTexto {
   /* background-color: #737373; */
 }
 
-#preguntas {
+.preguntas {
   display: flex;
   flex-direction: column;
   width: 100%;
