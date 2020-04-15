@@ -18,13 +18,15 @@
   height: 100vh;
   font-size: 1.4em;
   overflow-x: hidden;
+  position: relative;
 }
 
 /*Seccion izquierda*/
 #seccionIzquierdaCC {
+  position: absolute;
   padding: 1%;
   width: 73vw;
-  overflow: auto;
+
 }
 
 #seccionPreguntasYRespuestas {
@@ -107,19 +109,22 @@
 
 /*Seccion derecha*/
 #seccionDerechaCC {
-  position: relative;
+  position: fixed;
   height: 100%;
   width: 27vw;
+  right: 0;
   min-width: 279px;
+  background-color: white;
   padding: 1%;
   border-left: 2px solid #707070;
   -webkit-box-shadow: -9px 0px 1px 0px rgba(112,112,112,0.31);
   -moz-box-shadow: -9px 0px 1px 0px rgba(112,112,112,0.31);
   box-shadow: -9px 0px 1px 0px rgba(112,112,112,0.31);
+  transition: 1s;
 }
 
 .ocultarMenu {
-  left: 279px;
+  right: 0px !important;
 }
 
 #desplegarMenu {
@@ -226,12 +231,13 @@
 
 @media (max-width: 950px) {
   #seccionDerechaCC {
-    left: 279px;
+    right: -280px;
     z-index: 1;
   }
 
   #seccionIzquierdaCC {
     width: 100vw;
+    z-index: 0;
   }
 
   #desplegarMenu {

@@ -54,7 +54,7 @@
           </div>
           <hr>
         </div>
-        <button type="Submit">Actualizar</button>
+        <button type="Submit">Enviar</button>
       </div>
       </form>
     </section>

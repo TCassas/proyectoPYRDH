@@ -3,6 +3,6 @@ window.onload = function() {
       seccionDerecha = document.querySelector('#seccionDerechaCC');
 
   botonDesplegar.onclick = function() {
-    seccionDerecha.classList.toggle('ocultarMenu');
+    console.log("click!");
   }
 }

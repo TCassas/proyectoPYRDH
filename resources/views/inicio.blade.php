@@ -4,53 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
+    <script src="{{asset('js/menu.js')}}" charset="utf-8"></script>
     <title>Document</title>
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
     <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
-<body background="/storage/bg-body.png">
-  <main id="mainMenuPrincipal">
-    <section id="usuarioMenuPrincipal">
-      <div id="botonesMenu">
-        <a href="/perfil" class="botonMenu">
-          <ion-icon name="contact"></ion-icon> Usuario
-        </a>
+<body>
+  <main id="index-main">
+    <section id="menu">
+      <div class="menu-boton">
+        <ion-icon name="menu"></ion-icon>
+        <h2>Idionisio</h2>
+        <ion-icon name="contact"></ion-icon>
+        <div id="menu-links">
+          <a href="/inicio">Inicio</a>
+          <a href="/perfil">Mi perfil</a>
+          <a href="/cuestionarios/crear">Crear cuestionario</a>
+          <a href="/logout">Cerrar sesión</a>
+        </div>
       </div>
     </section>
-    <section id="opcionesMenuPrincipal">
-      <a href="/cuestionarios" class="botonMenu">Jugar</a>
-      <a href="/perfil/cuestionarios" class="botonMenu">Mis cuestionarios</a>
-      <div id="botonesConfigYAyuda">
-        <a href="/ayuda" class="botonMenu"><ion-icon name="help"></ion-icon></a>
-        <a href="#" class="botonMenu"><ion-icon name="settings"></ion-icon></a>
-      </div>
-    </section>
-  </main>
-
-<!--
-        <header>
-            <div id="usuario">
-            <p>usuario</p>
-            <button name="" id=""><ion-icon name="person"></ion-icon></button>
-            </div>
-
-        </header>
+    <div class="">
+      <h1>¡Bienvenido!</h1>
     </div>
-    <div id="cajaprincipal">
-        <div for="" id="">
-
-            <img src="img/images.jpg" alt=""><br>
-
-            <a href="menuBuscarCuestionario.php"><button name="" id="botones">Jugar</button></a>
-            <a href="formularioNuevoCuestionario.php"><button name="" id="botones">Mis cuestionarios</button></a>
-
-            <div id="botoncitos">
-                    <button name="" id="botoneschicos"><ion-icon name="help"></ion-icon></button>
-                    <button name="" id="botoneschicos"><ion-icon name="settings"></ion-icon></button>
-            </div>
+    <section id="index-buscador">
+      <form class="" action="/api/cuestionarios/buscar" method="post">
+        {{csrf_field()}}
+        <label for="cuestionarioBusqueda">Buscar</label>
+        <input type="text" name="cuestionarioBusqueda" value="" placeholder="Nombre / genero / descripción" id="cuestionarioBusqueda">
+        <button type="button" name="button" id="botonBuscar">
+          Buscar
+        </button>
+      </form>
+    </section>
+    <section id="index-resultados_container">
+      <p>Resultados: </p>
+      <section id="index-resultados">
+        <div id="columnaIzquierdaCuestionarios">
 
         </div>
-    </div> -->
+        <div id="columnaDerechaCuestionarios">
+
+        </div>
+      </section>
+    </section>
+  </main>
 </body>
 </html>

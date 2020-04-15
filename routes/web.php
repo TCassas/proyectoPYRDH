@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/inicio', function() { return view('inicio'); });
+Route::get('/inicio', "CuestionarioController@inicio");
 
 //
 
@@ -55,9 +55,18 @@ Route::get('/api/cuestionarios/{id}', 'CuestionarioController@getPreguntas');
 
 Route::post('/api/cuestionarios', 'PlayController@addPlay');
 
+Route::get('/api/cuestionarios', "CuestionarioController@allCuestionarios");
+
+Route::post('/api/cuestionarios/buscar', "CuestionarioController@buscarCuestionario");
+
+
 //
 
 Route::get('/ayuda', function() { return view('ayuda'); });
+
+Route::get('/logout', 'Auth\LoginController@logout', function () {
+    return abort(404);
+});
 
 Auth::routes();
 

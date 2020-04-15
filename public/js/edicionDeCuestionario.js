@@ -6,6 +6,15 @@ window.onload = function() {
       id = 1,
       i = 1;
 
+  let botonDesplegar = document.querySelector('#desplegarMenu'),
+      seccionDerecha = document.querySelector('#seccionDerechaCC');
+
+  botonDesplegar.onclick = function() {
+    seccionDerecha.classList.toggle("ocultarMenu");
+  }
+
+
+
   //A cada pregunta debo agregarle la logica necesaria para poder manipular la información recibida en el backend, por eso hago esto.
   //Para cada artiuclo (pregunta) le agrego un name que va variando de la siguiente forma:
   //respuestaN_I -- con N = numero de pregunta e I = numero de respuesta.
@@ -37,7 +46,7 @@ window.onload = function() {
     i = 1;
   });
 
-  let botonesBorrarExistentes = document.querySelectorAll('i');
+  let botonesBorrarExistentes = document.querySelectorAll('div.borrarPregunta i');
   botonesBorrarExistentes.forEach(function(boton) {
     boton.addEventListener("click", function() {
       setTimeout(function () {

@@ -11,20 +11,64 @@ use Auth;
 
 class cuestionarioController extends Controller
 {
+    public function inicio() {
+      $cuestionarios = Cuestionario::all();
+
+      return view('inicio')->with('cuestionarios', $cuestionarios);
+    }
+
     public function listar() {
       $cuestionarios = Cuestionario::all();
 
       return view('menuBuscarCuestionario')->with('cuestionarios', $cuestionarios);
     }
 
-    public function buscarCuestionario(Request $req) {
-      $cuestionarios = Cuestionario::where('titulo', 'like', '%' . $req['cuestionarioBusqueda'] . '%')->orWhere('descripcion', 'like', '%' . $req['cuestionarioBusqueda'] . '%')->get();
+    //Retorna todos los cuestionarios
+    public function allCuestionarios() {
+      $cuestionarios = Cuestionario::all();
+      $cuestionariosAll = [];
 
-      return view('menuBuscarCuestionario')->with('cuestionarios', $cuestionarios);
+      foreach ($cuestionarios as $cuestionario) {
+        $cuestionariosAll[] = [
+          "cuestionario_id" => $cuestionario->id,
+          "titulo" => $cuestionario->titulo,
+          "usuario_id" => $cuestionario->usuario->id,
+          "usuario_nombre" => $cuestionario->usuario->name,
+          "descripcion" => $cuestionario->descripcion,
+          "portada" => $cuestionario->portada,
+          "categoria" => $cuestionario->categoria->nombre
+        ];
+      }
+
+      return $cuestionariosAll;
     }
 
-    public function infoCuestionario($id) {
+    //Busca cuestionarios por titulo o descripcion
+    public function buscarCuestionario() {
+      $busqueda = json_decode($_POST["cuestionarioBusqueda"], true)["termino"];
+      $cuestionarios = Cuestionario::where('titulo', 'like', '%' . $busqueda . '%')->orWhere('descripcion', 'like', '%' . $busqueda . '%')->get();
+
+      $cuestionariosAll = [];
+
+      foreach ($cuestionarios as $cuestionario) {
+        $cuestionariosAll[] = [
+          "cuestionario_id" => $cuestionario->id,
+          "titulo" => $cuestionario->titulo,
+          "usuario_id" => $cuestionario->usuario->id,
+          "usuario_nombre" => $cuestionario->usuario->name,
+          "descripcion" => $cuestionario->descripcion,
+          "portada" => $cuestionario->portada,
+          "categoria" => $cuestionario->categoria->nombre
+        ];
+      }
+
+      return json_encode($cuestionariosAll);
+    }
+
+  public function infoCuestionario($id) {
       $cuestionario = Cuestionario::find($id);
+
+      dd($cuestionario);
       if(isset($cuestionario)) {
         return view('infoCuestionario')->with('cuestionario', $cuestionario);
       } else {
@@ -32,6 +76,7 @@ class cuestionarioController extends Controller
       }
     }
 
+    //Retorna las preguntas de X cuestionario
     public function getPreguntas($id) {
       $cuestionario = Cuestionario::find($id);
 
@@ -41,7 +86,7 @@ class cuestionarioController extends Controller
       return json_encode($preguntas);
     }
 
-    public function jugarCuestionario($id) {
+  public function jugarCuestionario($id) {
       return view('jugar');
     }
 

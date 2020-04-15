@@ -70,6 +70,7 @@
       </section>
     </section>
     <section id="seccionDerechaCC">
+      <span id="desplegarMenu"><i class="fas fa-angle-double-right"></i></span>
       <div id="formDerecho">
         <div class="grupoLI">
           <label for="">Nombre</label>
@@ -81,8 +82,7 @@
         </div>
         <div class="grupoLI">
           <label for="">Descripcion</label>
-          {{-- Agregar campo de descripcion --}}
-          <textarea name="descripcion" rows="8" cols="80"></textarea>
+          <textarea name="descripcion" rows="8" cols="80">{{$cuestionario->descripcion}}</textarea>
         </div>
         <div>
           <label for="categoria">Genero</label>

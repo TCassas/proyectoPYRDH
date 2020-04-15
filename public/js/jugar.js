@@ -6,6 +6,7 @@ window.onload = () => {
       seccionDerecha = document.querySelector('#seccionDerechaPreguntaTexto'),
       cronometro = document.querySelector('.cronometro p'),
       id = url[5];
+      console.log(id);
 
   fetch('/api/cuestionarios/' + id)
   .then((response) => {
@@ -28,7 +29,7 @@ window.onload = () => {
 
     //Seteo la primera pregunta y la variable donde se guardara la respuesta parcial del jugador
     setPregunta(preguntasArray[preguntaNumero]);
-    let respuestaFinal = "";
+    var respuestaFinal = "";
 
     let respuestas = document.querySelectorAll('.respuestaOpcion');
     efectosVisuales(respuestas, seccionRespuestas);
@@ -38,10 +39,8 @@ window.onload = () => {
       if(seJuega) {
         if(respuestaFinal == preguntasArray[preguntaNumero].respuestaCorrecta) {
           arrayAciertos.push(true);
-          console.log("Respuesta correcta!");
         } else {
           arrayAciertos.push(false);
-          console.log("Respuesta incorrecta :o");
         }
 
         tiempoTotal += time - parseInt(cronometro.innerText);
@@ -64,7 +63,7 @@ window.onload = () => {
           clearInterval(contador);
 
           let play = {
-            id: parseInt(id[0]),
+            id: parseInt(id),
             tiempo: tiempoTotal,
             aciertos: JSON.stringify(arrayAciertos)
           }
@@ -94,6 +93,103 @@ window.onload = () => {
         responder.click();
         tiempo = 25;
       }
+    }
+
+    //Dependiendo de tener 2 o 4 respuestas, crea en el dom tanto una pregunta de texto o de vof llamando a las correspondientes funciones ↓↓
+    function setPregunta(pregunta) {
+      if(Object.keys(pregunta).length == 5) {
+        setPreguntaTexto(pregunta);
+      } else {
+        setPreguntaVof(pregunta);
+      }
+    }
+
+    //Las siguientes 2 funciones, preparan el dom para cada pregunta, en cuanto a las preguntas, cada vez que se llama borra las que había anteriormente
+    function setPreguntaTexto(pregunta) {
+      let orden = shuffle([0, 1, 2, 3]);
+
+      consigna.innerText = pregunta.consigna;
+
+      seccionRespuestas.innerHTML = ``;
+
+      for(let i = 0; i < 4; i++) {
+        switch (orden[i]) {
+          case 0:
+            seccionRespuestas.innerHTML += `
+            <article class="respuestaOpcion">
+              <p>${pregunta.respuestaCorrecta}</p>
+            </article>
+            `
+            break;
+          case 1:
+            seccionRespuestas.innerHTML += `
+            <article class="respuestaOpcion">
+              <p>${pregunta.segundaRespuesta}</p>
+            </article>
+            `
+            break;
+          case 2:
+            seccionRespuestas.innerHTML += `
+            <article class="respuestaOpcion">
+              <p>${pregunta.terceraRespuesta}</p>
+            </article>
+            `
+            break;
+          case 3:
+            seccionRespuestas.innerHTML += `
+            <article class="respuestaOpcion">
+              <p>${pregunta.cuartaRespuesta}</p>
+            </article>
+            `
+            break;
+        }
+      }
+    }
+    function setPreguntaVof(pregunta) {
+      consigna.innerText = pregunta.consigna;
+
+      seccionRespuestas.innerHTML = ``;
+
+      seccionRespuestas.innerHTML += `
+      <article class="respuestaOpcion">
+        <p>Verdadero</p>
+      </article>
+      <article class="respuestaOpcion">
+        <p>Falso</p>
+      </article>
+      `
+    }
+
+    //Agregar efectos visuales a las respuestas, y lo de "seccion derecha" es para que al clickear fuera de una pregunta esta se desmarque
+    function efectosVisuales(respuestas, seccionDerecha) {
+      //Poder seleccionar o deseleccionar una respuesta
+      for(let respuesta of respuestas) {
+        respuesta.addEventListener('click', (e) => {
+
+          for(let respuesta of respuestas) {
+            if(respuesta.classList.contains("opcionSeleccionada")) {
+              respuesta.classList.remove("opcionSeleccionada");
+            }
+          }
+
+          respuesta.classList.add("opcionSeleccionada");
+
+          e.stopPropagation();
+
+          respuestaFinal = respuesta.children[0].innerText;
+
+        });
+      }
+
+      //Si se presiona fuera de las preguntas teniendo una seleccionada, se deselecciona
+      seccionDerecha.addEventListener('click', (e) => {
+        for(let respuesta of respuestas) {
+          if(respuesta.classList.contains("opcionSeleccionada")) {
+            respuesta.classList.remove("opcionSeleccionada");
+            respuestaFinal = "";
+          }
+        }
+      });
     }
   })
   .catch((err) => {
@@ -138,102 +234,5 @@ window.onload = () => {
     }
 
     return preguntas;
-  }
-
-  //Dependiendo de tener 2 o 4 respuestas, crea en el dom tanto una pregunta de texto o de vof llamando a las correspondientes funciones ↓↓
-  function setPregunta(pregunta) {
-    if(Object.keys(pregunta).length == 5) {
-      setPreguntaTexto(pregunta);
-    } else {
-      setPreguntaVof(pregunta);
-    }
-  }
-
-  //Las siguientes 2 funciones, preparan el dom para cada pregunta, en cuanto a las preguntas, cada vez que se llama borra las que había anteriormente
-  function setPreguntaTexto(pregunta) {
-    let orden = shuffle([0, 1, 2, 3]);
-
-    consigna.innerText = pregunta.consigna;
-
-    seccionRespuestas.innerHTML = ``;
-
-    for(let i = 0; i < 4; i++) {
-      switch (orden[i]) {
-        case 0:
-          seccionRespuestas.innerHTML += `
-          <article class="respuestaOpcion">
-            <p>${pregunta.respuestaCorrecta}</p>
-          </article>
-          `
-          break;
-        case 1:
-          seccionRespuestas.innerHTML += `
-          <article class="respuestaOpcion">
-            <p>${pregunta.segundaRespuesta}</p>
-          </article>
-          `
-          break;
-        case 2:
-          seccionRespuestas.innerHTML += `
-          <article class="respuestaOpcion">
-            <p>${pregunta.terceraRespuesta}</p>
-          </article>
-          `
-          break;
-        case 3:
-          seccionRespuestas.innerHTML += `
-          <article class="respuestaOpcion">
-            <p>${pregunta.cuartaRespuesta}</p>
-          </article>
-          `
-          break;
-      }
-    }
-  }
-  function setPreguntaVof(pregunta) {
-    console.log(pregunta);
-
-    consigna.innerText = pregunta.consigna;
-
-    seccionRespuestas.innerHTML = ``;
-
-    seccionRespuestas.innerHTML += `
-    <article class="respuestaOpcion">
-      <p>Verdadero</p>
-    </article>
-    <article class="respuestaOpcion">
-      <p>Falso</p>
-    </article>
-    `
-  }
-
-  //Agregar efectos visuales a las respuestas, y lo de "seccion derecha" es para que al clickear fuera de una pregunta esta se desmarque
-  function efectosVisuales(respuestas, seccionDerecha) {
-    //Poder seleccionar o deseleccionar una respuesta
-    for(let respuesta of respuestas) {
-      respuesta.addEventListener('click', (e) => {
-        respuestaFinal = respuesta.children[0].innerText;
-
-        for(let respuesta of respuestas) {
-          if(respuesta.classList.contains("opcionSeleccionada")) {
-            respuesta.classList.remove("opcionSeleccionada");
-          }
-        }
-
-        respuesta.classList.add("opcionSeleccionada");
-
-        e.stopPropagation();
-      });
-    }
-
-    //Si se presiona fuera de las preguntas teniendo una seleccionada, se deselecciona
-    seccionDerecha.addEventListener('click', (e) => {
-      for(let respuesta of respuestas) {
-        if(respuesta.classList.contains("opcionSeleccionada")) {
-          respuesta.classList.remove("opcionSeleccionada");
-          respuestaFinal = "";
-        }
-      }
-    });
   }
 }
