@@ -1,4 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `proyectopyrdh` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+CREATE DATABASE  IF NOT EXISTS `proyectopyrdh` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
 USE `proyectopyrdh`;
 -- MySQL dump 10.13  Distrib 8.0.15, for Win64 (x86_64)
 --
@@ -28,7 +28,7 @@ CREATE TABLE `categorias` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -50,19 +50,19 @@ DROP TABLE IF EXISTS `cuestionarios`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `cuestionarios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `usuario_id` int(11) unsigned NOT NULL,
+  `usuario_id` bigint(20) unsigned DEFAULT NULL,
   `categoria_id` int(11) NOT NULL,
   `titulo` varchar(70) DEFAULT NULL,
   `portada` varchar(145) DEFAULT NULL,
   `fecha_de_creacion` date DEFAULT NULL,
   `puntuacion` int(11) DEFAULT NULL,
-  `cantidad_preguntas` varchar(45) DEFAULT NULL,
+  `descripcion` varchar(150) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `usuario_id` (`usuario_id`),
   KEY `categoria_id` (`categoria_id`),
   CONSTRAINT `cuestionarios_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `users` (`id`),
   CONSTRAINT `cuestionarios_ibfk_2` FOREIGN KEY (`categoria_id`) REFERENCES `categorias` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,7 +71,7 @@ CREATE TABLE `cuestionarios` (
 
 LOCK TABLES `cuestionarios` WRITE;
 /*!40000 ALTER TABLE `cuestionarios` DISABLE KEYS */;
-INSERT INTO `cuestionarios` VALUES (3,NULL,1,'Cuestionario test','imagen predefinida','2020-01-30',0,'1'),(4,NULL,6,'cuestionario test 2','imagen predefinida','2020-01-30',0,'2'),(6,NULL,5,'Cuestionario :O','imagen predefinida','2020-01-30',0,'4');
+INSERT INTO `cuestionarios` VALUES (14,1,7,'Matematicas','7ZE1ynhVGjvxa1myikGD6SU29uvF90Q3liVy5ot5.jpeg',NULL,NULL,'Sin descripción'),(16,5,6,'Lorem','imagen predefinida',NULL,NULL,'Sin descripción'),(17,1,8,'Cuestionario de prueba','jyFLiRCMW5974ruF902yyKkRqQCXKNruNqMHT99z.png',NULL,NULL,'Sin descripción');
 /*!40000 ALTER TABLE `cuestionarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -87,7 +87,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,7 +96,7 @@ CREATE TABLE `migrations` (
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_resets_table',1);
+INSERT INTO `migrations` VALUES (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_resets_table',1),(3,'2020_02_20_004550_completar_tabla_users',2),(6,'2020_02_22_235641_cambio_nombre_y_agregar_descripcion',3),(7,'2020_02_24_231113_columna_descripcion_y_drop_cantidad_preguntas',3),(8,'2020_04_02_075405_create_plays_table',4),(10,'2020_04_04_091334_agregar_columna_tiempo',5);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -125,6 +125,39 @@ LOCK TABLES `password_resets` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `plays`
+--
+
+DROP TABLE IF EXISTS `plays`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `plays` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `usuario_id` bigint(20) unsigned NOT NULL,
+  `cuestionario_id` int(11) NOT NULL,
+  `respuestas` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tiempo` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `plays_usuario_id_foreign` (`usuario_id`),
+  KEY `plays_cuestionario_id_foreign` (`cuestionario_id`),
+  CONSTRAINT `plays_cuestionario_id_foreign` FOREIGN KEY (`cuestionario_id`) REFERENCES `cuestionarios` (`id`),
+  CONSTRAINT `plays_usuario_id_foreign` FOREIGN KEY (`usuario_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `plays`
+--
+
+LOCK TABLES `plays` WRITE;
+/*!40000 ALTER TABLE `plays` DISABLE KEYS */;
+INSERT INTO `plays` VALUES (17,NULL,NULL,1,14,'[false,true,true,false,true]',73);
+/*!40000 ALTER TABLE `plays` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `preguntas4respuestas`
 --
 
@@ -134,15 +167,15 @@ DROP TABLE IF EXISTS `preguntas4respuestas`;
 CREATE TABLE `preguntas4respuestas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cuestionario_id` int(11) DEFAULT NULL,
-  `consigna` varchar(45) DEFAULT NULL,
+  `consigna` varchar(85) DEFAULT NULL,
   `respuesta_correcta` varchar(45) DEFAULT NULL,
   `segunda_respuesta` varchar(45) DEFAULT NULL,
   `tercera_respuesta` varchar(45) DEFAULT NULL,
-  `cuarta_respeusta` varchar(45) DEFAULT NULL,
+  `cuarta_respuesta` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `cuestionario_id` (`cuestionario_id`),
   CONSTRAINT `preguntas4respuestas_ibfk_1` FOREIGN KEY (`cuestionario_id`) REFERENCES `cuestionarios` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -151,7 +184,7 @@ CREATE TABLE `preguntas4respuestas` (
 
 LOCK TABLES `preguntas4respuestas` WRITE;
 /*!40000 ALTER TABLE `preguntas4respuestas` DISABLE KEYS */;
-INSERT INTO `preguntas4respuestas` VALUES (1,4,'pregunta 1','1','2','3','4'),(2,6,'Pregunta 1','respuesta 1','respuesta 2','respuesta 3','respuesta 4'),(3,6,'PreguntaAa','res1','res2','res3','res4');
+INSERT INTO `preguntas4respuestas` VALUES (27,14,'2 + 2 =  ¿?','4','3','1','pez'),(28,14,'(A + B)² = A² + B²',NULL,NULL,NULL,NULL),(29,14,'La potencia no es distributiva en...','las sumas','los cocientes','la multiplicacion','ninguna de las anteriores'),(33,16,'Lorem','ipsum','ispum','sipum','muspi'),(34,17,'Pregunta de prueba 1','a','b','c','d'),(35,17,'jadns','dasjn','dsanj','ajsdn','asd');
 /*!40000 ALTER TABLE `preguntas4respuestas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -165,12 +198,12 @@ DROP TABLE IF EXISTS `preguntasvof`;
 CREATE TABLE `preguntasvof` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cuestionario_id` int(11) DEFAULT NULL,
-  `consigna` varchar(45) DEFAULT NULL,
+  `consigna` varchar(85) DEFAULT NULL,
   `respuesta_correcta` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `cuestionario_id` (`cuestionario_id`),
   CONSTRAINT `preguntasvof_ibfk_1` FOREIGN KEY (`cuestionario_id`) REFERENCES `cuestionarios` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -179,7 +212,7 @@ CREATE TABLE `preguntasvof` (
 
 LOCK TABLES `preguntasvof` WRITE;
 /*!40000 ALTER TABLE `preguntasvof` DISABLE KEYS */;
-INSERT INTO `preguntasvof` VALUES (1,4,'pregunta 2',1),(2,6,'Si o no',1),(3,6,'xD?',1);
+INSERT INTO `preguntasvof` VALUES (7,14,'(2)² + (-2²) = 4',0),(8,14,'(A + B)² es distinto de A² + B²',1);
 /*!40000 ALTER TABLE `preguntasvof` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -191,17 +224,18 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `users` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  `foto_perfil` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -210,7 +244,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'TCassas','tomascassas@gmail.com',NULL,'$2y$10$lf0WTUu.yMCqy5htVKnbqOSqqp8zwQN/kHNe2jNnr0bvvJe.O6uWK',NULL,'2020-02-18 04:10:42','2020-02-18 04:10:42');
+INSERT INTO `users` VALUES (1,'TCassas','tomascassas@gmail.com',NULL,'$2y$10$lf0WTUu.yMCqy5htVKnbqOSqqp8zwQN/kHNe2jNnr0bvvJe.O6uWK',NULL,'2020-02-18 04:10:42','2020-04-15 23:35:51','jGNHfYJ2Mv7WhGLPTyMNKnfTfRCBVlVbN2PtpqFP.jpeg'),(5,'Fulano','cosmefulano@gmail.com',NULL,'$2y$10$ToTySRFiONHuR7eIv2owUu1g9Z5qk6gvYRQAfVgj7gW0mr.qEG9Zq',NULL,'2020-04-16 01:25:12','2020-04-16 01:25:12','imagen predefinida');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -230,7 +264,7 @@ CREATE TABLE `usuarios` (
   `img` varchar(145) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `mail_UNIQUE` (`mail`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -252,4 +286,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-02-18  2:58:04
+-- Dump completed on 2020-05-06 22:00:40
