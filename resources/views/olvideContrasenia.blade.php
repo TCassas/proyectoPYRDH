@@ -10,39 +10,34 @@
   <link rel="stylesheet" href="{{asset('css/styles.css')}}">
   <title>Modifica tu información de usuario</title>
 </head>
-<body background="/storage/bg-body.png">
+<body background="imgs/bg-body.png">
   <main id="mainInfoUsuario">
     <section id="cartaUsuarioEditar">
       <section id="infoUsuarioEditar">
-        <a href="/perfil/{{$usuario->id}}" class="botonMenu">
+        <a href="index.php" class="botonMenu">
           <ion-icon name="arrow-round-back"></ion-icon> Regresar
         </a>
-        <figure id="fotoUsuarioPerfil">
-          @if ($usuario->foto_perfil != "imagen predefinida")
-            <img src="/storage/usuarioPerfil/{{$usuario->foto_perfil}}" alt="">
-          @else
-            <img src="/imgs/fondoPunteado.jpg" alt="">
-          @endif
-        </figure>
         <article class="infoUsuarioPerfil">
 
-          <form class="" action="/perfil/editar" method="post" enctype="multipart/form-data">
+          <form class="" action="/perfil/passwordreset" method="post">
             {{csrf_field()}}
             <div class="grupoLIYEditar">
-              <label for="nombre">Nombre de usuario:</label>
-              <input type="text" name="nombre" value="{{$usuario->name}}" required>
+              <label for="">Email</label>
+              <input type="email" name="correo" value="">
+              <small></small>
             </div>
 
             <div class="grupoLIYEditar">
-              <label for="correo">Correo Electronico:</label>
-              <input type="email" name="correo" value="{{$usuario->email}}" required>
+              <label for="">Nueva contraseña</label>
+              <input type="password" name="newPassword" value="">
+              <small></small>
             </div>
 
             <div class="grupoLIYEditar">
-              <label for="fotoPerfil">Subir una foto de perfil</label>
-              <input type="file" name="fotoPerfil" value="">
+              <label for="">Confirmar contraseña</label>
+              <input type="password" name="newPassword2" value="">
+              <small></small>
             </div>
-
             <button type="submit" name="button" class="enviarFormulario">Enviar</button>
           </form>
 

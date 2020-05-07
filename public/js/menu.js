@@ -57,18 +57,18 @@ window.onload = function() {
         <article class="cuestionario">
           <div class="cuestionario-info">
             <h4>${cuestionario.titulo}</h4>
-            <p>By: <a href="#">${cuestionario.usuario_nombre}</a></p>
+            <p>By: <a href="/perfil/${cuestionario.usuario_id}">${cuestionario.usuario_nombre}</a></p>
             <p class="descripcion">Descripción: <span>${cuestionario.descripcion}</span></p>
             <div class="cuestionario-info_jugable">
-              <p><ion-icon name="play-circle"></ion-icon> 100</p>
-              <p><ion-icon name="heart"></ion-icon> 100</p>
+              <p><ion-icon name="play-circle"></ion-icon> ${cuestionario.plays}</p>
+              <a href="/cuestionarios/${cuestionario.cuestionario_id}">Mas info</a>
             </div>
           </div>
           <div class="cuestionario-actions">
             <div class="cuestionario-imagen" style="background-image: url(${portada}); background-size: cover;">
 
             </div>
-            <a href="/cuestionarios/jugar/${cuestionario.cuestionario_id}">JUGAR<ion-icon name="play-circle"></ion-icon></a>
+            <a href="/cuestionarios/jugar/${cuestionario.cuestionario_id}">JUGAR</ion-icon></a>
           </div>
         </article>
         `;
@@ -77,18 +77,18 @@ window.onload = function() {
         <article class="cuestionario">
           <div class="cuestionario-info">
             <h4>${cuestionario.titulo}</h4>
-            <p>By: <a href="#">${cuestionario.usuario_nombre}</a></p>
+            <p>By: <a href="/perfil/${cuestionario.usuario_id}">${cuestionario.usuario_nombre}</a></p>
             <p class="descripcion">Descripción: <span>${cuestionario.descripcion}</span></p>
             <div class="cuestionario-info_jugable">
-              <p><ion-icon name="play-circle"></ion-icon> 100</p>
-              <p><ion-icon name="heart"></ion-icon> 100</p>
+              <p><ion-icon name="play-circle"></ion-icon> ${cuestionario.plays}</p>
+              <a href="/cuestionarios/${cuestionario.cuestionario_id}">Mas info</a>
             </div>
           </div>
           <div class="cuestionario-actions">
             <div class="cuestionario-imagen" style="background-image: url(${portada}); background-size: cover;">
 
             </div>
-            <a href="/cuestionarios/jugar/${cuestionario.cuestionario_id}">JUGAR<ion-icon name="play-circle"></ion-icon></a>
+            <a href="/cuestionarios/jugar/${cuestionario.cuestionario_id}">JUGAR</ion-icon></a>
           </div>
         </article>
         `;
@@ -103,7 +103,7 @@ window.onload = function() {
         e.stopPropagation();
         allCuestionarios[i].classList.toggle("cuestionario-desplegado");
         allCuestionarios[i].children[0].classList.toggle("cuestionario-info_desplegada");
-        allCuestionarios[i].children[0].children[0].classList.toggle("marginh4");
+        allCuestionarios[i].children[0].children[0].classList.toggle("cuestionario-titulo_desplegada");
         allCuestionarios[i].children[0].children[1].classList.toggle("marginAutor");
         allCuestionarios[i].children[0].children[2].classList.toggle("descripcion-desplegada");
         allCuestionarios[i].children[0].children[3].classList.toggle("cuestionario-info_jugable-desplegada");

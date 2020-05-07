@@ -40,4 +40,8 @@ class User extends Authenticatable
     public function cuestionarios() {
       return $this->hasMany('App\Cuestionario', 'usuario_id');
     }
+
+    public function plays() {
+      return $this->hasMany("App\Play", "usuario_id");
+    }
 }

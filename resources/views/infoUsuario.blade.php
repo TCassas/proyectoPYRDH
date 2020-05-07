@@ -25,14 +25,14 @@
           <p>Nombre de usuario: {{$usuario->name}}</p>
           <p>Correo electronico: {{$usuario->email}}</p>
           <p>Cantidad de cuestionarios creados: {{count($usuario->cuestionarios)}}</p>
-          <p>Play count: x</p>
+          <p>Play count: {{count($usuario->plays)}}</p>
         </article>
       </section>
       <section id="configuracionUsuario">
         <a href="/inicio" class="botonMenu">Regresar</a>
         <a href="/perfil/editar" class="botonMenu">Editar información</a>
-        <a href="" class="botonMenu">Cambiar contraseña</a>
-        <a href="cerrarSesion.php" class="botonMenu">Cerrar sesión</a>
+        <a href="/perfil/passwordreset" class="botonMenu">Cambiar contraseña</a>
+        <a href="/logout" class="botonMenu">Cerrar sesión</a>
       </section>
     </section>
   </main>

@@ -5,8 +5,8 @@ window.onload = () => {
       seccionRespuestas = document.querySelector('#opciones'),
       seccionDerecha = document.querySelector('#seccionDerechaPreguntaTexto'),
       cronometro = document.querySelector('.cronometro p'),
+      errores = document.querySelector(".errorCruz span"),
       id = url[5];
-      console.log(id);
 
   fetch('/api/cuestionarios/' + id)
   .then((response) => {
@@ -18,7 +18,7 @@ window.onload = () => {
     //Desordeno las preguntas en un arreglo de objetos literales, mas facil de manipular. Creo las variables necesarias para la logica del juego
     let preguntasArray = ordenarPreguntas(preguntas),
         preguntaNumero = 0,
-        aciertos = 0,
+        erroresContador = 0,
         tiempo = 25,
         tiempoTotal = 0,
         contador = setInterval(iniciarCronometro, 1000),
@@ -41,6 +41,8 @@ window.onload = () => {
           arrayAciertos.push(true);
         } else {
           arrayAciertos.push(false);
+          erroresContador++;
+          errores.innerText = erroresContador;
         }
 
         tiempoTotal += time - parseInt(cronometro.innerText);
@@ -78,6 +80,8 @@ window.onload = () => {
               'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
             }
           });
+
+          window.location.replace("/cuestionarios/" + id);
         }
 
         tiempo = 25;

@@ -25,4 +25,8 @@ class Cuestionario extends Model
   public function preguntasvof() {
     return $this->hasMany("App\PreguntaVOF", "cuestionario_id");
   }
+
+  public function plays() {
+    return $this->hasMany("App\Play", "cuestionario_id");
+  }
 }

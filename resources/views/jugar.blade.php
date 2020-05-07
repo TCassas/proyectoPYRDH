@@ -22,29 +22,7 @@
       </div>
       <div class="contadorErrores">
         <div class="errorCruz">
-          <ion-icon name="checkmark-circle"></ion-icon>
-        </div>
-        <div class="errorCruz">
-          <ion-icon name="close-circle"></ion-icon>
-        </div>
-        <div class="errorCruz">
-          <ion-icon name="close-circle"></ion-icon>
-        </div>
-      </div>
-      <div class="comodinesPreguntaTexto">
-        <div>
-          <h5>Comodines</h5>
-        </div>
-        <div class="seccionComodines">
-          <button class="comodin1">
-            <ion-icon name="pie"></ion-icon>
-          </button>
-          <button class="comodin2">
-            <ion-icon name="people"></ion-icon>
-          </button>
-          <button class="comodin3">
-            <ion-icon name="bulb"></ion-icon>
-          </button>
+          <p>Errores: <span>0</span> </p>
         </div>
       </div>
     </section>
@@ -58,7 +36,7 @@
         {{-- <section id="cantidadPreguntas">
 
         </section> --}}
-        <button type="button" name="button"  id="responder">Enviar</button>
+        <button type="button" name="button"  id="responder" class="botonMenu">Enviar</button>
       </form>
     </section>
   </main>

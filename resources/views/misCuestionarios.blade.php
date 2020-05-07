@@ -34,6 +34,9 @@
     <section id="cuestionariosLista">
 
       <!-- Input busqueda de cuestionarnios -->
+      @if ($errors->any())
+        <h2>{{ $errors->first() }}</h2>
+      @endif
       <div class="unasRespuestas" id="inputBuscarCuestionario">
         <form class="" action="/cuestionarios/buscar" method="GET">
           <input type="text" name="cuestionarioBusqueda" value="" placeholder="Buscar">

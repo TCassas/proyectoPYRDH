@@ -23,13 +23,20 @@ Route::get('/perfil', 'UsuarioController@infoUsuario');
 
 Route::get('/perfil/editar', 'UsuarioController@editarUsuarioFormulario');
 
-Route::post('/perfil/editar', 'UsuarioController@editarUsuario');
+Route::get('/perfil/passwordreset', 'UsuarioController@editarContraseniaForm');
 
-//
+Route::post('/perfil/passwordreset', 'UsuarioController@editarContrasenia');
+
+Route::post('/perfil/editar', 'UsuarioController@editarUsuario');
 
 Route::get('/perfil/cuestionarios', 'UsuarioController@listarCuestionarios');
 
 Route::get('/perfil/cuestionarios/{id}', 'CuestionarioController@infoPerfilCuestionario');
+
+Route::get('/perfil/{id}', 'UsuarioController@buscarPerfil');
+
+//
+
 
 Route::get('/cuestionarios', 'CuestionarioController@listar');
 
@@ -48,6 +55,10 @@ Route::get('/cuestionarios/editar/{id}', 'CuestionarioController@mostrarCuestion
 Route::put('/cuestionarios/editar/{id}', 'CuestionarioController@actualizarCuestionario');
 
 Route::delete('/cuestionarios/borrar/{id}', 'CuestionarioController@borrarCuestionario');
+
+Route::get('/loginNuevo', function() {
+  return view("loginNuevo");
+});
 
 //
 

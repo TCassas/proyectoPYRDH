@@ -14,11 +14,11 @@
     <section id="menu">
       <div class="menu-boton">
         <ion-icon name="menu"></ion-icon>
-        <h2>Idionisio</h2>
+        <h2>{{$nombre}}</h2>
         <ion-icon name="contact"></ion-icon>
         <div id="menu-links">
           <a href="/inicio">Inicio</a>
-          <a href="/perfil">Mi perfil</a>
+          <a href="/perfil/{{$id}}">Mi perfil</a>
           <a href="/cuestionarios/crear">Crear cuestionario</a>
           <a href="/logout">Cerrar sesión</a>
         </div>
@@ -31,7 +31,7 @@
       <form class="" action="/api/cuestionarios/buscar" method="post">
         {{csrf_field()}}
         <label for="cuestionarioBusqueda">Buscar</label>
-        <input type="text" name="cuestionarioBusqueda" value="" placeholder="Nombre / genero / descripción" id="cuestionarioBusqueda">
+        <input type="text" name="cuestionarioBusqueda" value="" placeholder="Nombre / descripción" id="cuestionarioBusqueda">
         <button type="button" name="button" id="botonBuscar">
           Buscar
         </button>

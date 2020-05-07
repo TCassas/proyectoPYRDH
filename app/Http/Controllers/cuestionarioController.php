@@ -13,8 +13,9 @@ class cuestionarioController extends Controller
 {
     public function inicio() {
       $cuestionarios = Cuestionario::all();
+      $usuarioLog = Auth::user();
 
-      return view('inicio')->with('cuestionarios', $cuestionarios);
+      return view('inicio')->with('cuestionarios', $cuestionarios)->with('id', $usuarioLog->id)->with('nombre', $usuarioLog->name);
     }
 
     public function listar() {
@@ -36,7 +37,8 @@ class cuestionarioController extends Controller
           "usuario_nombre" => $cuestionario->usuario->name,
           "descripcion" => $cuestionario->descripcion,
           "portada" => $cuestionario->portada,
-          "categoria" => $cuestionario->categoria->nombre
+          "categoria" => $cuestionario->categoria->nombre,
+          "plays" => count($cuestionario->plays)
         ];
       }
 
@@ -65,12 +67,33 @@ class cuestionarioController extends Controller
       return json_encode($cuestionariosAll);
     }
 
+    public function perfilCuestionarios() {
+      $busqueda = json_decode($_POST["cuestionarioBusqueda"], true)["id"];
+      $cuestionarios = Cuestionario::where('usuario_id', 'like',  $busqueda)->orWhere('titulo', 'like', '%' . $busqueda . '%')->orWhere('descripcion', 'like', '%' . $busqueda . '%')->get();
+      $cuestionarios = Cuestionario::where('usuario_id', 'like',  $busqueda)->get();
+
+      $cuestionariosAll = [];
+
+      foreach ($cuestionarios as $cuestionario) {
+        $cuestionariosAll[] = [
+          "cuestionario_id" => $cuestionario->id,
+          "titulo" => $cuestionario->titulo,
+          "usuario_id" => $cuestionario->usuario->id,
+          "usuario_nombre" => $cuestionario->usuario->name,
+          "descripcion" => $cuestionario->descripcion,
+          "portada" => $cuestionario->portada,
+          "categoria" => $cuestionario->categoria->nombre
+        ];
+      }
+
+      return json_encode($cuestionariosAll);
+    }
+
   public function infoCuestionario($id) {
       $cuestionario = Cuestionario::find($id);
 
-      dd($cuestionario);
       if(isset($cuestionario)) {
-        return view('infoCuestionario')->with('cuestionario', $cuestionario);
+        return view('infoCuestionario')->with('cuestionario', $cuestionario)->with('id', $id);
       } else {
         return redirect('/cuestionarios');
       }
@@ -119,9 +142,19 @@ class cuestionarioController extends Controller
 
       $cuestionarioActualizado = $this->acondicionarReq($req->all());
 
+      if(count($cuestionarioActualizado["preguntas"]) == 0) {
+        return redirect('/perfil/cuestionarios')->withErrors("No se puede crear un cuestionario sin preguntas");
+      }
+
       $cuestionario->usuario_id = $usuarioLog->id;
       $cuestionario->titulo = $cuestionarioActualizado["titulo"];
-      $cuestionario->descripcion = $cuestionarioActualizado["descripcion"];
+
+      if(empty($cuestionarioActualizado["descripcion"])) {
+        $cuestionario->descripcion = $cuestionarioActualizado["descripcion"];
+      } else {
+        $cuestionario->descripcion = "Sin descripción";
+      }
+
       $cuestionario->categoria_id = $cuestionarioActualizado["categoria_id"];
 
       if(!empty($req->file("img"))) {
@@ -129,6 +162,8 @@ class cuestionarioController extends Controller
         $imagenPortada = basename($path);
 
         $cuestionario->portada = $imagenPortada;
+      } else {
+        $cuestionario->portada = "imagen predefinida";
       }
 
       $cuestionario->save();
@@ -156,7 +191,7 @@ class cuestionarioController extends Controller
         }
       }
 
-      return redirect("/perfil/cuestionarios");
+      return redirect("/perfil/" . $usuarioLog->id);
     }
 
     public function actualizarCuestionario(Request $req, $id) {
@@ -174,80 +209,82 @@ class cuestionarioController extends Controller
       $cuestionario->descripcion = $cuestionarioActualizado["descripcion"];
       $cuestionario->categoria_id = $cuestionarioActualizado["categoria_id"];
 
-      if(!empty($req->file("img"))) {
-        unlink("storage/cuestionariosImgs/$cuestionario->portada");
-        $path = $req->file("img")->store("public/cuestionariosImgs");
-        $imagenPortada = basename($path);
+      if(count($cuestionarioActualizado["preguntas"]) != 0) {
+        if(!empty($req->file("img"))) {
+          unlink("storage/cuestionariosImgs/$cuestionario->portada");
+          $path = $req->file("img")->store("public/cuestionariosImgs");
+          $imagenPortada = basename($path);
 
-        $cuestionario->portada = $imagenPortada;
-      }  else {
+          $cuestionario->portada = $imagenPortada;
+        }  else {
 
-      }
-
-      foreach ($cuestionarioActualizado["preguntas"] as $pregunta) {
-        if($pregunta["tipo"] === 't') {
-          $nuevaPregunta = Pregunta4Respuestas::find($pregunta["id"]);
-
-          if(isset($nuevaPregunta) && $pregunta["consigna"] === "borrar") {
-            $nuevaPregunta->delete();
-
-            continue;
-          }
-
-          if(isset($nuevaPregunta)) {
-            echo "Existe texto<br>";
-            $nuevaPregunta->consigna = $pregunta["consigna"];
-            $nuevaPregunta->respuesta_correcta = $pregunta["respuestas"][0];
-            $nuevaPregunta->segunda_respuesta = $pregunta["respuestas"][1];
-            $nuevaPregunta->tercera_respuesta = $pregunta["respuestas"][2];
-            $nuevaPregunta->cuarta_respuesta = $pregunta["respuestas"][3];
-
-            $nuevaPregunta->save();
-          } else {
-            var_dump($pregunta);
-            echo "No existe texto<br>";
-            $nuevaPregunta = New Pregunta4Respuestas;
-            $nuevaPregunta->cuestionario_id = $id;
-            $nuevaPregunta->consigna = $pregunta["consigna"];
-            $nuevaPregunta->respuesta_correcta = $pregunta["respuestas"][0];
-            $nuevaPregunta->segunda_respuesta = $pregunta["respuestas"][1];
-            $nuevaPregunta->tercera_respuesta = $pregunta["respuestas"][2];
-            $nuevaPregunta->cuarta_respuesta = $pregunta["respuestas"][3];
-
-            $nuevaPregunta->save();
-          }
-        } else {
-          $nuevaPregunta = PreguntaVOF::find($pregunta["id"]);
-
-          if(isset($nuevaPregunta) && $pregunta["consigna"] === "borrar") {
-            $nuevaPregunta->delete();
-
-            continue;
-          }
-
-          if(isset($nuevaPregunta)) {
-            echo "Existe vof<br>";
-            $nuevaPregunta->consigna = $pregunta["consigna"];
-            $nuevaPregunta->respuesta_correcta = $pregunta["respuestas"][0];
-
-            $nuevaPregunta->save();
-          } else {
-            echo "No existe vof<br>";
-            $nuevaPregunta = New PreguntaVOF;
-            $nuevaPregunta->cuestionario_id = $id;
-            $nuevaPregunta->consigna = $pregunta["consigna"];
-            $nuevaPregunta->respuesta_correcta = $pregunta["respuestas"][0];
-
-
-            $nuevaPregunta->save();
-          }
         }
 
+        foreach ($cuestionarioActualizado["preguntas"] as $pregunta) {
+          if($pregunta["tipo"] === 't') {
+            $nuevaPregunta = Pregunta4Respuestas::find($pregunta["id"]);
+
+            if(isset($nuevaPregunta) && $pregunta["consigna"] === "borrar") {
+              $nuevaPregunta->delete();
+
+              continue;
+            }
+
+            if(isset($nuevaPregunta)) {
+              echo "Existe texto<br>";
+              $nuevaPregunta->consigna = $pregunta["consigna"];
+              $nuevaPregunta->respuesta_correcta = $pregunta["respuestas"][0];
+              $nuevaPregunta->segunda_respuesta = $pregunta["respuestas"][1];
+              $nuevaPregunta->tercera_respuesta = $pregunta["respuestas"][2];
+              $nuevaPregunta->cuarta_respuesta = $pregunta["respuestas"][3];
+
+              $nuevaPregunta->save();
+            } else {
+              var_dump($pregunta);
+              echo "No existe texto<br>";
+              $nuevaPregunta = New Pregunta4Respuestas;
+              $nuevaPregunta->cuestionario_id = $id;
+              $nuevaPregunta->consigna = $pregunta["consigna"];
+              $nuevaPregunta->respuesta_correcta = $pregunta["respuestas"][0];
+              $nuevaPregunta->segunda_respuesta = $pregunta["respuestas"][1];
+              $nuevaPregunta->tercera_respuesta = $pregunta["respuestas"][2];
+              $nuevaPregunta->cuarta_respuesta = $pregunta["respuestas"][3];
+
+              $nuevaPregunta->save();
+            }
+          } else {
+            $nuevaPregunta = PreguntaVOF::find($pregunta["id"]);
+
+            if(isset($nuevaPregunta) && $pregunta["consigna"] === "borrar") {
+              $nuevaPregunta->delete();
+
+              continue;
+            }
+
+            if(isset($nuevaPregunta)) {
+              echo "Existe vof<br>";
+              $nuevaPregunta->consigna = $pregunta["consigna"];
+              $nuevaPregunta->respuesta_correcta = $pregunta["respuestas"][0];
+
+              $nuevaPregunta->save();
+            } else {
+              echo "No existe vof<br>";
+              $nuevaPregunta = New PreguntaVOF;
+              $nuevaPregunta->cuestionario_id = $id;
+              $nuevaPregunta->consigna = $pregunta["consigna"];
+              $nuevaPregunta->respuesta_correcta = $pregunta["respuestas"][0];
+
+
+              $nuevaPregunta->save();
+            }
+          }
+
+        }
+
+        $cuestionario->save();
       }
 
-      $cuestionario->save();
-
-      return redirect("/perfil/cuestionarios");
+      return redirect("/perfil/" . $usuarioLog->id);
     }
 
     public function borrarCuestionario($id) {
@@ -263,11 +300,15 @@ class cuestionarioController extends Controller
           $pregunta->delete();
         }
 
+        foreach ($cuestionario->plays as $play) {
+          $play->delete();
+        }
+
         $cuestionario->delete();
 
-        return redirect("/perfil/cuestionarios");
+        return redirect("/perfil/".$usuarioLog->id);
       } else {
-        return redirect("/perfil/cuestionarios");
+        return redirect("/inicio");
       }
     }
 

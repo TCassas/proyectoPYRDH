@@ -22,6 +22,17 @@ class usuarioController extends Controller
     return view('editarUsuario')->with('usuario', $usuarioLog);
   }
 
+  public function buscarPerfil($id) {
+    $usuarioLog = Auth::user();
+    $usuario = User::find($id);
+
+    if($usuarioLog->id == $usuario->id) {
+      return view("perfilPublicoPersonal")->with('usuario', $usuario);
+    } else {
+      return view("perfilPublico")->with('usuario', $usuario);
+    }
+  }
+
   public function editarUsuario(Request $req) {
     $usuarioLog = Auth::user();
     $usuario = User::find($usuarioLog->id);
@@ -45,7 +56,23 @@ class usuarioController extends Controller
 
     $usuario->save();
 
-    return redirect("/perfil");
+    return redirect("/perfil")->with("success", "Información actualizada correctamente");
+  }
+
+  public function editarContraseniaForm() {
+    $usuarioLog = Auth::user();
+    $usuario = User::find($usuarioLog->id);
+
+    return view("olvideContrasenia")->with("usuario", $usuario);
+  }
+
+  public function editarContrasenia($req) {
+    $usuarioLog = Auth::user();
+    $usuario = User::find($usuarioLog->id);
+
+    if($usuario->email != $req["correo"]) {
+      redirect("/perfil/passwordreset")->withErrors("Correo no valido");
+    }
   }
 
   public function listarCuestionarios() {
