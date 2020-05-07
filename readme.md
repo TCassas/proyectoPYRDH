@@ -7,9 +7,9 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
-## About this projects
+## About this project
 
-PYRDH it's a quiz game where you can create your own quizzes with different ammount of questions of two types (4 answers and true or false question) and sharing them with other users.
+PYRDH it's a quiz game where you can create your own quizzes with different amount of questions of two types (4 answers and true or false questions) and sharing them with other users.
 
 Notes:
 - I'm pretty sure you are going to have troubles with the database, everytime someone has tried to import the project dump it returned errors, I think it can be something about using different MySQL versions. While developing this project I used MySQL 8.0.15.
